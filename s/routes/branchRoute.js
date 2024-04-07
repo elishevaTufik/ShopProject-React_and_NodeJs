@@ -4,7 +4,7 @@ const verifyJWT =require("../middleware/verifyJWT")
 
 const branchesController=require("../controller/branchesController")
 
-router.get("/getAll",branchesController.getAllBranches)
+router.get("/",branchesController.getAllBranches)
 router.post("/create",verifyJWT, branchesController.createBranch)
 router.delete("/:id",verifyJWT,branchesController.deleteBranch)
 router.put("/update/:id",verifyJWT,branchesController.updateBranch)

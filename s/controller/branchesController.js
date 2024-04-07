@@ -13,11 +13,11 @@ const createBranch = async (req, res) => {
     {
         return res.status(401).json({message:'Unauthorized' })
     }
-    const { city, location, openHours } = req.body
+    const { city, location,image, openHours } = req.body
     if (!city || !location || !openHours) {
         return res.status(400).json({ message: 'fields are required' })
     }
-    const branch = await Branches.create({ city, location, openHours })
+    const branch = await Branches.create({ city, location,image,openHours })
     if (branch) {
         return res.status(201).json({ message: 'New branch created' })
     }

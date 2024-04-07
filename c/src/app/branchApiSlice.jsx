@@ -6,7 +6,7 @@ const branchApiSlice = apiSlice.injectEndpoints({
 
         getAllBranches: build.query({
             query: () => ({
-                url: '/api/branch/getAll'
+                url: '/api/branch/'
             }), 
             providesTags:["Branch"]
         }),

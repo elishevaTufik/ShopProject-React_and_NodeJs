@@ -38,6 +38,8 @@ export default function BranchAdmin() {
     if (resCreate.isSuccess) {
       alert()
     }
+    console.log(resCreate)
+
   }, [resCreate])
 
 
@@ -56,8 +58,6 @@ export default function BranchAdmin() {
   const [location, setLocation] = useState([{street:''},{building:''}]);
   const [openHours, setOpenHours] = useState([{open:''},{close:''}]);
   const [image, setImage] = useState("")
-
-
   const [id, setId] = useState(0)
 
 
@@ -74,11 +74,10 @@ export default function BranchAdmin() {
     setCity("")
     setLocation("")
     setOpenHours(null)
-    // setImage("")
-
+    setImage("")
     setId(0)
-    setIsEdit(false)
 
+    setIsEdit(false)
     setSubmitted(false);
     setProductDialog(false);
   };
@@ -93,15 +92,14 @@ export default function BranchAdmin() {
     if (city !== "" && openHours.open !== null && openHours.close !== null && location.street !== "" && location.building !== "") {
 
       if (isEdit) {
-        console.log("id " + id);
+        
         updateBranch({ id, city, openHours,location,image })
-
+        console.log(openHours.open);
         setCity("")
         setLocation("")
         setOpenHours(null)
-        // setImage("")
+        setImage("")
 
-        //setExtras(rowData.extras)
         setId(0)
         setIsEdit(false)
       }
@@ -112,19 +110,15 @@ export default function BranchAdmin() {
         setCity("")
         setLocation("")
         setOpenHours(null)
-        // setImage("")
-
+        setImage("")
         setId(0)
-        setIsEdit(false)
-       
+        
       }
       setProductDialog(false);
     }
   };
 
   const editProduct = (rowData) => {
-    //setProduct({ ...product });
-    //UpdateSweet(id)
     setIsEdit(true)
     setProductDialog(true);
 
@@ -142,7 +136,6 @@ export default function BranchAdmin() {
   };
 
   const deleteProduct = () => {
-
     deleteBranch(id)
     setDeleteProductDialog(false);
     //   toast.current.show({
@@ -180,7 +173,7 @@ export default function BranchAdmin() {
   const leftToolbarTemplate = () => {
     return (
       <div className="flex flex-wrap gap-2">
-        <Button label="הוסף מוצר" icon="pi pi-plus" severity="success" onClick={openNew} />
+        <Button label="הוסף סניף" icon="pi pi-plus" severity="success" onClick={openNew} style={{backgroundColor:'#ce9149', border:'1px solid #ce9149'}} />
       </div>
     );
   };
@@ -193,7 +186,7 @@ export default function BranchAdmin() {
 
   const imageBodyTemplate = (rowData) => {
     return (
-      <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
+      <img src={`images.${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
       // <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
 
     );
@@ -212,9 +205,7 @@ export default function BranchAdmin() {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <Button icon="pi pi-pencil" rounded outlined className="mr-2"
-          onClick={() => editProduct(rowData)} />
-        {/* <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteProduct(rowData)} /> */}
+        <Button icon="pi pi-pencil" rounded outlined className="mr-2"  onClick={() => editProduct(rowData)} />
         <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteProduct(rowData._id)} />
       </React.Fragment>
     );
@@ -250,7 +241,7 @@ export default function BranchAdmin() {
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
     </React.Fragment>
   );
-  
+  console.log(openHours.open);
   return (
     <div>
       <Toast ref={toast} />
