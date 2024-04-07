@@ -1,0 +1,37 @@
+body {
+  /* background:url('../public/images/3.jpg'); */
+    background-repeat: repeat-y;
+    background-size: cover;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+div {
+   
+    background-repeat: repeat-y;
+    background-size: cover;
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  
+button {
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.App{
+    background:url('../public/images/3.jpg');
+    background-repeat: repeat-y;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* img{
+  width: 10%;
+  height: 10%;
+  text-align: center;
+} */

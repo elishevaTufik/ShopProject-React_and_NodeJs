@@ -1,0 +1,15 @@
+/* .cardDialog1{
+    maxHeight: 750px;
+    borderRadius: 8px;
+    width: 500px;
+    height: 750px;
+    direction: 'rtl';
+    backgroundColor: '#ffffff';
+    backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))';
+} */
+body{
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  

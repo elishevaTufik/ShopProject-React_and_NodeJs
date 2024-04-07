@@ -1,0 +1,66 @@
+/* html {
+    font-size: 14px;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: normal;
+    background: var(--surface-ground);
+    color: var(--text-color);
+    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+span.flag {
+    width: 44px;
+    height: 30px;
+    display: inline-block;
+}
+
+img.flag {
+    width: 30px;
+}
+
+.flag {
+    background: url(https://primefaces.org/cdn/primereact/images/flag/flags_responsive.png)
+        no-repeat;
+    background-size: 100%;
+    vertical-align: middle;
+} */
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* background-color:#080808; */
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  .card {
+    /* background:#080808; */
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    /* direction: rtl; */
+  }
+  
+  .classSize {
+  width: 350px;
+  height: 350px;
+  
+ }

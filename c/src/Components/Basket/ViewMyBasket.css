@@ -1,0 +1,50 @@
+span.flag {
+    width: 44px;
+    height: 30px;
+    display: inline-block;
+}
+img.flag {
+    width: 30px;
+}
+.flag {
+    background: url(https://primefaces.org/cdn/primereact/images/flag/flags_responsive.png)
+        no-repeat;
+    background-size: 100%;
+    vertical-align: middle;
+}
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: normal;
+    background: var(--surface-ground);
+    color: var(--text-color);
+    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.sa { 
+direction: rtl;
+}
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    width: 75%;
+    text-align: center;
+    margin-left: 13%;
+}
+.m-0{
+    text-align: center;
+}
+
+.p-button-secondary{
+    background-color:'#ec4899';
+}
+
+
