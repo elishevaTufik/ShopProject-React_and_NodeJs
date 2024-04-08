@@ -10,7 +10,6 @@ const ordersSchema = new mongoose.Schema(
 
         branchId: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
             ref: "Branches"
         },
 

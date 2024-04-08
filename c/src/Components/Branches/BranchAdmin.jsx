@@ -53,8 +53,9 @@ export default function BranchAdmin() {
 
   
   const [city, setCity] = useState("");
-  const [location, setLocation] = useState({street:''},{building:''});
-  const [openHours, setOpenHours] = useState({open:''},{close:''});
+  const [location, setLocation] = useState([{street:''},{building:''}]);
+  const [openHours, setOpenHours] = useState([{open:''},{close:''}]);
+  const [open,setOPen]=useState(0)
   const [image, setImage] = useState("")
   const [id, setId] = useState(0)
 
@@ -147,26 +148,6 @@ export default function BranchAdmin() {
     dt.current.exportCSV();
   };
 
-  
-
-  // const onInputChange = (e, name) => {
-  //   const val = (e.target && e.target.value) || '';
-  //   let _product = { ...product };
-
-  //   _product[`${name}`] = val;
-
-  //   setProduct(_product);
-  // };
-
-  // const onInputNumberChange = (e, name) => {
-  //   const val = e.value || 0;
-  //   let _product = { ...product };
-
-  //   _product[`${name}`] = val;
-
-  //   setProduct(_product);
-  // };
-
   const leftToolbarTemplate = () => {
     return (
       <div className="flex flex-wrap gap-2">
@@ -186,16 +167,6 @@ export default function BranchAdmin() {
       <img src={`images.${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
       // <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
 
-    );
-  };
-
-  // const ratingBodyTemplate = (rowData) => {
-  //   return <Rating value={rowData.rating} readOnly cancel={false} />;
-  // };
-
-  const statusBodyTemplate = (rowData) => {
-    return (
-      <Tag value={rowData.inInventory} severity={getSeverity(rowData.inInventory)} ></Tag>
     );
   };
 
@@ -238,15 +209,15 @@ export default function BranchAdmin() {
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
     </React.Fragment>
   );
-  console.log( "branch",branches);
-console.log(branches[0].openHours.open);
+  console.log("branches",branches);
+console.log( "branches[0]",branches[0]);
 return (
     
     <div>
       <Toast ref={toast} />
       <div className="card">
         <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}  ></Toolbar>
-        <DataTable  ref={dt}  value={branches}  onSelectionChange={(e) => setSelectedProducts(e.value)}  style={{ opacity: 1 }}  dataKey="id" paginator  rows={10}  rowsPerPageOptions={[5, 10, 25]}  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"  globalFilter={globalFilter}  header={header}  >
+        <DataTable  ref={dt}  value={branches}   style={{ opacity: 1 }}  dataKey="id" paginator  rows={10}  rowsPerPageOptions={[5, 10, 25]}  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"  globalFilter={globalFilter}  header={header}  >
           <Column field="city" header="עיר" sortable style={{ minWidth: '16rem' }} ></Column>
           <Column field="location" header="כתובת" sortable style={{ minWidth: '16rem' }} ></Column>
           <Column field="image" header="תמונה" body={imageBodyTemplate} ></Column>
@@ -272,47 +243,7 @@ return (
           <InputText id="location1" value={location.street} onChange={(e) => setLocation(e.target.value)} required rows={3} cols={20} />
           <InputNumber id="location2" value={location.building} onChange={(e) => setLocation(e.target.value)} required rows={3} cols={20}/>
         </div>
-
-        <div className="field">
-          {/* <label className="mb-3 font-bold">Category</label> */}
-          <div className="formgrid grid">
-            <div className="field-radiobutton col-6">
-              {/* <RadioButton inputId="category1"  name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'}/>
-              <label htmlFor="category1">Accessories</label> */}
-            </div>
-            {/* <div className="field-radiobutton col-6">
-              <RadioButton
-                inputId="category2"
-                name="category"
-                value="Clothing"
-                onChange={onCategoryChange}
-                checked={product.category === 'Clothing'}
-              />
-              <label htmlFor="category2">Clothing</label> 
-            {/* </div> */}
-            {/* <div className="field-radiobutton col-6">
-              <RadioButton
-                inputId="category3"
-                name="category"
-                value="Electronics"
-                onChange={onCategoryChange}
-                checked={product.category === 'Electronics'}
-              />
-              <label htmlFor="category3">Electronics</label>
-            </div>
-            <div className="field-radiobutton col-6">
-              <RadioButton
-                inputId="category4"
-                name="category"
-                value="Fitness"
-                onChange={onCategoryChange}
-                checked={product.category === 'Fitness'}
-              />
-              <label htmlFor="category4">Fitness</label>
-            </div>*/}
-          </div>
-        </div>
-
+        
         <div className="formgrid grid">
           <div className="field col">
             <label htmlFor="openHours" className="font-bold">שעות פתיחה  </label>

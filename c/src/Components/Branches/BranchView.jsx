@@ -11,7 +11,7 @@ import "primeflex/primeflex.css"
 export default function BranchView() {
     const {data: branches=[],something, isSuccess} = useGetAllBranchesQuery();
     const [layout, setLayout] = useState('grid');
-    const[products,setProducts] = useState([])
+    
 
     // useEffect(() => {
     //     if (isSuccess)

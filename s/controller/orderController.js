@@ -74,7 +74,7 @@ const createOrder = async (req, res) => {
     }
 
     const {clientId, branchId, sweets,address } = req.body
-    if (!clientId || !branchId ||   !sweets || !address) 
+    if (!clientId || !sweets) 
     {
         return res.status(400).json({ message: 'clientId, branchId,  sweets, city, street, house are required' })
     }

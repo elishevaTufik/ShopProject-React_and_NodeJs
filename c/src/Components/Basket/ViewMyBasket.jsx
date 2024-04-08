@@ -28,7 +28,7 @@ import './ViewMyBasket.css'
 
 export default function ProductsDemo() {
 
-    const [CreateNewSweet, resCreate] = useCreateNewSweetMutation()
+ 
     const [DeleteProduct, resDeleteProduct] = useDeleteProductMutation()
     const [UpdateQuantityOfProduct] = useUpdateQuantityOfProductMutation()
     const [CreateOrder,resCreateOrder] = useCreateOrderMutation()
@@ -46,14 +46,14 @@ export default function ProductsDemo() {
     }, [isSuccess])
 
     useEffect(() => {
-        if (resCreate.isError) {
-            alert(resCreate.error)
+        if (resCreateOrder.isError) {
+            alert(resCreateOrder.error)
         }
-        if (resCreate.isSuccess) {
+        if (resCreateOrder.isSuccess) {
         }
-        console.log(resCreate)
+        console.log(resCreateOrder)
     }
-        , [resCreate])
+        , [resCreateOrder])
 
     //const [products, setProducts] = useState(sweets);
 
@@ -102,7 +102,7 @@ export default function ProductsDemo() {
     const buyBasket = () => {
         //clientId, sweets,address 
         fillCart()
-        //CreateOrder(cart.clientId,sweets)
+        // CreateOrder(cart.clientId,sweets)
         sweets=[]
         setSubmitted(false);
         setProductDialog(true);
