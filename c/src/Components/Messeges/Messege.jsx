@@ -4,7 +4,7 @@ function Messege(props) {
     
     return (
       <div className="Messege">
-        Messeges
+        Messege
       </div>
       
     );
