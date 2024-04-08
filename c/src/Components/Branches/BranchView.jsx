@@ -13,12 +13,12 @@ export default function BranchView() {
     const [layout, setLayout] = useState('grid');
     const[products,setProducts] = useState([])
 
-    useEffect(() => {
-        if (isSuccess)
-            setProducts(products)
-        else
-            console.log("loading");
-    }, [isSuccess]);
+    // useEffect(() => {
+    //     if (isSuccess)
+    //         setProducts(products)
+    //     else
+    //         console.log("loading");
+    // }, [isSuccess]);
 
     
     const listItem = (product, index) => {

@@ -7,14 +7,12 @@ import { Button } from 'primereact/button';
 //import { FileUpload } from 'primereact/fileupload';
 //import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { Calendar } from 'primereact/calendar';
 import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
-import { Checkbox } from 'primereact/checkbox';
 import "primeflex/primeflex.css"
 
 
@@ -55,8 +53,8 @@ export default function BranchAdmin() {
 
   
   const [city, setCity] = useState("");
-  const [location, setLocation] = useState([{street:''},{building:''}]);
-  const [openHours, setOpenHours] = useState([{open:''},{close:''}]);
+  const [location, setLocation] = useState({street:''},{building:''});
+  const [openHours, setOpenHours] = useState({open:''},{close:''});
   const [image, setImage] = useState("")
   const [id, setId] = useState(0)
 
@@ -85,16 +83,15 @@ export default function BranchAdmin() {
   const hideDeleteProductDialog = () => {
     setDeleteProductDialog(false);
   };
-
+  
   const saveProduct = () => {
     setSubmitted(true);
-
     if (city !== "" && openHours.open !== null && openHours.close !== null && location.street !== "" && location.building !== "") {
 
       if (isEdit) {
         
         updateBranch({ id, city, openHours,location,image })
-        console.log(openHours.open);
+        
         setCity("")
         setLocation("")
         setOpenHours(null)
@@ -241,8 +238,10 @@ export default function BranchAdmin() {
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
     </React.Fragment>
   );
-  console.log(openHours.open);
-  return (
+  console.log( "branch",branches);
+console.log(branches[0].openHours.open);
+return (
+    
     <div>
       <Toast ref={toast} />
       <div className="card">

@@ -34,10 +34,14 @@ export default function ProductsDemo() {
     const [CreateOrder,resCreateOrder] = useCreateOrderMutation()
 
     const { data: cart = [], isSuccess } = useGetAllCartQuery()
-
+    let sweets=[];
+    
     useEffect(() => {
         if (isSuccess)
-            console.log(cart);
+        {
+            console.log("cart",cart);
+            console.log(cart[1].sweetId._id);
+        }
 
     }, [isSuccess])
 
@@ -71,6 +75,15 @@ export default function ProductsDemo() {
     const [id, setId] = useState(0);
 
     const [image, setImage] = useState("");
+    
+    const fillCart=()=>{
+        console.log("fillllllllllllllllllllllllllllllllllllllllllllllllll");
+        cart.forEach(element => {
+             sweets.push(element.sweetId._id)
+        });
+       
+        console.log("sweets",sweets);
+    }
 
     const onChangeCheckBox = (checked) => {
         setChecked(checked)
@@ -86,18 +99,17 @@ export default function ProductsDemo() {
         setProductDialog(true);
     };
 
-    const buyBasket = (rowData) => {
-        //clientId, branchId, sweets,address 
-        console.log("!!!!!!!!!!!!!!!!!!!!");
-        console.log("rowData",rowData);
-        //CreateOrder({cart})
+    const buyBasket = () => {
+        //clientId, sweets,address 
+        fillCart()
+        //CreateOrder(cart.clientId,sweets)
+        sweets=[]
         setSubmitted(false);
         setProductDialog(true);
     };
 
     const onClikUpdeteQuentity =(id,quantity)=>{
-        console.log(id);
-        console.log(quantity);
+
         UpdateQuantityOfProduct({id,quantity})
     };
 
@@ -141,19 +153,17 @@ export default function ProductsDemo() {
     };
 
     const rightToolbarTemplate = (rowData) => {
-        return <Button label="רכישת הסל" icon="pi pi-upload" className="p-button-help" onClick={buyBasket(rowData)} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }} />;
+        return <Button label="רכישת הסל" icon="pi pi-upload" className="p-button-help" onClick={buyBasket()} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }} />;
     };
 
     const imageBodyTemplate = (rowData) => {
         //../public/images/3.jpg
-        console.log(rowData.sweetId.image);
         return <img src={`images/${rowData.sweetId.image}`} alt={rowData.sweetId.image} className="shadow-2 border-round" style={{ width: '150px', direction: 'rtl' }} />;
         //return <img alt="rowData.image" src={`../public/images/${image}`} height="40" className="mr-2" style={{textAlign:'center', width: '64px'}}></img> 
         //    url('../public/images/3.jpg');
     };
     //,nubvvvv
     const inputN = (rowData) => {
-        {console.log("rowData input n",rowData);}
         return (<>
             <InputNumber min={1} className="card flex justify-content-center" value={rowData.quantity} onValueChange={(e) => onClikUpdeteQuentity(rowData._id,e.value)} showButtons buttonLayout="vertical" style={{ width: '8rem' }}
                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
@@ -164,7 +174,6 @@ export default function ProductsDemo() {
     };
 
     const nameBodyTemplate = (rowData) => {
-        console.log(rowData);
         return <p>{rowData.sweetId.name}</p>;
     };
 
