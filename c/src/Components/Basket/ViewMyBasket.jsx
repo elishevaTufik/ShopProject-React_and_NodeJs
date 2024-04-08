@@ -39,8 +39,8 @@ export default function ProductsDemo() {
     useEffect(() => {
         if (isSuccess)
         {
-            console.log("cart",cart);
-            console.log(cart[1].sweetId._id);
+            // console.log("cart",cart);
+            // console.log(cart[1].sweetId._id);
         }
 
     }, [isSuccess])
@@ -82,7 +82,7 @@ export default function ProductsDemo() {
              sweets.push(element.sweetId._id)
         });
        
-        console.log("sweets",sweets);
+        // console.log("sweets",sweets);
     }
 
     const onChangeCheckBox = (checked) => {
