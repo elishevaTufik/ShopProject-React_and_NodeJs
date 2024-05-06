@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { classNames } from 'primereact/utils';
+import { Toast } from 'primereact/toast';
 
-import {useGetAllSweetsQuery} from '../../app/sweetsApiSlice'
-import {useAddNewProdMutation} from '../../app/basketSlice'
-
-
+import { useGetAllSweetsQuery } from '../../app/sweetsApiSlice'
+import { useAddNewProdMutation } from '../../app/basketSlice'
 
 import './SweetViewClient.css'
 import "primeflex/primeflex.css"
 
 export default function Galery() {
+
+    const toast = useRef(null);
+
     const { category } = useParams();
     const [products, setProducts] = useState([]);
     const [layout, setLayout] = useState('grid');
 
     const { data, isLoading, isError, error, isSuccess } = useGetAllSweetsQuery()
     const [AddNewProd, resAddNewProd] = useAddNewProdMutation()
-    
+
 
     const cart = JSON.parse(localStorage.getItem('cart')) || []
 
@@ -33,24 +35,24 @@ export default function Galery() {
 
     }, [isSuccess]);
 
-    useEffect(()=>{
-        if(resAddNewProd.isError){
+    useEffect(() => {
+        if (resAddNewProd.isError) {
             alert(resAddNewProd.error)
         }
-        if(resAddNewProd.isSuccess){
+        if (resAddNewProd.isSuccess) {
             console.log("success resAddNewProd")
 
         }
         console.log(resAddNewProd)
     }
-        ,[resAddNewProd])
+        , [resAddNewProd])
 
     const listItem = (product, index) => {
         return (
             <>
-                <div className="col-12" key={product.id} style={{width:'33%'}}>
+                <div className="col-12" key={product.id} style={{ width: '33%' }}>
                     <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
-                        <img className="classSize" src={`images/${product.image}`} style={{height:150,width:150}}/*alt={product.name}*/ />
+                        <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width: 150 }}/*alt={product.name}*/ />
                         <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                             <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                                 <div className="text-2xl font-bold text-900">{product.name}</div>
@@ -117,18 +119,19 @@ export default function Galery() {
     };
 
     const hundleSubmit = (product) => {
-        console.log("hundleSubmit product._id",product._id);
+        console.log("hundleSubmit product._id", product._id);
         AddNewProd(product._id)
-        console.log("resAddNewProd",resAddNewProd)
-
+        toast.current.show({ severity: 'success', summary: 'המוצר נוסף לסל בהצלחה', life: 3000 });
+        console.log("resAddNewProd", resAddNewProd)
     }
     // const hundleSubmit1=(product)=>{
     //     AddNewProd1(product)
     // }
-    
+
     return (
         <div className="card" >
             <DataView value={products} listTemplate={listTemplate} layout={layout} header={header()} />
+            <Toast ref={toast} />
         </div>
     )
 }
