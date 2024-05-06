@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const basketSchema = new mongoose.Schema({
 
-    clientId: {
+    clientId: { 
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref:"Client"
