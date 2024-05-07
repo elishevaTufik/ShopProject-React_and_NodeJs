@@ -10,7 +10,12 @@ const messegeApiSlice = apiSlice.injectEndpoints({
             }), 
             providesTags:["Messege"]
         }),
-
+        getMessageByIdClient: build.query({
+            query: (id) => ({
+                url: '/api/messege/'+id
+            }), 
+            providesTags:["Messege"]
+        }),
         getMessagesNotChecked: build.query({
             query: () => ({
                 url: '/api/messege/getMessagesNotChecked'
@@ -41,6 +46,7 @@ const messegeApiSlice = apiSlice.injectEndpoints({
 export  const { 
     useGetAllMessagesQuery,
     useGetMessagesNotCheckedQuery,
+    useGetMessageByIdClientQuery,
     useWriteMessageMutation,
     useUpdateCheckedMutation,
     } = messegeApiSlice
