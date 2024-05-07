@@ -12,6 +12,23 @@ const getAllMessages = async (req, res) => {
     }
     res.json(messages)
 }
+const getMessageByIdClient = async (req, res) => {
+
+    if(req.user.permission!='client')
+    {
+        return res.status(401).json({message:'Unauthorized' })
+    }
+
+    const {clientId} = req.params
+    console.log(clientId);
+    const messages = await Messages.find({clientId:clientId}).lean()
+
+    if (!messages.length) {
+    return res.status(400).json({ message: 'No order found' })
+    }
+    
+    res.json(orders)
+}
 
 const getMessagesNotChecked = async (req, res) => {
     if(req.user.permission!='admin')
@@ -65,6 +82,7 @@ const updateChecked = async (req, res) => {
 module.exports = {
     getAllMessages,
     getMessagesNotChecked,
+    getMessageByIdClient,
     writeMessage,
     updateChecked,
 }
