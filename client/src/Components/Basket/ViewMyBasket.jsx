@@ -25,7 +25,6 @@ import { useCreateNewSweetMutation } from '../../app/sweetsApiSlice'
 import { useUpdateSweetMutation } from '../../app/sweetsApiSlice'
 import { useGetAllCartQuery, useUpdateQuantityOfProductMutation } from '../../app/basketSlice'
 import { useDeleteProductMutation } from '../../app/basketSlice'
-import { useCreateOrderMutation } from '../../app/orderApiSlice'
 import './ViewMyBasket.css'
 
 export default function ProductsDemo() {
@@ -34,7 +33,6 @@ export default function ProductsDemo() {
     
     const [DeleteProduct, resDeleteProduct] = useDeleteProductMutation()
     const [UpdateQuantityOfProduct] = useUpdateQuantityOfProductMutation()
-    const [CreateOrder, resCreateOrder] = useCreateOrderMutation()
 
     const { data: cart = [], isSuccess } = useGetAllCartQuery()
 
@@ -51,16 +49,6 @@ export default function ProductsDemo() {
         setVisible(false)
     }
  
-    useEffect(() => {
-        if (resCreateOrder.isError) {
-            alert(resCreateOrder.error)
-        }
-        if (resCreateOrder.isSuccess) {
-        }
-        console.log(resCreateOrder)
-    }
-        , [resCreateOrder])
-
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
@@ -81,15 +69,6 @@ export default function ProductsDemo() {
     const [id, setId] = useState(0);
 
     const [image, setImage] = useState("");
-
-    
-    // const cities = [
-    //     { name: 'New York', code: 'NY' },
-    //     { name: 'Rome', code: 'RM' },
-    //     { name: 'London', code: 'LDN' },
-    //     { name: 'Istanbul', code: 'IST' },
-    //     { name: 'Paris', code: 'PRS' }
-    // ];
 
     const fillArrSweets = () => {
         console.log("in fillArrSweets func");
@@ -114,16 +93,10 @@ export default function ProductsDemo() {
         setProductDialog(true);
     };
 
-    const buyBasket = () => {
-        navigate("/ConfirmOrder")
-        // //clientId, branchId, sweets,address
-        // fillArrSweets()
-        // setVisible(true)
-        // // CreateOrder(cart.clientId,sweets)
-        // sweets = []
-        // setSubmitted(false);
-        // setProductDialog(true);
-    };
+    // const buyBasket = () => {
+    //     // //clientId, branchId, sweets,address
+    //     // CreateOrder(cart.clientId,sweets)
+    // };
 
     const onClikUpdeteQuentity = (id, quantity) => {
 

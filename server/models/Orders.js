@@ -10,6 +10,7 @@ const ordersSchema = new mongoose.Schema(
 
         branchId: {
             type: mongoose.Schema.Types.ObjectId,
+            required: true,
             ref: "Branches"
         },
 
@@ -20,9 +21,7 @@ const ordersSchema = new mongoose.Schema(
         },
 
         address: {
-            city:String,
-            street: String,
-            building: Number
+            type:String,
         },
 
         status: {

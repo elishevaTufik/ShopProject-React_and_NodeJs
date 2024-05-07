@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -20,53 +21,87 @@ import { ListBox } from 'primereact/listbox';
 import "primeflex/primeflex.css"
 
 import { useGetAllBranchesQuery } from '../../app/branchApiSlice'
+import { useCreateOrderMutation } from '../../app/orderApiSlice'
+import { useGetAllCartQuery} from '../../app/basketSlice'
+import { confirmDialog } from 'primereact/confirmdialog';
 
 export default function ConfirmOrder() {
+    
+    const navigate = useNavigate()
 
     const { data: branches = [] } = useGetAllBranchesQuery()
+    const { data: cart = [], isSuccess } = useGetAllCartQuery()
+    const [CreateOrder, resCreateOrder] = useCreateOrderMutation()
+
+    useEffect(() => {
+        if (resCreateOrder.isError) {
+            console.log(resCreateOrder.error)
+        }
+        if (resCreateOrder.isSuccess) {
+        }
+        console.log(resCreateOrder)
+    }
+        ,[resCreateOrder])
+
+
     console.log("branches",branches);
     
-    const places = branches.map((e)=>e.location+", "+e.city);
+    let places=[]
+
+    branches.forEach(e => {
+        places.push({_id:e._id, description:e.location+" , "+e.city})
+    });
+
     console.log("places",places);
 
-    // const [branchId, setBranchId] = useState(null);
     const [address, setAddress] = useState("");
-    const [selectedBranch, setselectedBranch] = useState(null);
-
-    const onclickcancel = () => {
-
-    };
+    const [selectedBranchId, setselectedBranchId] = useState(null);
 
     const onclickadd = () => {
 
+        if(address==null || address==''){
+            alert("הכנס את הכתובת שלך")
+            return
+        }
+        
+        if(selectedBranchId==null){
+            alert("בחר סניף ממנו תרצה להזמין")
+            return
+        }
+
+        let x=cart[0].clientId
+        //console.log("x, selectedBranchId, cart, address",x,selectedBranchId,cart,address);
+        CreateOrder({x,selectedBranchId,cart,address})
     };
 
+    const onclickcancel = () => {
+        navigate("/Basket")
+    };
+
+    const footer = (
+        <>
+            <Button label="אישור הזמנה" icon="pi pi-check" onClick={onclickadd}/>
+            <Button label="חזרה לסל" severity="secondary" icon="pi pi-undo" style={{ marginLeft: '0.5em' }} onClick={onclickcancel}  />
+        </>
+    );
 
     return (
-        <div  style={{width:'50%', textAlign:'center', marginTop: '10%', marginLeft: '25%'}}>
-            <Card title="טופס רכישה" subTitle="---יאלה, בוא נזמין" className="md:w-25rem">
-                <p className="m-0">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
-                    numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-                </p>
-                        <div className="p-inputgroup flex-1">
-                            <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
-                                <i className="pi pi-home"></i>
-                            </span>
-                            <InputText style={{width:'50%',borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
-                        </div><br/>
+        <div  style={{width:'50%', textAlign:'center', marginTop: '20px', marginLeft: '25%'}}>
+            <Card title="טופס רכישה" subTitle="---יאלה, בוא נזמין"  footer={footer}>
+                    <div className="p-inputgroup flex-1">
+                        <InputText style={{width:'100%',borderRadius:'5px', textAlign:'center'}} placeholder="...מה הכתובת המלאה שלך? השליח יבוא אליך עד הבית" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
+                        <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
+                            <i className="pi pi-home"></i>
+                        </span></div><br/>
+                    <p>אנא בחר סניף שממנו תרצה להזמין</p><br/>
 
-                        <div className="p-inputgroup flex-1">
-                           <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
-                                <i className="pi pi-shopping-bag"></i>
-                            </span>
-                            <ListBox filter value={selectedBranch}  style={{width:'50%', borderRadius:'5px'}} placeholder="בחר סניף" onChange={(e) => setselectedBranch(e.value)} options={places} className="w-full md:w-14rem" />
-                        </div><br/>
+                    <div className="p-inputgroup flex-1">
+                        {/* <ListBox filter value={selectedBranch} style={{width:'50%', borderRadius:'5px'}} placeholder="בחר סניף" onChange={(e) => setselectedBranch(e.value)} options={places} className="w-full md:w-40rem" /> */}
+                        <ListBox  value={selectedBranchId} style={{width:'50%', borderRadius:'5px'}} placeholder="בחר סניף" onChange={(e) => setselectedBranchId(e.value._id)} options={places} optionLabel="description" className="w-full md:w-40rem" />
+                        <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
+                            <i className="pi pi-shopping-bag"></i>
+                        </span> </div><br/>
 
-                        <div className="flex align-items-center gap-2" >
-                            <Button label="בטל" onClick={(e) => onclickcancel(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '5%', backgroundColor: '#ffffff' }}></Button>
-                            <Button label="הירשם" onClick={(e) => onclickadd()} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '17%', backgroundColor: '#ffffff' }}></Button>
-                        </div><br/>
             </Card>
         </div>
     )

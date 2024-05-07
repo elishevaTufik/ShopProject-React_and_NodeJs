@@ -23,7 +23,6 @@ import {useCreateNewSweetMutation} from '../../app/sweetsApiSlice'
 import {useDeleteSweetMutation} from '../../app/sweetsApiSlice'
 import {useUpdateSweetMutation} from '../../app/sweetsApiSlice'
 
-
 import './DataTableSweets.css'
 // import { set } from 'mongoose';
 
