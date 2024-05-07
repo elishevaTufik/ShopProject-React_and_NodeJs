@@ -268,14 +268,11 @@ export default function ProductsDemo() {
                         dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="מראה {first} - {last} מתוך {totalRecords} מוצרים" globalFilter={globalFilter} header={header}>
-                    {/* <Column selectionMode="multiple" exportable={false}></Column> */}
-                    {/* <Column field="code" header="Code" sortable style={{ minWidth: '12rem' }}></Column> */}
                     <Column field="name" header="שם" sortable style={{ minWidth: '16rem' }}></Column>
                     <Column field="description" header="תיאור" style={{ minWidth: '16rem' }}></Column>
                     <Column field="image" header="תמונה" body={imageBodyTemplate}></Column>
                     <Column field="price" header="מחיר" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
                     <Column field="category" header="תוספות"></Column>
-                    {/* <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable style={{ minWidth: '12rem' }}></Column> */}
                     <Column field="inventoryStatus" header="?במלאי" body={statusBodyTemplate}></Column>
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
                 </DataTable>

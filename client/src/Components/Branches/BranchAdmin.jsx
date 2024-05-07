@@ -55,8 +55,8 @@ export default function BranchAdmin() {
   
   const [city, setCity] = useState("");
   const [location, setLocation] = useState("");
-  const [close, setClose] = useState(0);
-  const [open,setOpen]=useState(0)
+  const [close, setClose] = useState();
+  const [open,setOpen]=useState()
   const [image, setImage] = useState("")
   const [id, setId] = useState(0)
 
@@ -73,7 +73,8 @@ export default function BranchAdmin() {
 
     setCity("")
     setLocation("")
-    setOpen(0)
+    setOpen()
+    setClose()
     setChecked(0)
     setImage("")
     setId(0)
@@ -89,16 +90,17 @@ export default function BranchAdmin() {
   
   const saveProduct = () => {
     setSubmitted(true);
-    if (city !== "" && open!== null && close !== null && location !== "") {
+    if (city !== "" && location !== "") {
+    // if (city !== "" && open!== null && close !== null && location !== "") {
+      console.log("updateBranch");
       if (isEdit) {
         
-        updateBranch({ id, city, open,close,location,image })
-        
-
+        updateBranch({id,city,open,close,location,image})
+      
         setCity("")
+        setOpen()
+        setClose()
         setLocation("")
-        setOpen(0)
-        setClose(0)
         setImage("")
         setId(0)
         setIsEdit(false)
@@ -108,8 +110,8 @@ export default function BranchAdmin() {
         createBranch({ city, location,image,open,close})
         setCity("")
         setLocation("")
-        setOpen(0)
-        setClose(0)
+        setOpen()
+        setClose()
         setImage("")
         setId(0)
         
@@ -121,11 +123,11 @@ export default function BranchAdmin() {
   const editProduct = (rowData) => {
     setIsEdit(true)
     setProductDialog(true);
-
     setCity(rowData.city)
     setLocation(rowData.location)
     setOpen(rowData.open)
     setClose(rowData.close)
+    setImage(rowData.image)
     setId(rowData._id)
   };
 
@@ -164,11 +166,10 @@ export default function BranchAdmin() {
   };
 
   const imageBodyTemplate = (rowData) => {
-    return (
-      <img src={`images.${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
-      // <img src={`https://primefaces.org/cdn/primereact/images/product/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />
-
-    );
+    console.log("rowData.image");
+        console.log(rowData.image);
+        //../public/images/3.jpg
+        return <img src={`images/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
   };
 
   const actionBodyTemplate = (rowData) => {
@@ -191,7 +192,7 @@ export default function BranchAdmin() {
 
   const header = (
     <div className="flex flex-wrap gap-2 align-items-center justify-content-between" style={{ textAlign: 'center' }}>
-      <h2 className="m-0">ניהול סניפים</h2>
+      <h2 style={{textAlign:'center'}} className="m-0">ניהול סניפים</h2>
       <span className="p-input-icon-left">
         <i className="pi pi-search" />
         <InputText  type="search"  onInput={(e) => setGlobalFilter(e.target.value)}  placeholder="Search..."  />
@@ -227,10 +228,10 @@ return (
         </DataTable>
       </div>
 
-      <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog} >
-        {image && (
+      <Dialog visible={productDialog} style={{ width: '32rem', textAlign:'center'}} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי הסניף" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog} >
+        {/* {image && (
           <img src={`https://primefaces.org/cdn/primereact/images/product/${image}`} alt={image} className="product-image block m-auto pb-3"/>
-        )}
+        )} */}
         <div className="field">
           <label htmlFor="city" className="font-bold">עיר</label>
           <InputText  id="city"  value={city}  onChange={(e) => setCity(e.target.value)}  required  autoFocus  className={classNames({ 'p-invalid': submitted && city !== " " })} />
@@ -241,23 +242,20 @@ return (
           <label htmlFor="location" className="font-bold"> מיקום</label>
           <InputText id="location1" value={location} onChange={(e) => setLocation(e.target.value)} required rows={3} cols={20} />
         </div>
-        
         <div className="formgrid grid">
           <div className="field col">
-            <label htmlFor="openHours" className="font-bold">שעות פתיחה  </label>
            <div className="flex-auto">
-               
+               <label htmlFor="openHours" className="font-bold">שעת פתיחה  </label>
                 <Calendar id="open" value={open} onChange={(e) => setOpen(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
-                <label htmlFor="buttondisplay" className="font-bold block mb-2">
-              שעת סגירה</label>
-                <Calendar id="close" value={close} onChange={(e) => setClose(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
+                <label htmlFor="buttondisplay" className="font-bold block mb-2">שעת סגירה</label>
+                <Calendar id="close" value={close} onChange={(e) => setClose(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />}/>
             </div> 
-            {/* <InputNumber id="open" value={open} onValueChange={(e) => setOpen(e.target.value)}/> */}
-            {/* <InputNumber id="open" value={open} onValueChange={(e) => setOpen(e.target.value)} mode="currency" /> */}
-
-            {/* <InputNumber id="close" value={close} onValueChange={(e) => setClose(e.target.value)}/>
-            <InputNumber id="close" value={close} onValueChange={(e) => setClose(e.target.value)} mode="currency" /> */}
-
+                <div className="field">
+                    <label htmlFor="image" className="font-bold">
+                        תמונה
+                    </label>
+                    <InputText id="image" value={image} onChange={(e) =>setImage(e.target.value)} className={classNames({ 'p-invalid':  image=="" })} />
+                </div>
           </div>
         </div>
       </Dialog>
@@ -266,7 +264,7 @@ return (
         <div className="confirmation-content">
           <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
           {(<span>
-            Are you sure you want to delete this branch?
+            ?האם אתה בטוח שאתה רוצה למחוק סניף זה
           </span>)}
         </div>
       </Dialog>

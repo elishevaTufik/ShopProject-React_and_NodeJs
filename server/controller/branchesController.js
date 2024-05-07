@@ -9,10 +9,11 @@ const getAllBranches = async (req, res) => {
 }
 
 const createBranch = async (req, res) => {
-    // if(req.user.permission!='admin')
-    // {
-    //     return res.status(401).json({message:'Unauthorized' })
-    // }
+    console.log("createBranch");
+    if(req.user.permission!='admin')
+    {
+        return res.status(401).json({message:'Unauthorized' })
+    }
     const { city, location,image, open,close } = req.body
     if (!city || !location || !open ||!close) {
         return res.status(400).json({ message: 'fields are required' })
@@ -27,12 +28,13 @@ const createBranch = async (req, res) => {
 }
 
 const updateBranch = async (req, res) => {
+    console.log("updateeBranch");
+
     if(req.user.permission!='admin')
     {
         return res.status(401).json({message:'Unauthorized' })
     }
-    const { id } = req.params
-    const {city, location, open,close } = req.body
+    const {id,city, location, open,close,image } = req.body
     if (!city || !location || !open || !close) {
         return res.status(400).json({ message: "fields are required" })
     }
@@ -45,6 +47,7 @@ const updateBranch = async (req, res) => {
     branch.open = open
     branch.close = close
     branch.location = location
+    branch.image=image;
     const updateBranch = await branch.save()
     res.json(`"${updateBranch.city}" updated`)
 

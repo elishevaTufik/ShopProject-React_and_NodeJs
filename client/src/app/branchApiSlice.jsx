@@ -29,9 +29,10 @@ const branchApiSlice = apiSlice.injectEndpoints({
         }),
         
         updateBranch: build.mutation({
-            query: (id) => ({
-                url: '/api/branch/update/'+id,
+            query: (branch) => ({
+                url: '/api/branch/update',
                 method:"PUT",
+                body:branch
             }),
             invalidatesTags:["Branch"]
         })

@@ -26,7 +26,7 @@ export default function BranchView() {
         return (
             <div className="col-12" key={product.id} style={{direction:'rtl'}} >
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
-                    <img className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src={`images/${product.image}`} style={{height:150,width:150}} />
+                    <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width:150 }}/*alt={product.name}*/ />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.city}</div>
@@ -46,8 +46,9 @@ export default function BranchView() {
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="w-9 shadow-2 border-round" src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`} alt={product.name} />
-                        <div className="text-2xl font-bold">{product.city}</div>
+                        <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width:150 }} /*alt={product.name}*/ />
+                        <div className="text-2xl font-bold text-900">{product.city}</div>
+                            <div>{product.location}</div>
                         <div><b>:שעות פתיחה</b></div>
                           <div> {product.open}:00-{product.close}:00</div>
                     </div>

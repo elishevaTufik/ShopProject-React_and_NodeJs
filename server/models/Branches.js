@@ -10,11 +10,11 @@ const branchSchema = new mongoose.Schema({
         required: true,
     },
     open:{
-        type: Number,
+        type: mongoose.Schema.Types.Date,
         required:true
     },
     close:{
-        type: Number,
+        type: mongoose.Schema.Types.Date,
         required:true
     },
     image:{
