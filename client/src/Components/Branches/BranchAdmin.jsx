@@ -43,6 +43,7 @@ export default function BranchAdmin() {
 
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
+  
 
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -53,9 +54,9 @@ export default function BranchAdmin() {
 
   
   const [city, setCity] = useState("");
-  const [location, setLocation] = useState([{street:''},{building:''}]);
-  const [openHours, setOpenHours] = useState([{open:''},{close:''}]);
-  const [open,setOPen]=useState(0)
+  const [location, setLocation] = useState("");
+  const [close, setClose] = useState(0);
+  const [open,setOpen]=useState(0)
   const [image, setImage] = useState("")
   const [id, setId] = useState(0)
 
@@ -72,7 +73,8 @@ export default function BranchAdmin() {
 
     setCity("")
     setLocation("")
-    setOpenHours(null)
+    setOpen(0)
+    setChecked(0)
     setImage("")
     setId(0)
 
@@ -87,27 +89,27 @@ export default function BranchAdmin() {
   
   const saveProduct = () => {
     setSubmitted(true);
-    if (city !== "" && openHours.open !== null && openHours.close !== null && location.street !== "" && location.building !== "") {
-
+    if (city !== "" && open!== null && close !== null && location !== "") {
       if (isEdit) {
         
-        updateBranch({ id, city, openHours,location,image })
+        updateBranch({ id, city, open,close,location,image })
         
+
         setCity("")
         setLocation("")
-        setOpenHours(null)
+        setOpen(0)
+        setClose(0)
         setImage("")
-
         setId(0)
         setIsEdit(false)
       }
 
       else {
-        createBranch({ city, openHours, location,image})
-
+        createBranch({ city, location,image,open,close})
         setCity("")
         setLocation("")
-        setOpenHours(null)
+        setOpen(0)
+        setClose(0)
         setImage("")
         setId(0)
         
@@ -121,10 +123,9 @@ export default function BranchAdmin() {
     setProductDialog(true);
 
     setCity(rowData.city)
-    setLocation(rowData.location.street)
-    setLocation(rowData.location.building)
-    setOpenHours(rowData.openHours.open)
-    setOpenHours(rowData.openHours.close)
+    setLocation(rowData.location)
+    setOpen(rowData.open)
+    setClose(rowData.close)
     setId(rowData._id)
   };
 
@@ -210,7 +211,6 @@ export default function BranchAdmin() {
     </React.Fragment>
   );
   console.log("branches",branches);
-console.log( "branches[0]",branches[0]);
 return (
     
     <div>
@@ -220,10 +220,9 @@ return (
         <DataTable  ref={dt}  value={branches}   style={{ opacity: 1 }}  dataKey="id" paginator  rows={10}  rowsPerPageOptions={[5, 10, 25]}  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"  globalFilter={globalFilter}  header={header}  >
           <Column field="city" header="עיר" sortable style={{ minWidth: '16rem' }} ></Column>
           <Column field="location" header="כתובת" sortable style={{ minWidth: '16rem' }} ></Column>
-          <Column field="image" header="תמונה" body={imageBodyTemplate} ></Column>
-          <Column field="openHours" header="שעות פתיחה" style={{ minWidth: '8rem' }} ></Column>
-          {/* <Column  field="category"  header="Category"  sortable style={{ minWidth: '10rem' }}  ></Column> */}
-          {/* <Column field="rating" header="Reviews"//body={ratingBodyTemplate} sortablestyle={{ minWidth: '12rem' }} ></Column> */}
+          <Column field="open" header="שעת פתיחה" style={{ minWidth: '8rem' }} ></Column>
+          <Column field="close" header="שעת סגירה" style={{ minWidth: '8rem' }} ></Column>
+          <Column field="image"  body={imageBodyTemplate} ></Column>
           <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}  ></Column>
         </DataTable>
       </div>
@@ -240,21 +239,25 @@ return (
         </div>
         <div className="field">
           <label htmlFor="location" className="font-bold"> מיקום</label>
-          <InputText id="location1" value={location.street} onChange={(e) => setLocation(e.target.value)} required rows={3} cols={20} />
-          <InputNumber id="location2" value={location.building} onChange={(e) => setLocation(e.target.value)} required rows={3} cols={20}/>
+          <InputText id="location1" value={location} onChange={(e) => setLocation(e.target.value)} required rows={3} cols={20} />
         </div>
         
         <div className="formgrid grid">
           <div className="field col">
             <label htmlFor="openHours" className="font-bold">שעות פתיחה  </label>
            <div className="flex-auto">
+               
+                <Calendar id="open" value={open} onChange={(e) => setOpen(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
                 <label htmlFor="buttondisplay" className="font-bold block mb-2">
-                    שעות פתיחה
-                </label>
-                <Calendar id="openHours1" value={openHours.open} onChange={(e) => setOpenHours(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
-                <Calendar id="openHours2" value={openHours.close} onChange={(e) => setOpenHours(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
+              שעת סגירה</label>
+                <Calendar id="close" value={close} onChange={(e) => setClose(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
             </div> 
-            {/* <InputNumber id="openHours" value={openHours} onValueChange={(e) => setOpenHours(e.target.value)} mode="currency" /> */}
+            {/* <InputNumber id="open" value={open} onValueChange={(e) => setOpen(e.target.value)}/> */}
+            {/* <InputNumber id="open" value={open} onValueChange={(e) => setOpen(e.target.value)} mode="currency" /> */}
+
+            {/* <InputNumber id="close" value={close} onValueChange={(e) => setClose(e.target.value)}/>
+            <InputNumber id="close" value={close} onValueChange={(e) => setClose(e.target.value)} mode="currency" /> */}
+
           </div>
         </div>
       </Dialog>

@@ -6,18 +6,16 @@ const branchSchema = new mongoose.Schema({
         required: true,
     },
     location: {
-        street: String,
-        building: Number
+        type: String,
+        required: true,
     },
-    openHours: {
-        open:{
-            type: Number,
-            required:true
-        },
-        close:{
-            type: Number,
-            required:true
-        },
+    open:{
+        type: Number,
+        required:true
+    },
+    close:{
+        type: Number,
+        required:true
     },
     image:{
         type:String,
@@ -28,3 +26,4 @@ const branchSchema = new mongoose.Schema({
 }
 )
 module.exports = mongoose.model("Branches", branchSchema)
+ 

@@ -9,15 +9,15 @@ const getAllBranches = async (req, res) => {
 }
 
 const createBranch = async (req, res) => {
-    if(req.user.permission!='admin')
-    {
-        return res.status(401).json({message:'Unauthorized' })
-    }
-    const { city, location,image, openHours } = req.body
-    if (!city || !location || !openHours) {
+    // if(req.user.permission!='admin')
+    // {
+    //     return res.status(401).json({message:'Unauthorized' })
+    // }
+    const { city, location,image, open,close } = req.body
+    if (!city || !location || !open ||!close) {
         return res.status(400).json({ message: 'fields are required' })
     }
-    const branch = await Branches.create({ city, location,image,openHours })
+    const branch = await Branches.create({ city, location,image,open,close })
     if (branch) {
         return res.status(201).json({ message: 'New branch created' })
     }
@@ -32,8 +32,8 @@ const updateBranch = async (req, res) => {
         return res.status(401).json({message:'Unauthorized' })
     }
     const { id } = req.params
-    const {city, location, openHours } = req.body
-    if (!city || !location || !openHours) {
+    const {city, location, open,close } = req.body
+    if (!city || !location || !open || !close) {
         return res.status(400).json({ message: "fields are required" })
     }
     const branch = await Branches.findById(id)
@@ -42,7 +42,8 @@ const updateBranch = async (req, res) => {
     }
 
     branch.city = city
-    branch.openHours = openHours
+    branch.open = open
+    branch.close = close
     branch.location = location
     const updateBranch = await branch.save()
     res.json(`"${updateBranch.city}" updated`)
