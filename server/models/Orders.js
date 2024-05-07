@@ -30,7 +30,6 @@ const ordersSchema = new mongoose.Schema(
             enum: ["accepted", "done", "closed","canceled"],
             default: "accepted"
         }
-
     },
     {
         timestamps: true

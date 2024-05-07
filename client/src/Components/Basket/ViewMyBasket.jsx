@@ -21,24 +21,22 @@ import "primeflex/primeflex.css"
 import { useCreateNewSweetMutation } from '../../app/sweetsApiSlice'
 import { useUpdateSweetMutation } from '../../app/sweetsApiSlice'
 import { useGetAllCartQuery, useUpdateQuantityOfProductMutation } from '../../app/basketSlice'
-import {useDeleteProductMutation} from '../../app/basketSlice'
-import {useCreateOrderMutation} from '../../app/orderApiSlice'
+import { useDeleteProductMutation } from '../../app/basketSlice'
+import { useCreateOrderMutation } from '../../app/orderApiSlice'
 import './ViewMyBasket.css'
-// import { set } from 'mongoose';
 
 export default function ProductsDemo() {
 
- 
+
     const [DeleteProduct, resDeleteProduct] = useDeleteProductMutation()
     const [UpdateQuantityOfProduct] = useUpdateQuantityOfProductMutation()
-    const [CreateOrder,resCreateOrder] = useCreateOrderMutation()
+    const [CreateOrder, resCreateOrder] = useCreateOrderMutation()
 
     const { data: cart = [], isSuccess } = useGetAllCartQuery()
-    let sweets=[];
-    
+    let sweets = [];
+
     useEffect(() => {
-        if (isSuccess)
-        {
+        if (isSuccess) {
             // console.log("cart",cart);
             // console.log(cart[1].sweetId._id);
         }
@@ -66,6 +64,12 @@ export default function ProductsDemo() {
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
+
+    const [branchId, setBranchId] = useState(null);
+    const [address, setAddress] = useState("");
+
+    const [visible, setVisible] = useState(false);
+
     const toast = useRef(null);
     const dt = useRef(null);
 
@@ -75,14 +79,14 @@ export default function ProductsDemo() {
     const [id, setId] = useState(0);
 
     const [image, setImage] = useState("");
-    
-    const fillCart=()=>{
-        console.log("fillllllllllllllllllllllllllllllllllllllllllllllllll");
+
+    const fillArrSweets = () => {
+        console.log("in fillArrSweets func");
         cart.forEach(element => {
-             sweets.push(element.sweetId._id)
+           // sweets.push(element.sweetId._id)
+            sweets.push(element)
         });
-       
-        // console.log("sweets",sweets);
+         console.log("sweets",sweets);
     }
 
     const onChangeCheckBox = (checked) => {
@@ -100,17 +104,18 @@ export default function ProductsDemo() {
     };
 
     const buyBasket = () => {
-        //clientId, sweets,address 
-        fillCart()
+        //clientId, branchId, sweets,address
+        fillArrSweets()
+        setVisible(true)
         // CreateOrder(cart.clientId,sweets)
-        sweets=[]
+        sweets = []
         setSubmitted(false);
         setProductDialog(true);
     };
 
-    const onClikUpdeteQuentity =(id,quantity)=>{
+    const onClikUpdeteQuentity = (id, quantity) => {
 
-        UpdateQuantityOfProduct({id,quantity})
+        UpdateQuantityOfProduct({ id, quantity })
     };
 
     const hideDialog = () => {
@@ -165,7 +170,7 @@ export default function ProductsDemo() {
     //,nubvvvv
     const inputN = (rowData) => {
         return (<>
-            <InputNumber min={1} className="card flex justify-content-center" value={rowData.quantity} onValueChange={(e) => onClikUpdeteQuentity(rowData._id,e.value)} showButtons buttonLayout="vertical" style={{ width: '8rem' }}
+            <InputNumber min={1} className="card flex justify-content-center" value={rowData.quantity} onValueChange={(e) => onClikUpdeteQuentity(rowData._id, e.value)} showButtons buttonLayout="vertical" style={{ width: '8rem' }}
                 decrementButtonClassName="p-button-secondary" incrementButtonClassName="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
         </>)
     }
@@ -242,7 +247,7 @@ export default function ProductsDemo() {
                     <Column field="inventoryStatus" body={statusBodyTemplate} ></Column>
                     <Column field="price" body={priceBodyTemplate} style={{ minWidth: '4rem', direction: 'rtl', textAlign: 'center' }}></Column>
                     <Column field="quantity" body={inputN} style={{ minWidth: '4rem', direction: 'rtl' }} ></Column>
-                    <Column field="name" body={nameBodyTemplate}style={{ minWidth: '2rem', direction: 'rtl',textAlign:'center' }}></Column>
+                    <Column field="name" body={nameBodyTemplate} style={{ minWidth: '2rem', direction: 'rtl', textAlign: 'center' }}></Column>
                     <Column field="image" body={imageBodyTemplate} style={{ direction: 'rtl' }}> </Column>
                 </DataTable>
             </div>
@@ -265,6 +270,41 @@ export default function ProductsDemo() {
                     {<span>Are you sure you want to delete the selected products?</span>}
                 </div>
             </Dialog>
+
+            
+            <Dialog 
+                visible={visible}
+                modal
+
+                onHide={() => {
+                    setVisible(false)
+                }}
+
+                style={{textAlign:'center'}}
+                content={({ hide }) => (
+
+                    <div className="register card" style={{borderRadius:'15px', direction: 'rtl', textAlign:'center' ,width: '500px',height: '600px', backgroundColor: "white", backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}><br/>
+
+                        <h1 style={{ marginRight: '30px',textAlign:'center' , fontSize: '30px' }}>טופס רכישה:</h1><br/>
+                    
+                        <div className="p-inputgroup flex-1">
+                           <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
+                                <i className="pi pi-home"></i>
+                            </span>
+                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
+                        </div><br/>
+
+                        <div className="p-inputgroup flex-1">
+                           <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
+                                <i className="pi pi-shopping-bag"></i>
+                            </span>
+                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
+                        </div><br/>
+
+                    </div>
+                )}
+            ></Dialog>
+
         </div>
     );
 }
