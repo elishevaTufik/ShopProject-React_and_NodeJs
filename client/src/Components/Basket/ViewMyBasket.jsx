@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // import { ProductService } from './service/ProductService';
 
 import { classNames } from 'primereact/utils';
@@ -16,6 +18,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { Checkbox } from 'primereact/checkbox';
+import { ListBox } from 'primereact/listbox';
 import "primeflex/primeflex.css"
 
 import { useCreateNewSweetMutation } from '../../app/sweetsApiSlice'
@@ -26,13 +29,15 @@ import { useCreateOrderMutation } from '../../app/orderApiSlice'
 import './ViewMyBasket.css'
 
 export default function ProductsDemo() {
-
-
+    
+    const navigate = useNavigate()
+    
     const [DeleteProduct, resDeleteProduct] = useDeleteProductMutation()
     const [UpdateQuantityOfProduct] = useUpdateQuantityOfProductMutation()
     const [CreateOrder, resCreateOrder] = useCreateOrderMutation()
 
     const { data: cart = [], isSuccess } = useGetAllCartQuery()
+
     let sweets = [];
 
     useEffect(() => {
@@ -40,9 +45,12 @@ export default function ProductsDemo() {
             // console.log("cart",cart);
             // console.log(cart[1].sweetId._id);
         }
-
     }, [isSuccess])
 
+    const onclickadd = () => {
+        setVisible(false)
+    }
+ 
     useEffect(() => {
         if (resCreateOrder.isError) {
             alert(resCreateOrder.error)
@@ -53,20 +61,14 @@ export default function ProductsDemo() {
     }
         , [resCreateOrder])
 
-    //const [products, setProducts] = useState(sweets);
-
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
-    // const [product, setProduct] = useState(null);
 
     const [checked, setChecked] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
-
-    const [branchId, setBranchId] = useState(null);
-    const [address, setAddress] = useState("");
 
     const [visible, setVisible] = useState(false);
 
@@ -79,6 +81,15 @@ export default function ProductsDemo() {
     const [id, setId] = useState(0);
 
     const [image, setImage] = useState("");
+
+    
+    // const cities = [
+    //     { name: 'New York', code: 'NY' },
+    //     { name: 'Rome', code: 'RM' },
+    //     { name: 'London', code: 'LDN' },
+    //     { name: 'Istanbul', code: 'IST' },
+    //     { name: 'Paris', code: 'PRS' }
+    // ];
 
     const fillArrSweets = () => {
         console.log("in fillArrSweets func");
@@ -104,13 +115,14 @@ export default function ProductsDemo() {
     };
 
     const buyBasket = () => {
-        //clientId, branchId, sweets,address
-        fillArrSweets()
-        setVisible(true)
-        // CreateOrder(cart.clientId,sweets)
-        sweets = []
-        setSubmitted(false);
-        setProductDialog(true);
+        navigate("/ConfirmOrder")
+        // //clientId, branchId, sweets,address
+        // fillArrSweets()
+        // setVisible(true)
+        // // CreateOrder(cart.clientId,sweets)
+        // sweets = []
+        // setSubmitted(false);
+        // setProductDialog(true);
     };
 
     const onClikUpdeteQuentity = (id, quantity) => {
@@ -145,7 +157,6 @@ export default function ProductsDemo() {
     const mydeleteProduct = () => {
         DeleteProduct(id)
         setDeleteProductDialog(false);
-        // toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     };
 
     const confirmDeleteSelected = () => {
@@ -154,18 +165,16 @@ export default function ProductsDemo() {
 
     const deleteSelectedProducts = () => {
         setDeleteProductsDialog(false);
-        // toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     };
 
     const rightToolbarTemplate = (rowData) => {
-        return <Button label="רכישת הסל" icon="pi pi-upload" className="p-button-help" onClick={buyBasket()} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }} />;
+        return <a href="http://localhost:3000/ConfirmOrder" target="_blank" rel="noopener noreferrer" className="p-button font-bold">רכישת הסל</a>
+        //  <Button label="רכישת הסל" icon="pi pi-check" onClick={buyBasket()} />   
+        // return <Button label="רכישת הסל" icon="pi pi-upload" className="p-button-help" onClick={buyBasket()} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }} />;
     };
 
     const imageBodyTemplate = (rowData) => {
-        //../public/images/3.jpg
         return <img src={`images/${rowData.sweetId.image}`} alt={rowData.sweetId.image} className="shadow-2 border-round" style={{ width: '150px', direction: 'rtl' }} />;
-        //return <img alt="rowData.image" src={`../public/images/${image}`} height="40" className="mr-2" style={{textAlign:'center', width: '64px'}}></img> 
-        //    url('../public/images/3.jpg');
     };
     //,nubvvvv
     const inputN = (rowData) => {
@@ -190,7 +199,6 @@ export default function ProductsDemo() {
         return (
             <React.Fragment>
                 <s style={{ color: '#ffffff' }}> . . . </s>
-                {/* //אייקון אפדייט ומחיקה */}
                 <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => { confirmDeleteProduct(rowData._id) }} />
             </React.Fragment>
         );
@@ -210,12 +218,6 @@ export default function ProductsDemo() {
         <h1 className="m-0"> הסל שלי </h1>
     );
 
-    // const productDialogFooter = (
-    //     <React.Fragment>
-    //         <Button label="ביטול" icon="pi pi-times" outlined onClick={hideDialog} />
-    //         <Button label="שמירה" icon="pi pi-check" onClick={saveProduct} />
-    //     </React.Fragment>
-    // );
     const deleteProductDialogFooter = (
         <React.Fragment>
             <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
@@ -232,8 +234,6 @@ export default function ProductsDemo() {
     return (
         <div >
             <br /><br /><br />
-            {/* <img alt="logo" src="../images/logo.png" height="40" className="mr-2" style={{length:'20%',width:'20%'}}></img> */}
-            {/* <img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img> */}
             <Toast ref={toast} />
             <div className="card">
                 <Toolbar className="mb-4" right={rightToolbarTemplate}></Toolbar>
@@ -272,7 +272,7 @@ export default function ProductsDemo() {
             </Dialog>
 
             
-            <Dialog 
+            {/* <Dialog 
                 visible={visible}
                 modal
 
@@ -291,19 +291,31 @@ export default function ProductsDemo() {
                            <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
                                 <i className="pi pi-home"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
+                            <InputText style={{width:'50%',borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
                         </div><br/>
 
                         <div className="p-inputgroup flex-1">
                            <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
                                 <i className="pi pi-shopping-bag"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
+                            <ListBox filter value={selectedBranch} 
+                            style={{width:'50%', borderRadius:'5px'}} 
+                            placeholder="בחר סניף" 
+                            onChange={(e) => setselectedBranch(e.value)} 
+                            options={places} 
+                            className="w-full md:w-14rem" />
+                        </div><br/>
+
+                        <div className="p-inputgroup flex-1">
+                        <div className="flex align-items-center gap-2" >
+                            <Button label="בטל" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '5%', backgroundColor: '#ffffff' }}></Button>
+                            <Button label="הירשם" onClick={(e) => onclickadd()} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '17%', backgroundColor: '#ffffff' }}></Button>
+                        </div>
                         </div><br/>
 
                     </div>
                 )}
-            ></Dialog>
+            ></Dialog> */}
 
         </div>
     );
