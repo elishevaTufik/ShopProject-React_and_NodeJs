@@ -62,7 +62,6 @@ const getOrderByIdClient = async (req, res) => {
     if (!orders.length) {
     return res.status(400).json({ message: 'No order found' })
     }
-    
     res.json(orders)
 }
 
@@ -74,9 +73,10 @@ const createOrder = async (req, res) => {
     }
 
     const {clientId, branchId, sweets,address } = req.body
+    console.log({clientId, branchId, sweets,address });
     if (!clientId || !sweets) 
     {
-        return res.status(400).json({ message: 'clientId, branchId,  sweets, city, street, house are required' })
+        return res.status(400).json({ message: 'clientId, branchId,  sweets, and address are required' })
     }
 
     const order = await Orders.create({clientId, branchId, sweets, address})
