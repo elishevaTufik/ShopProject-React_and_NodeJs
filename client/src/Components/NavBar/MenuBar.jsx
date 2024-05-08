@@ -69,7 +69,7 @@ if(permission=='admin')
                     label: 'הודעות',
                     icon: 'pi pi-comment',
                     // template: itemRenderer,
-                    url: '/Messeg'
+                    url: '/Messege'
                 },
         
                 {
@@ -136,7 +136,7 @@ if(permission=='admin')
                         label: 'הודעות',
                         icon: 'pi pi-comment',
                         // template: itemRenderer,
-                        url: '/Messeg'
+                        url: '/Messege'
                     },
             
                     {
