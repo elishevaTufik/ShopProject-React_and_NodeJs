@@ -72,14 +72,16 @@ const createOrder = async (req, res) => {
         return res.status(401).json({message:'Unauthorized' })
     }
 
-    const {clientId, branchId, sweets,address } = req.body
-    console.log({clientId, branchId, sweets,address });
+    const {clientId, branchId, sweets, address} = req.body
+    console.log(clientId, branchId, sweets,address );
     if (!clientId || !sweets) 
     {
         return res.status(400).json({ message: 'clientId, branchId,  sweets, and address are required' })
     }
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     const order = await Orders.create({clientId, branchId, sweets, address})
+
     if(order){
         return res.json(order)
     }
