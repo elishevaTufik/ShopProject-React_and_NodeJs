@@ -9,7 +9,7 @@ function Messege() {
       <div className="Messege">
         Messege
         <br/>
-      
+        {/* {permission=='client'?<MessageClient />:<Galery/>} */}
         {permission=='client'?<MessageClient id={_id}/>:<Galery/>}
       </div>
     );

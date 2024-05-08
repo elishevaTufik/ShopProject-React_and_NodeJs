@@ -44,7 +44,10 @@ export default function BranchAdmin() {
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
   
-
+const changeOpen=(e)=>
+{
+  debugger
+}
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -55,14 +58,14 @@ export default function BranchAdmin() {
   
   const [city, setCity] = useState("");
   const [location, setLocation] = useState("");
-  const [close, setClose] = useState();
-  const [open,setOpen]=useState()
+  const [close, setClose] = useState("00:00");
+  const [open,setOpen]=useState("00:00")
   const [image, setImage] = useState("")
   const [id, setId] = useState(0)
 
 
   const [isEdit, setIsEdit] = useState(false);
-
+const s="22:22"
   const openNew = () => {
     //setProduct(sweets);
     setSubmitted(false);
@@ -98,8 +101,8 @@ export default function BranchAdmin() {
         updateBranch({id,city,open,close,location,image})
       
         setCity("")
-        setOpen()
-        setClose()
+        setOpen("00:00")
+        setClose("00:00")
         setLocation("")
         setImage("")
         setId(0)
@@ -110,8 +113,8 @@ export default function BranchAdmin() {
         createBranch({ city, location,image,open,close})
         setCity("")
         setLocation("")
-        setOpen()
-        setClose()
+        setOpen("00:00")
+        setClose("00:00")
         setImage("")
         setId(0)
         
@@ -246,9 +249,9 @@ return (
           <div className="field col">
            <div className="flex-auto">
                <label htmlFor="openHours" className="font-bold">שעת פתיחה  </label>
-                <Calendar id="open" value={open} onChange={(e) => setOpen(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
+                <Calendar id="open" value={new Date('October 13, 2014 '+open+':00')} onChange={(e)=>setOpen(""+e.target.value.getHours()+":"+e.target.value.getMinutes())} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
                 <label htmlFor="buttondisplay" className="font-bold block mb-2">שעת סגירה</label>
-                <Calendar id="close" value={close} onChange={(e) => setClose(e.target.value)} showIcon timeOnly  icon={() => <i className="pi pi-clock" />}/>
+                <Calendar id="close" value={new Date('October 13, 2014 '+close+':00')} onChange={(e) => setClose(""+e.target.value.getHours()+":"+e.target.value.getMinutes())} showIcon timeOnly  icon={() => <i className="pi pi-clock" />}/>
             </div> 
                 <div className="field">
                     <label htmlFor="image" className="font-bold">

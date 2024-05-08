@@ -12,7 +12,8 @@ const messegeApiSlice = apiSlice.injectEndpoints({
         }),
         getMessageByIdClient: build.query({
             query: (id) => ({
-                url: '/api/messege/'+id
+                url: '/api/messege',
+                body:id
             }), 
             providesTags:["Messege"]
         }),
