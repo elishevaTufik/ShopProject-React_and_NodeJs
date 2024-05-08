@@ -8,6 +8,9 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Checkbox } from "primereact/checkbox";
 import { Dropdown } from 'primereact/dropdown';
+import { Password } from 'primereact/password';
+import { InputNumber } from 'primereact/inputnumber';
+import { InputMask } from "primereact/inputmask";
 
 import './Register.css'
 
@@ -42,6 +45,11 @@ export default function HeadlessDemo() {
     const onclickadd = () => {
         setVisible(false)
         registerClient({ username: username, name: name, password: password, email: email, phone: phone})
+        setUsername("")
+        setPassword("")
+        setName("")
+        setEmail("")
+        setPhone("")
     }
  
     return (
@@ -81,7 +89,9 @@ export default function HeadlessDemo() {
                             <span style={{marginRight:"40px", borderRadius:'5px'}} className="p-inputgroup-addon">
                                 <i className="pi pi-key"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}}/>
+                            {/* //<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask /> */}
+                            
+                            <Password style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask/>
                         </div><br/>
 
                         <div className="p-inputgroup flex-1">
@@ -102,7 +112,7 @@ export default function HeadlessDemo() {
                             <span style={{marginRight:"40px", borderRadius:'5px'}} className="p-inputgroup-addon">
                                 <i className="pi pi-phone"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder= "טלפון" id="phone" onChange={(e)=>{setPhone(e.target.value)}} />
+                            <InputMask id="phone" mask="999-9999999"  style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder= "טלפון" id="phone" onChange={(e)=>{setPhone(e.value)}} />
                         </div>
                         <div className="flex align-items-center gap-2" >
                             <Button label="בטל" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '5%', backgroundColor: '#ffffff' }}></Button>

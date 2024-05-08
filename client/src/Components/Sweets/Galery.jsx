@@ -9,11 +9,15 @@ import { Toast } from 'primereact/toast';
 
 import { useGetAllSweetsQuery } from '../../app/sweetsApiSlice'
 import { useAddNewProdMutation } from '../../app/basketSlice'
+import useAuth from "../../hooks/useAuth";
 
 import './SweetViewClient.css'
 import "primeflex/primeflex.css"
 
 export default function Galery() {
+    
+    const {_id,username, permission, name, email, phone, isAdmin, isClient,isWorker,isShiftManager}=useAuth()
+    console.log("username"+username);
 
     const toast = useRef(null);
 
@@ -23,6 +27,7 @@ export default function Galery() {
 
     const { data, isLoading, isError, error, isSuccess } = useGetAllSweetsQuery()
     const [AddNewProd, resAddNewProd] = useAddNewProdMutation()
+
 
 
     const cart = JSON.parse(localStorage.getItem('cart')) || []
@@ -47,6 +52,14 @@ export default function Galery() {
     }
         , [resAddNewProd])
 
+    const checkDisabled = (value) => {
+        if(username==undefined)
+          return true
+        
+        return value
+    
+    };
+    
     const listItem = (product, index) => {
         return (
             <>
@@ -65,7 +78,7 @@ export default function Galery() {
                             </div>
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                                 <span className="text-2xl font-semibold">₪{product.price}</span>
-                                <Button onClick={() => { hundleSubmit(product) }} icon="pi pi-cart-plus" className="p-button-rounded" disabled={!product.inInventory}></Button>
+                                <Button onClick={() => { hundleSubmit(product) }} icon="pi pi-cart-plus" className="p-button-rounded" disabled={checkDisabled(!product.inInventory)}></Button>
                             </div>
                         </div>
                     </div>
@@ -90,7 +103,7 @@ export default function Galery() {
                     </div>
                     <div className="flex align-items-center justify-content-between">
                         <span className="text-2xl font-semibold">₪{product.price}</span>
-                        <Button onClick={() => { hundleSubmit(product) }} icon="pi pi-cart-plus" className="p-button-rounded" disabled={!product.inInventory}></Button>
+                        <Button onClick={() => { hundleSubmit(product) }} icon="pi pi-cart-plus" className="p-button-rounded" disabled={checkDisabled(!product.inInventory)}></Button>
                     </div>
                 </div>
             </div>

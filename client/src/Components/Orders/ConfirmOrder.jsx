@@ -43,7 +43,6 @@ export default function ConfirmOrder() {
     }
         ,[resCreateOrder])
 
-
     console.log("branches",branches);
     
     let places=[]
@@ -70,8 +69,8 @@ export default function ConfirmOrder() {
         }
 
         let x=cart[0].clientId
-        //console.log("x, selectedBranchId, cart, address",x,selectedBranchId,cart,address);
-        CreateOrder({x,selectedBranchId,cart,address})
+
+        CreateOrder({clientId:x,branchId:selectedBranchId,sweets:cart,address})
     };
 
     const onclickcancel = () => {
@@ -101,7 +100,6 @@ export default function ConfirmOrder() {
                         <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
                             <i className="pi pi-shopping-bag"></i>
                         </span> </div><br/>
-
             </Card>
         </div>
     )
