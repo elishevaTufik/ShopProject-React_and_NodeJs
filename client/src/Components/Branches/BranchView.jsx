@@ -29,10 +29,9 @@ export default function BranchView() {
                     <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width:150 }}/*alt={product.name}*/ />
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div className="text-2xl font-bold text-900">{product.city}</div>
-                            <div>{product.location}</div>
+                            <div className="text-2xl font-bold text-900">{product.location},{product.city}</div>
                             <div><b>:שעות פתיחה</b></div>
-                          <div> {product.open}:00-{product.close}:00</div>
+                          <div> {product.open}-{product.close}</div>
                             {/* <Rating value={product.rating} readOnly cancel={false}></Rating> */}
                         </div>
                     </div>
@@ -47,10 +46,9 @@ export default function BranchView() {
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-column align-items-center gap-3 py-5">
                         <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width:150 }} /*alt={product.name}*/ />
-                        <div className="text-2xl font-bold text-900">{product.city}</div>
-                            <div>{product.location}</div>
+                        <div className="text-2xl font-bold text-900">{product.location}, {product.city}</div>
                         <div><b>:שעות פתיחה</b></div>
-                          <div> {product.open}:00-{product.close}:00</div>
+                          <div> {product.open}-{product.close}</div>
                     </div>
                 </div>
             </div>
