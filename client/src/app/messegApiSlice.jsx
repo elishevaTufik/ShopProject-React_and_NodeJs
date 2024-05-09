@@ -26,7 +26,7 @@ const messegeApiSlice = apiSlice.injectEndpoints({
 
         writeMessage: build.mutation({
             query: (messege) => ({
-                url: '/api/messege/writeMessage',
+                url: '/api/messege/',
                 method:"POST",
                 body:messege
             }),

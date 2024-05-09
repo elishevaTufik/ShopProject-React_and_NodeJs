@@ -9,7 +9,7 @@ router.use(verifyJWT)
 router.get("/getAll",messagesController.getAllMessages)
 router.get("/",messagesController.getMessageByIdClient)
 router.get("/getMessagesNotChecked",messagesController.getMessagesNotChecked)
-router.post("/writeMessage", messagesController.writeMessage)
+router.post("/", messagesController.writeMessage)
 router.put("/update/:id",messagesController.updateChecked)
 
 module.exports = router

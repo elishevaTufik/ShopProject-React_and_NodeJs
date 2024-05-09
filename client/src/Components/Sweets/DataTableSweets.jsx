@@ -94,6 +94,7 @@ export default function ProductsDemo() {
         setImage("")
 
         setisEdit(false)
+        ////////////////
         setSubmitted(false);
         setProductDialog(false);
     };
@@ -204,7 +205,7 @@ export default function ProductsDemo() {
 
     const actionBodyTemplate = (rowData) => {
         {                
-}  
+ }  
         return (
             <React.Fragment>
                 <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
@@ -247,12 +248,12 @@ export default function ProductsDemo() {
              <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
          </React.Fragment>
     );
-    const deleteProductsDialogFooter = (
-        <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedProducts} />
-        </React.Fragment>
-    );
+    // const deleteProductsDialogFooter = (
+    //     <React.Fragment>
+    //         <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
+    //         <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedProducts} />
+    //     </React.Fragment>
+    // );
 
     return (
         <div >
@@ -355,12 +356,12 @@ export default function ProductsDemo() {
                 </div>
             </Dialog>
 
-            <Dialog visible={deleteProductsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
+            {/* <Dialog visible={deleteProductsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {<span>Are you sure you want to delete the selected products?</span>}
                 </div>
-            </Dialog>
+            </Dialog> */}
         </div>
     );
 }

@@ -13,8 +13,8 @@ const getAllMessages = async (req, res) => {
     res.json(messages)
 }
 const getMessageByIdClient = async (req, res) => {
-    console.log("getMessageByIdClient");
-    console.log("permission " , req.user.permission);
+    // console.log("getMessageByIdClient");
+    // console.log("permission " , req.user.permission);
     if(req.user.permission!='client')
     {
         return res.status(401).json({message:'Unauthorized' })
@@ -22,7 +22,7 @@ const getMessageByIdClient = async (req, res) => {
     const {clientId} = req.body
     const messages = await Messages.find({clientId:req.user._id}).lean()
     //.populate("clientId", { name: 1 ,image: 1})
-    console.log(clientId);
+    // console.log(clientId);
     
     if (!messages.length) {
     return res.status(400).json({ message: 'No message found' })
@@ -44,12 +44,15 @@ const getMessagesNotChecked = async (req, res) => {
 }
 
 const writeMessage = async (req, res) => {
+     console.log("aaaaaaaaaaa");
+ console.log("req.user.permission",req.user.permission);
 
     if(req.user.permission!='client')
     {
         return res.status(401).json({message:'Unauthorized' })
     }
     const {clientId, title, text, date} = req.body
+    console.log("clientId",clientId, "  title", title,"  text",text);
     if (!clientId || !title || !text) 
     {
         return res.status(400).json({ message: 'clientId, title, text are required' })

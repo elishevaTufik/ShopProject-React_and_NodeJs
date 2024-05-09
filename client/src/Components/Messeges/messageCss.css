@@ -1,4 +1,56 @@
 
-.p-dataview .p-dataview-content {
+/* .p-dataview .p-dataview-content {
     background: transparent
+} */
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: normal;
+    background: var(--surface-ground);
+    color: var(--text-color);
+    padding: 1rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.card {
+    /* background: var(--surface-card); */
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background: transparent;
+}
+.p-dataview .p-dataview-content {
+    background: transparent;
+    color: #4b5563;
+    border: 0 none;
+    padding: 0;
+}
+.p-button.p-button-outlined {
+    background-color: white;
+    color: #ec4899;
+    border: 2px solid;
+}
+.p-toolbar {
+    background: transparent;
+    border: 1px solid transparent;
+    /* padding: 1.25rem; */
+    /* border-radius: 6px; */
+    /* gap: 0.5rem; */
+    /* display: flex; */
+    align-items: left;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    margin-left: 10%;
+    /* left:50%; */
+    /* display: inline-flex; */
+    cursor: pointer;
+    user-select: none;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    /* position: relative; */
 }
