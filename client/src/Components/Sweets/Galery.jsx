@@ -42,7 +42,7 @@ export default function Galery() {
 
     useEffect(() => {
         if (resAddNewProd.isError) {
-            alert(resAddNewProd.error)
+            console.log(resAddNewProd.error)
         }
         if (resAddNewProd.isSuccess) {
             console.log("success resAddNewProd")
@@ -132,7 +132,8 @@ export default function Galery() {
     };
 
     const hundleSubmit = (product) => {
-        console.log("hundleSubmit product._id", product._id);
+        console.log("hundleSubmit product._id", product._id,typeof(product._id));
+        
         AddNewProd(product._id)
         toast.current.show({ severity: 'success', summary: 'המוצר נוסף לסל בהצלחה', life: 3000 });
         console.log("resAddNewProd", resAddNewProd)

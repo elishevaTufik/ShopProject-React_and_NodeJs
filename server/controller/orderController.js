@@ -73,12 +73,16 @@ const createOrder = async (req, res) => {
     }
 
     const {clientId, branchId, sweets, address} = req.body
+
     console.log(clientId, branchId, sweets,address );
-    if (!clientId || !sweets) 
+    console.log(typeof(clientId));
+    console.log(typeof(branchId));
+    console.log(typeof(sweets));
+    
+    if (!clientId || !sweets)
     {
         return res.status(400).json({ message: 'clientId, branchId,  sweets, and address are required' })
     }
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
     const order = await Orders.create({clientId, branchId, sweets, address})
 

@@ -13,36 +13,31 @@ const addNewProd = async (req, res) => {
         return res.status(400).json({ message: 'missing field!' })
     }
 
-    const ifExist = await Basket.findOne({ sweetId: sweetId }).populate("sweetId", { price: 1 })
+    const ifExist = await Basket.findOne({ sweetId: sweetId, clientId: req.user._id })
 
     if (ifExist) {
-        console.log("Exist");
         ifExist.quantity = ifExist.quantity + 1
-        ifExist.price = ifExist.sweetId.price * ifExist.quantity
-        await ifExist.save()
+        ifExist.price = ifExist.price * ifExist.quantity;
+        await ifExist.save();
         res.status(201).json({ message: 'new item added-quantity+1' })
     }
 
     if (!ifExist) {
-        console.log("not Exist");
         const pro = await Sweets.findOne({ _id: sweetId }).lean()
         const newProd = await Basket.create({ clientId: req.user._id, sweetId: sweetId, price: pro.price })
 
         if (newProd) {
-            console.log("newProd",newProd);
-
             return res.status(201).json({ message: 'new item added' })
         }
         else {
-            console.log("not sucsess newProd");
-
             return res.status(400).json({ message: 'invalid item' })
         }
     }
 }
 
+
 const getAllCart = async (req, res) => {
-    const products = await Basket.find({ clientId: req.user._id }).lean().populate("sweetId", { name: 1 ,image: 1})
+    const products = await Basket.find({ clientId: req.user._id }).lean().populate("sweetId", { name: 1, image: 1 })
     if (!products?.length) {
         return res.status(400).json({ message: "No products found :(" })
     }
@@ -67,16 +62,15 @@ const updateQuantityOfProduct = async (req, res) => {
 
     const { id, quantity } = req.body
 
-    if (!id || !quantity)
-    {
+    if (!id || !quantity) {
         return res.status(400).json({ message: 'missing field' });
-    } 
-    
+    }
+
 
     const prod = await Basket.findById(id).populate("sweetId", { price: 1 })
 
     if (!prod) {
-        
+
         return res.status(400).json({ message: 'prod not found!' })
     }
 

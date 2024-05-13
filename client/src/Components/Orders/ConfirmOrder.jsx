@@ -67,10 +67,10 @@ export default function ConfirmOrder() {
             alert("בחר סניף ממנו תרצה להזמין")
             return
         }
+        console.log("cart",cart);
+        console.log("typeof(cart[0].clientId)",typeof(cart[0].clientId));
+        CreateOrder({clientId:cart[0].clientId,branchId:selectedBranchId,sweets:cart,address})
 
-        let x=cart[0].clientId
-
-        CreateOrder({clientId:x,branchId:selectedBranchId,sweets:cart,address})
     };
 
     const onclickcancel = () => {
