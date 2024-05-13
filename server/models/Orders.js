@@ -16,7 +16,7 @@ const ordersSchema = new mongoose.Schema(
 
         sweets: {
             type: [mongoose.Schema.Types.ObjectId],
-            ref:"Basket",
+            ref:"Sweets",
             required: true
         },
 
