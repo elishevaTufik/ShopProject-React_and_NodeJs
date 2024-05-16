@@ -244,52 +244,6 @@ export default function ProductsDemo() {
                 </div>
             </Dialog>
 
-            
-            {/* <Dialog 
-                visible={visible}
-                modal
-
-                onHide={() => {
-                    setVisible(false)
-                }}
-
-                style={{textAlign:'center'}}
-                content={({ hide }) => (
-
-                    <div className="register card" style={{borderRadius:'15px', direction: 'rtl', textAlign:'center' ,width: '500px',height: '600px', backgroundColor: "white", backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}><br/>
-
-                        <h1 style={{ marginRight: '30px',textAlign:'center' , fontSize: '30px' }}>טופס רכישה:</h1><br/>
-                    
-                        <div className="p-inputgroup flex-1">
-                           <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
-                                <i className="pi pi-home"></i>
-                            </span>
-                            <InputText style={{width:'50%',borderRadius:'5px'}} placeholder="הכתובת שלך" id="address" onChange={(e)=>{setAddress(e.target.value)}}/>
-                        </div><br/>
-
-                        <div className="p-inputgroup flex-1">
-                           <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
-                                <i className="pi pi-shopping-bag"></i>
-                            </span>
-                            <ListBox filter value={selectedBranch} 
-                            style={{width:'50%', borderRadius:'5px'}} 
-                            placeholder="בחר סניף" 
-                            onChange={(e) => setselectedBranch(e.value)} 
-                            options={places} 
-                            className="w-full md:w-14rem" />
-                        </div><br/>
-
-                        <div className="p-inputgroup flex-1">
-                        <div className="flex align-items-center gap-2" >
-                            <Button label="בטל" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '5%', backgroundColor: '#ffffff' }}></Button>
-                            <Button label="הירשם" onClick={(e) => onclickadd()} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '17%', backgroundColor: '#ffffff' }}></Button>
-                        </div>
-                        </div><br/>
-
-                    </div>
-                )}
-            ></Dialog> */}
-
         </div>
     );
 }
