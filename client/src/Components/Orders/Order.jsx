@@ -1,4 +1,4 @@
-import OrdersClient from "./OrdersClient";
+import ClientOrders from "./ClientOrders";
 import ManagerOrders from "./ManagerOrders"
 import useAuth from "../../hooks/useAuth";
 
@@ -8,7 +8,7 @@ function Order() {
     return (
       <div className="Order">
         <br/>
-       {permission=='client'? <OrdersClient />:<ManagerOrders/>}
+       {permission=='client'? <ClientOrders />:<ManagerOrders/>}
            
       </div>
     );

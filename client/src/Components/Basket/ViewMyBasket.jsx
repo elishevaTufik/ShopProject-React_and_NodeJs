@@ -231,7 +231,7 @@ export default function ProductsDemo() {
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} /> <br /><br />
                     {(
                         <span>
-                            האם אתה בטוח רוצה למחוק את  <b>{name}?</b>
+                            ?האם אתה בטוח רוצה למחוק אותי  <b></b>
                         </span>
                     )}
                 </div>
