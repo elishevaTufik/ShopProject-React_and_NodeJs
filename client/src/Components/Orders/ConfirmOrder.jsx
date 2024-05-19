@@ -6,7 +6,6 @@ import { Button } from 'primereact/button';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Toast } from 'primereact/toast';
 import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
@@ -46,6 +45,18 @@ export default function ConfirmOrder() {
         console.log(resCreateOrder)
     }
         ,[resCreateOrder])
+
+
+    useEffect(() => {
+        if (resCDeleteBasketById.isError) {
+            console.log(resCDeleteBasketById.error)
+        }
+        if (resCDeleteBasketById.isSuccess) {
+            navigate('/Order')
+        }
+        console.log(resCDeleteBasketById)
+    }
+        ,[resCDeleteBasketById])
 
     console.log("branches",branches);
     

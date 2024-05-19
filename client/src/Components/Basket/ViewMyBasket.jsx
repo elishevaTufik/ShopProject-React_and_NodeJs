@@ -40,8 +40,7 @@ export default function ProductsDemo() {
 
     useEffect(() => {
         if (isSuccess) {
-            // console.log("cart",cart);
-            // console.log(cart[1].sweetId._id);
+            console.log("cart",cart);
         }
     }, [isSuccess])
 
@@ -93,10 +92,9 @@ export default function ProductsDemo() {
         setProductDialog(true);
     };
 
-    // const buyBasket = () => {
-    //     // //clientId, branchId, sweets,address
-    //     // CreateOrder(cart.clientId,sweets)
-    // };
+    const buyBasket = () => {
+        navigate("/ConfirmOrder")
+    };
 
     const onClikUpdeteQuentity = (id, quantity) => {
 
@@ -141,9 +139,7 @@ export default function ProductsDemo() {
     };
 
     const rightToolbarTemplate = (rowData) => {
-        return <a href="http://localhost:3000/ConfirmOrder" target="_blank" rel="noopener noreferrer" className="p-button font-bold">רכישת הסל</a>
-        //  <Button label="רכישת הסל" icon="pi pi-check" onClick={buyBasket()} />   
-        // return <Button label="רכישת הסל" icon="pi pi-upload" className="p-button-help" onClick={buyBasket()} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }} />;
+        return <Button label="רכישת הסל" icon="pi pi-eject" className="p-button-help" onClick={buyBasket} disabled={checkDisabled()} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }}  />;
     };
 
     const imageBodyTemplate = (rowData) => {
@@ -176,6 +172,12 @@ export default function ProductsDemo() {
             </React.Fragment>
         );
     };
+
+    const checkDisabled =()=>{
+        if (cart.length>0)
+            return false
+        return true
+    }
 
     const getSeverity = (inInventorys) => {
         switch (inInventorys) {
@@ -219,7 +221,7 @@ export default function ProductsDemo() {
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem', direction: 'rtl' }}></Column>
                     <Column field="inventoryStatus" body={statusBodyTemplate} ></Column>
                     <Column field="price" body={priceBodyTemplate} style={{ minWidth: '4rem', direction: 'rtl', textAlign: 'center' }}></Column>
-                    <Column field="quantity" body={inputN} style={{ minWidth: '4rem', direction: 'rtl' }} ></Column>
+                    <Column field="quantity" body={inputN} style={{ minWidth: '4rem', direction: 'rtl'}} ></Column>
                     <Column field="name" body={nameBodyTemplate} style={{ minWidth: '2rem', direction: 'rtl', textAlign: 'center' }}></Column>
                     <Column field="image" body={imageBodyTemplate} style={{ direction: 'rtl' }}> </Column>
                 </DataTable>

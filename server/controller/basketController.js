@@ -58,18 +58,15 @@ const deleteProduct = async (req, res) => {
 }
 
 const deleteBasketById = async (req, res) => {
-console.log("deleteBasketById");
     if (req.user.permission != 'client') {
         return res.status(401).json({ message: 'Unauthorized' })
     }
 
     const { clientId } = req.body
-    console.log("clientId",clientId);
     if (!clientId) {
         return res.status(400).json({ message: 'clientId is requierd!' })
     }
     await Basket.deleteMany({ clientId });
-    console.log('Basket deleted successfully'); 
     res.json('Basket deleted successfully')
 
 }
