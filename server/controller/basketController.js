@@ -48,7 +48,6 @@ const getAllCart = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     const { id } = req.params
-    console.log(id);
     const prod = await Basket.findById(id).exec()
     if (!prod) {
         return res.status(400).json({ message: 'prod not found!' })
@@ -58,6 +57,23 @@ const deleteProduct = async (req, res) => {
     res.json(reply)
 }
 
+const deleteBasketById = async (req, res) => {
+
+    if (req.user.permission != 'client') {
+        return res.status(401).json({ message: 'Unauthorized' })
+    }
+
+    const { clientId } = req.body
+
+    if (!clientId) {
+        return res.status(400).json({ message: 'clientId is requierd!' })
+    }
+    await Basket.deleteMany({ clientId });
+    console.log('Baskets deleted successfully'); 
+    res.json(reply)
+
+}
+
 const updateQuantityOfProduct = async (req, res) => {
 
     const { id, quantity } = req.body
@@ -65,7 +81,6 @@ const updateQuantityOfProduct = async (req, res) => {
     if (!id || !quantity) {
         return res.status(400).json({ message: 'missing field' });
     }
-
 
     const prod = await Basket.findById(id).populate("sweetId", { price: 1 })
 
@@ -91,5 +106,6 @@ module.exports = {
     addNewProd,
     getAllCart,
     deleteProduct,
+    deleteBasketById,
     updateQuantityOfProduct
 }

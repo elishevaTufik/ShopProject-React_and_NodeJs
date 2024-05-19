@@ -8,6 +8,7 @@ router.use(verifyJWT)
 router.get("/", BasketController.getAllCart)
 router.post("/:sweetId", BasketController.addNewProd)
 router.delete("/:id", BasketController.deleteProduct)
+router.delete("/", BasketController.deleteBasketById)
 router.put("/", BasketController.updateQuantityOfProduct)
 
 module.exports = router 

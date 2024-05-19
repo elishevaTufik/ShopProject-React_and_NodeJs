@@ -26,7 +26,16 @@ const basketsApiSlice = apiSlice.injectEndpoints({
             }),
             invalidatesTags:["Basket"]
         }),
-    
+
+        deleteBasketById: build.mutation({
+            query: (clientId) => ({
+                url: '/api/basket/',
+                method:"DELETE",
+                body:clientId,
+            }),
+            invalidatesTags:["Basket"]
+        }),
+
         updateQuantityOfProduct: build.mutation({
             query: (basket) => ({
                 url: '/api/basket/',
@@ -42,5 +51,6 @@ export  const {
     useGetAllCartQuery,
     useAddNewProdMutation,
     useDeleteProductMutation,
+    useDeleteBasketByIdMutation,
     useUpdateQuantityOfProductMutation,
     } = basketsApiSlice
