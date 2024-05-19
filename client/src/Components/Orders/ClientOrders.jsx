@@ -7,8 +7,10 @@ import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
+import ClientAllOrders from "./ClientAllOrders";
 import { useGetOrderByIdClientQuery } from '../../app/orderApiSlice'
 import useAuth from "../../hooks/useAuth";
+import { Navigate } from 'react-router-dom';
 
 function ClientOrders() {
 
@@ -162,7 +164,14 @@ function ClientOrders() {
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
         </Card>
+          {/* <ClientAllOrders/> */}
+          <br/><br/>
+          <button onClick={Navigate('/ClientAllOrders')}
+          style={{ textAlign: 'center', color: '#ffffff', backgroundColor: '#ec4899', width: '20%', textAlign: 'center', marginLeft: '40%', borderRadius: '10px', opacity: '0.7', fontSize: '150%', border:'none' }}
+          />
+          <br />להיסטוריית ההזמנות<br /><br />
       </div>
+    
     </div>
   );
 }
