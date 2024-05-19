@@ -33,16 +33,31 @@ export default function ProductsDemo() {
     
     const [DeleteProduct, resDeleteProduct] = useDeleteProductMutation()
     const [UpdateQuantityOfProduct] = useUpdateQuantityOfProductMutation()
-
-    const { data: cart = [], isSuccess } = useGetAllCartQuery()
+    const [c,setC]=useState([])
+    const { data: cart = [], isSuccess,isError,error } = useGetAllCartQuery()
 
     let sweets = [];
 
     useEffect(() => {
         if (isSuccess) {
-            console.log("cart",cart);
+            // console.log("cart",cart);
+            setC(cart)
+
         }
     }, [isSuccess])
+    useEffect(() => {
+            // console.log("cart",cart);
+            setC(cart)
+
+        
+    }, [cart])
+    useEffect(() => {
+        if (isError) {
+            console.log(error);
+            if(error.status==400)
+            setC([])
+        }
+    }, [isError])
 
     const onclickadd = () => {
         setVisible(false)
@@ -212,7 +227,7 @@ export default function ProductsDemo() {
             <Toast ref={toast} />
             <div className="card">
                 <Toolbar className="mb-4" right={rightToolbarTemplate}></Toolbar>
-                <DataTable ref={dt} value={cart}
+                <DataTable ref={dt} value={c}
                     style={{ opacity: 1 }}
                     dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"

@@ -15,49 +15,75 @@ function ClientOrders() {
   const { _id, username, permission, name, email, phone, isAdmin, isClient, isWorker, isShiftManager } = useAuth()
   const { data: orders = [], isLoading, isError, error, isSuccess } = useGetOrderByIdClientQuery(_id)
 
+  const emptyObject = {
+    address: "a",
+    branchId: "b",
+    clientId:"a",
+    createdAt: "c",
+    status: "d",
+    sweets: [],
+    updatedAt:"a",
+    _v:"s",
+    _id:"s"
+  };
+
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const [createdAt, setCreatedAt] = useState(null);
-  const [sweets, setSweets] = useState([]);
-  const [address, setAddress] = useState(null);
-  const [branchId, setBranchId] = useState(null);
-  const [status, setStatus] = useState(null);
-
+  const [last, setLast] = useState(emptyObject);
 
   useEffect(() => {
     if (isSuccess)
+    {
       console.log("orders", orders);
+      const a=findLatestOrder()
+      console.log("a",a);
+      setLast(a)
+      // console.log("last",last);
+      setTabs([
+        {
+          header: 'תאריך ביצוע',
+          children: <p className="m-0">{`${new Date(a.createdAt).getDate()}-${new Date(a.createdAt).getMonth()+1}-${new Date(a.createdAt).getFullYear()}`}</p>
+        },
+        {
+          header: 'מוצרים שהוזמנו',
+          children: <p className="m-0">{a.sweets}</p>
+        },
+        {
+          header: 'כתובת למשלוח',
+          children: <p className="m-0">{a.address}</p>
+        },
+        {
+          header: 'סניף ממנו בוצעה ההזמנה',
+          children: <p className="m-0">{}</p>
+        },
+        {
+          header: 'סטטוס הזמנה',
+          children: <p className="m-0">{a.status}</p>
+        }
+      ])
+
+    }
     else
       console.log("loading");
 
   }, [isSuccess]);
 
   const findLatestOrder = () => {
+    console.log("in findLatestOrder");
     if (orders.length === 0) {
       return null;
     }
     const sortedOrders = [...orders];
     const latestOrder = sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
 
-    setCreatedAt(latestOrder.createdAt)
-    setSweets(latestOrder.sweets)
-    setAddress(latestOrder.address)
-    setBranchId(latestOrder.branchId)
-    setStatus(latestOrder.status)
-
     console.log("latestOrder", latestOrder);
     return latestOrder;
   }
-
-
-  // setLastOrder(findLatestOrder())
-
 
   const itemRenderer = (item, itemIndex) => {
     const isActiveItem = activeIndex === itemIndex;
     const backgroundColor = isActiveItem ? 'var(--primary-color)' : 'var(--surface-b)';
     const textColor = isActiveItem ? 'var(--surface-b)' : 'var(--text-color-secondary)';
-
     return (
       <>
         <span
@@ -91,31 +117,31 @@ function ClientOrders() {
     }
   ];
 
-  const [tabs] = useState([
+  const [tabs,setTabs] = useState([
     {
       header: 'תאריך ביצוע',
-      children: <p className="m-0">{createdAt}</p>
+      children: <p className="m-0">{last.createdAt}</p>
     },
     {
       header: 'מוצרים שהוזמנו',
-      children: <p className="m-0">{sweets}</p>
+      children: <p className="m-0">{last.sweets}</p>
     },
     {
       header: 'כתובת למשלוח',
-      children: <p className="m-0">{address}</p>
+      children: <p className="m-0">{last.address}</p>
     },
     {
       header: 'סניף ממנו בוצעה ההזמנה',
-      children: <p className="m-0">{branchId}</p>
+      children: <p className="m-0">{}</p>
     },
     {
       header: 'סטטוס הזמנה',
-      children: <p className="m-0">{status}</p>
+      children: <p className="m-0">{last.address}</p>
     }
   ]);
 
   const createDynamicTabs = () => {
-    // findLatestOrder()
+
     return tabs.map((tab, i) => {
       return (
         <AccordionTab key={tab.header} header={tab.header} disabled={tab.disabled}>
@@ -125,7 +151,6 @@ function ClientOrders() {
     });
   };
 
-
   return (
     <div className="Order">
       <br />
@@ -134,8 +159,7 @@ function ClientOrders() {
           <br />ההזמנות שלי<br /><br />
         </p>
         <Card title="הזמנה פתוחה" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
-          <br />
-          <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br /><br /><br />
+          <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
         </Card>
       </div>
