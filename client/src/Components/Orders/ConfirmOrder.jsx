@@ -18,28 +18,30 @@ import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { Checkbox } from 'primereact/checkbox';
 import { ListBox } from 'primereact/listbox';
+import { confirmDialog } from 'primereact/confirmdialog';
 import "primeflex/primeflex.css"
 
+import useAuth from "../../hooks/useAuth";
 import { useGetAllBranchesQuery } from '../../app/branchApiSlice'
 import { useCreateOrderMutation } from '../../app/orderApiSlice'
-import { useGetAllCartQuery} from '../../app/basketSlice'
-import { confirmDialog } from 'primereact/confirmdialog';
+import { useDeleteBasketByIdMutation, useGetAllCartQuery} from '../../app/basketSlice'
 
 export default function ConfirmOrder() {
     
+    const { _id, username, permission, name, email, phone, isAdmin, isClient, isWorker, isShiftManager } = useAuth()
     const navigate = useNavigate()
 
     const { data: branches = [] } = useGetAllBranchesQuery()
     const { data: cart = [], isSuccess } = useGetAllCartQuery()
     const [CreateOrder, resCreateOrder] = useCreateOrderMutation()
+    const [DeleteBasketById, resCDeleteBasketById] = useDeleteBasketByIdMutation()
 
     useEffect(() => {
         if (resCreateOrder.isError) {
             console.log(resCreateOrder.error)
         }
         if (resCreateOrder.isSuccess) {
-            
-
+            deleteMyBasket();
         }
         console.log(resCreateOrder)
     }
@@ -77,6 +79,11 @@ export default function ConfirmOrder() {
     const onclickcancel = () => {
         navigate("/Basket")
     };
+
+    const deleteMyBasket = () =>{
+        DeleteBasketById({clientId:_id})
+        console.log(resCDeleteBasketById);
+    }
 
     const footer = (
         <>

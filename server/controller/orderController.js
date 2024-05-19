@@ -65,58 +65,27 @@ const getOrderByIdClient = async (req, res) => {
     res.json(orders)
 }
 
-// const createOrder = async (req, res) => {
-
-//     if(req.user.permission!='client')
-//     {
-//         return res.status(401).json({message:'Unauthorized' })
-//     }
-
-//     const {clientId, branchId, sweets, address} = req.body
-
-//     console.log(clientId, branchId, sweets,address );
-//     console.log(typeof(clientId));
-//     console.log(typeof(branchId));
-//     console.log(typeof(sweets));
-    
-//     if (!clientId || !sweets)
-//     {
-//         return res.status(400).json({ message: 'clientId, branchId,  sweets, and address are required' })
-//     }
-
-//     const order = await Orders.create({clientId, branchId, sweets, address})
-    
-//     if(order){
-//         return res.json(order)
-//     }
-//     else{
-//         return res.status(400).json({ message: 'Invalid order ' })
-//     }
-// }
-
 const createOrder = async (req, res) => {
-    try {
-        if (req.user.permission !== 'client') {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
-
-        const { clientId, branchId, sweets, address } = req.body;
-
-        if (!clientId || !branchId || !sweets || !address) {
-            return res.status(400).json({ message: 'clientId, branchId, sweets, and address are required' });
-        }
-
-        const order = await Orders.create({ clientId, branchId, sweets, address });
-
-        if (order) {
-            return res.json(order);
-        } else {
-            return res.status(400).json({ message: 'Invalid order' });
-        }
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
+    if (req.user.permission !== 'client') {
+        return res.status(401).json({ message: 'Unauthorized' });
     }
+
+    const { clientId, branchId, sweets, address } = req.body;
+
+    if (!clientId || !branchId || !sweets || !address) {
+        return res.status(400).json({ message: 'clientId, branchId, sweets, and address are required' });
+    }
+
+    const order = await Orders.create({ clientId, branchId, sweets, address });
+
+    if (order) {
+        return res.json(order);
+    } else {
+        return res.status(400).json({ message: 'Invalid order' });
+    }
+    console.error(error);
+    return res.status(500).json({ message: 'Internal server error' });
+
 }
 
 const updateOrder = async (req, res) => {
