@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { TreeTable } from 'primereact/treetable';
+import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { NodeService } from './NodeService';
+// import { ProductService } from './ProductService';
+import { Card } from 'primereact/card';
 
-export default function DynamicColumnsDemo() {
-    const [nodes, setNodes] = useState([]);
-    const columns = [
-        { field: 'name', header: 'Name', expander: true },
-        { field: 'size', header: 'Type' },
-        { field: 'type', header: 'Size' }
-    ];
+import { useGetOrderByIdClientQuery } from '../../app/orderApiSlice'
+import useAuth from "../../hooks/useAuth";
 
-    useEffect(() => {
-        NodeService.getTreeTableNodes().then((data) => setNodes(data));
-    }, []);
+export default function BasicDemo() {
+
+    const { _id, username, permission, name, email, phone, isAdmin, isClient, isWorker, isShiftManager } = useAuth()
+    const { data: orders = [], isLoading, isError, error, isSuccess } = useGetOrderByIdClientQuery(_id)
+    
 
     return (
         <div className="card">
-            <br/><br/><br/>
-            <TreeTable value={nodes} tableStyle={{ minWidth: '50rem' }} style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
-                {columns.map((col, i) => (
-                    <Column key={col.field} field={col.field} header={col.header} expander={col.expander} />
-                ))}
-            </TreeTable>
+            {console.log("orders to db "+orders)}
+            <Card title="היסטוריית הזמנות" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
+            <DataTable value={orders} tableStyle={{ minWidth: '50rem' }}>
+                {/* <Column field={orders[0].status} header="סטטוס"></Column>
+                <Column field={orders[0].address} header="לכתובת"></Column>
+                <Column field={orders[0].date} header="תאריך"></Column>
+                <Column field={orders[0].sweets} header="מתוקים שהוזמנו"></Column> */}
+            </DataTable>             
+            </Card>
+
         </div>
     );
 }

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { Card } from 'primereact/card';
-import { Steps } from 'primereact/steps';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+import { Steps } from 'primereact/steps';
 
 import ClientAllOrders from "./ClientAllOrders";
 import { useGetOrderByIdClientQuery } from '../../app/orderApiSlice'
@@ -164,12 +165,7 @@ function ClientOrders() {
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
         </Card>
-          {/* <ClientAllOrders/> */}
-          <br/><br/>
-          <button onClick={Navigate('/ClientAllOrders')}
-          style={{ textAlign: 'center', color: '#ffffff', backgroundColor: '#ec4899', width: '20%', textAlign: 'center', marginLeft: '40%', borderRadius: '10px', opacity: '0.7', fontSize: '150%', border:'none' }}
-          />
-          <br />להיסטוריית ההזמנות<br /><br />
+          <ClientAllOrders/>
       </div>
     
     </div>
