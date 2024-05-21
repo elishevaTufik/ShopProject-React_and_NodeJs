@@ -3,6 +3,7 @@ import { Button } from 'primereact/button';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { classNames } from 'primereact/utils';
+import { Image } from 'primereact/image';
 
 import {useGetAllBranchesQuery} from '../../app/branchApiSlice'
 
@@ -17,7 +18,9 @@ export default function BranchView() {
         return (
             <div className="col-12" key={product.id} style={{direction:'rtl'}} >
                 <div className={classNames('flex flex-column xl:flex-row xl:align-items-start p-4 gap-4', { 'border-top-1 surface-border': index !== 0 })}>
-                    <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width:150 }}/*alt={product.name}*/ />
+                {/* <Image src={`images/${rowData.image}`} alt="Image"  width= '250'  preview /> */}
+                    <Image  src={`images/${product.image}`} alt="Image" width="250" preview />
+                    
                     <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                             <div className="text-2xl font-bold text-900">{product.location},{product.city}</div>
@@ -36,7 +39,8 @@ export default function BranchView() {
             <div className="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" key={product.id}>
                 <div className="p-4 border-1 surface-border surface-card border-round">
                     <div className="flex flex-column align-items-center gap-3 py-5">
-                        <img className="classSize" src={`images/${product.image}`} style={{ height: 150, width:150 }} /*alt={product.name}*/ />
+                       
+                        <Image  src={ `images/${product.image}`} alt="Image" width="250" preview />
                         <div className="text-2xl font-bold text-900">{product.location}, {product.city}</div>
                         <div><b>:שעות פתיחה</b></div>
                           <div> {product.open}-{product.close}</div>

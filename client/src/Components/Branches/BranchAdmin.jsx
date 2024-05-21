@@ -13,6 +13,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
+import { Image } from 'primereact/image';
 import "primeflex/primeflex.css"
 
 
@@ -65,7 +66,7 @@ const changeOpen=(e)=>
 
 
   const [isEdit, setIsEdit] = useState(false);
-const s="22:22"
+
   const openNew = () => {
     //setProduct(sweets);
     setSubmitted(false);
@@ -162,8 +163,16 @@ const s="22:22"
   };
 
   const imageBodyTemplate = (rowData) => {
-        return <img src={`images/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
-  };
+
+    console.log("rowData.image");
+        console.log(rowData.image);
+        //../public/images/3.jpg
+        return(
+        <div className="card flex justify-content-center">
+        <Image src={`images/${rowData.image}`} alt="Image"  width= '250'  preview />
+    </div>
+        
+  )};
 
   const actionBodyTemplate = (rowData) => {
     return (
