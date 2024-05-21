@@ -32,6 +32,9 @@ export default function HeadlessDemo() {
 
     useEffect(()=>{
         if(isError){
+            console.log(error);
+           { error.status==409? alert("אופס.... המשתמש הזה כבר קים"):  alert("יש להשלים את כל השדות")}
+          
             navigate("/RegisterClient")
         }
         },[isError])  
@@ -61,7 +64,8 @@ export default function HeadlessDemo() {
             <br/><br/>
             <Button onClick={()=>setVisible(true)} >הרשמה</Button>
 
-            <h3>{isError&&JSON.stringify(error.data)}</h3>
+            {/* <h3>{isError&&JSON.stringify(error.data)}</h3> */}
+
 
             <Dialog 
                 visible={visible}
@@ -90,8 +94,12 @@ export default function HeadlessDemo() {
                                 <i className="pi pi-key"></i>
                             </span>
                             {/* //<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask /> */}
-                            <div className="card flex justify-content-center">
-                                <Password style={{ maxWidth:"75%", borderRadius:'5px' ,'padding-right': '9.5rem','padding-left': "0rem"}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask />
+                            <div className="p-inputgroup flex-1">
+                            {/* <div className="card flex justify-content-center"> */}
+                           {/* padding-left: 24rem;
+                                margin-right: -11.5rem;
+                                    padding-right: 0.5rem; */}
+                                <Password style={{ maxWidth:"100%", borderRadius:'5px' ,paddingright: '0.5rem',paddingleft: "24rem",marginright: "-11.5rem"}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask />
                             </div>
 
                             {/* <Password style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask/> */}
