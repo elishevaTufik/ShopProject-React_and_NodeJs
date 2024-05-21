@@ -48,7 +48,7 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
                 <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="status" header="סטטוס"></Column>
                 <Column field="address" header="כתובת"></Column>
-                <Column field="date" header="תאריך"></Column>
+                <Column field="createdAt" header="תאריך" sortable ></Column>
                 <Column field="sweets" header="מוצרים שהוזמנו"></Column>
             </DataTable>
             {/* {manager?<ManagerOrders  order={order} />:<></>} */}

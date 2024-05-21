@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink, useNavigate } from "react-router-dom"
 import { useSelector , useDispatch } from "react-redux"
-
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { Badge } from 'primereact/badge';
@@ -10,6 +9,7 @@ import { Avatar } from 'primereact/avatar';
 import 'primeicons/primeicons.css';
 
 import './NavBar.css'
+import  SideBar  from './SideBar';
 import { removeToken } from "../../Authorization/authSlice"
 import apiSlice from '../../app/apiSlice';
 import useAuth from "../../hooks/useAuth";
@@ -60,11 +60,11 @@ if(permission=='admin')
                 //     url: '/Client'
                 // },
         
-                {
-                    label: 'הודעות',
-                    icon: 'pi pi-comment',
-                    url: '/Messege'
-                },
+                // {
+                //     label: 'הודעות',
+                //     icon: 'pi pi-comment',
+                //     url: '/Messege'
+                // },
         
                 {
                     label: ' הזמנות ',
@@ -74,26 +74,26 @@ if(permission=='admin')
 
                 {
                     label: 'לאיזור האישי ',
-                    icon: 'pi pi-palette',
+                    icon: 'pi pi-user',
                     items: [
                         
                         {
                             label: 'הרשמה',
-                            icon: 'pi pi-palette',
+                            icon: 'pi pi-user-plus',
                             badge: 3,
                             url: '/RegisterClient'
 
                         },
                         {
                             label: 'התחברות',
-                            icon: 'pi pi-palette',
+                            icon: 'pi pi-sign-in',
                             badge: 2,
                             url: '/Login'
                         },
 
                         {
                             label: 'התנתקות',
-                            icon: 'pi pi-palette',
+                            icon: 'pi pi-sign-out',
                             badge: 2,
                             url: '/Logout'
                         },
@@ -143,32 +143,31 @@ if(permission=='admin')
     
                     {
                         label: 'לאיזור האישי ',
-                        icon: 'pi pi-palette',
+                        icon: 'pi pi-user',
                         items: [
                             
                             {
                                 label: 'הרשמה',
-                                icon: 'pi pi-palette',
+                                icon: 'pi pi-user-plus',
                                 badge: 3,
                                 url: '/RegisterClient'
     
                             },
                             {
                                 label: 'התחברות',
-                                icon: 'pi pi-palette',
+                                icon: 'pi pi-sign-in',
                                 badge: 2,
                                 url: '/Login'
                             },
     
                             {
                                 label: 'התנתקות',
-                                icon: 'pi pi-palette',
+                                icon: 'pi pi-sign-out',
                                 badge: 2,
                                 url: '/Logout'
                             },
                         ]
                     }
-                    
                 ];
             }
             else
@@ -188,26 +187,26 @@ if(permission=='admin')
             
                     {
                         label: 'לאיזור האישי ',
-                        icon: 'pi pi-palette',
+                        icon: 'pi pi-user',
                         items: [
                             
                             {
                                 label: 'הרשמה',
-                                icon: 'pi pi-palette',
+                                icon: 'pi pi-user-plus',
                                 badge: 3,
                                 url: '/RegisterClient'
     
                             },
                             {
                                 label: 'התחברות',
-                                icon: 'pi pi-palette',
+                                icon: 'pi pi-sign-in',
                                 badge: 2,
                                 url: '/Login'
                             },
     
                             {
                                 label: 'התנתקות',
-                                icon: 'pi pi-palette',
+                                icon: 'pi pi-sign-out',
                                 badge: 2,
                                 url: '/Logout'
                             },
@@ -221,8 +220,10 @@ if(permission=='admin')
         }
 
     const start = <img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img>;
+
     const end = (
         <div className="flex align-items-center gap-2">
+            <SideBar/>
         </div>
     );
 

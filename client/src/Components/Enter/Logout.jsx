@@ -70,7 +70,7 @@ const Nav = () => {
                                 className="w-8rem"
                             ></Button>
                             <Button 
-                                label="חס וכרפס"
+                                label="לא"
                                 outlined
                                 onClick={() => {
                                     reject();
