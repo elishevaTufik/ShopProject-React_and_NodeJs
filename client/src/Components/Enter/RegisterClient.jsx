@@ -90,8 +90,11 @@ export default function HeadlessDemo() {
                                 <i className="pi pi-key"></i>
                             </span>
                             {/* //<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask /> */}
-                            
-                            <Password style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask/>
+                            <div className="card flex justify-content-center">
+                                <Password style={{ maxWidth:"75%", borderRadius:'5px' ,'padding-right': '9.5rem','padding-left': "0rem"}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask />
+                            </div>
+
+                            {/* <Password style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask/> */}
                         </div><br/>
 
                         <div className="p-inputgroup flex-1">

@@ -17,7 +17,6 @@ import "primeflex/primeflex.css"
 export default function Galery() {
     
     const {_id,username, permission, name, email, phone, isAdmin, isClient,isWorker,isShiftManager}=useAuth()
-    console.log("username"+username);
 
     const toast = useRef(null);
 
@@ -131,16 +130,10 @@ export default function Galery() {
         );
     };
 
-    const hundleSubmit = (product) => {
-        console.log("hundleSubmit product._id", product._id,typeof(product._id));
-        
+    const hundleSubmit = (product) => {        
         AddNewProd(product._id)
         toast.current.show({ severity: 'success', summary: 'המוצר נוסף לסל בהצלחה', life: 3000 });
-        console.log("resAddNewProd", resAddNewProd)
     }
-    // const hundleSubmit1=(product)=>{
-    //     AddNewProd1(product)
-    // }
 
     return (
         <div className="card" >

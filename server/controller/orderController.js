@@ -121,7 +121,6 @@ const updateOrder = async (req, res) => {
     res.json(`${updatedorder.id} updated`)
 }
 
-//לכתוב פונקציית ביטול הזמנה ללקוח בלבד
 const updateStatus = async (req, res) => {
 
     if(req.user.permission!='admin' 
@@ -133,8 +132,6 @@ const updateStatus = async (req, res) => {
     
     const {id} = req.params
     const order = await Orders.findById(id)
-    
-
     if (!order)
     {
         return res.status(400).json({ message: 'order not found' })
@@ -143,7 +140,6 @@ const updateStatus = async (req, res) => {
     const arr = ["accepted", "done", "closed"]
 
     const i= arr.indexOf(order.status);
-        console.log(i);
     if(i<0 || i==2){
         return res.status(400).json({ message: 'The status must be accepted, done or closed'})
     }
@@ -153,6 +149,22 @@ const updateStatus = async (req, res) => {
     res.json(`${updatedChecked.id}'s status updated`)
     }
 
+const cancelOrder = async (req, res) => {
+    if(req.user.permission!='client')
+    {
+        return res.status(401).json({message:'Unauthorized' })
+    }
+    const {orderId} = req.params
+    const order = await Orders.findById(orderId);
+    
+    if (!order) {
+        return res.status(400).json({ message: 'order not found' })
+    }
+    order.status = "canceled";
+    await order.save();
+    res.json(`order's status updated`)
+};
+
 module.exports = {
     getAllOrders,
     getOrdersHistory,
@@ -161,5 +173,6 @@ module.exports = {
     getOrderByIdClient,
     createOrder,
     updateOrder,
-    updateStatus
+    updateStatus,
+    cancelOrder
 }

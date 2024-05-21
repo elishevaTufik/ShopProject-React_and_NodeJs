@@ -13,15 +13,6 @@ export default function BranchView() {
     const {data: branches=[],something, isSuccess} = useGetAllBranchesQuery();
     const [layout, setLayout] = useState('grid');
     
-
-    // useEffect(() => {
-    //     if (isSuccess)
-    //         setProducts(products)
-    //     else
-    //         console.log("loading");
-    // }, [isSuccess]);
-
-    
     const listItem = (product, index) => {
        
         return (

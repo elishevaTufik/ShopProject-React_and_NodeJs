@@ -8,12 +8,14 @@ import { useGetAllOrdersQuery } from "../../app/orderApiSlice";
 import { Button } from 'primereact/button';
 
 
-export default function RadioButtonRowSelectionDemo() {
+export default function RadioButtonRowSelectionDemo(props) {
     const [products, setProducts] = useState([]);
+    const [manager, setManager] = useState(false);
+    const [order, setOrder] = useState({});
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [rowClick, setRowClick] = useState(true);
 const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrdersQuery()
-    
+
     useEffect(() => {
         if (isSuccess){
             //setProducts(orders)
@@ -30,10 +32,8 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
     // }, []);
 
     const selectedOrder=(e)=>{
-        console.log("e.value",e);
-       <ManagerOrders  order={e} />
-      
-    }
+        props.setOrder(e)
+        }
 
    
 
@@ -44,13 +44,15 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
             
-            <DataTable value={orders} selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) =>{ selectedOrder(e.value) }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={orders}  selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) =>{ selectedOrder(e.value) }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
                 <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
                 <Column field="status" header="סטטוס"></Column>
                 <Column field="address" header="כתובת"></Column>
                 <Column field="date" header="תאריך"></Column>
                 <Column field="sweets" header="מוצרים שהוזמנו"></Column>
             </DataTable>
+            {/* {manager?<ManagerOrders  order={order} />:<></>} */}
+            
         </div>
     );
 }

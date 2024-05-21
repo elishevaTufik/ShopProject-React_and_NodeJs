@@ -113,7 +113,6 @@ export default function ProductsDemo() {
         if (name!="" && price!=0 && description!="") 
         {
             if(isEdit){
-                console.log("id: "+id);
                 UpdateSweet({id,price, name, description, extras, image, inInventory})
                 setPrice(0)
                 setName("")
@@ -186,8 +185,6 @@ export default function ProductsDemo() {
     };
 
     const imageBodyTemplate = (rowData) => {
-        console.log("rowData.image");
-        console.log(rowData.image);
         //../public/images/3.jpg
         return <img src={`images/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
         //return <img alt="rowData.image" src={`../public/images/${image}`} height="40" className="mr-2" style={{textAlign:'center', width: '64px'}}></img> 

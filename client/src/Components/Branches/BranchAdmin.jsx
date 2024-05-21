@@ -96,7 +96,6 @@ const changeOpen=(e)=>
     setSubmitted(true);
     if (city !== "" && location !== "") {
     // if (city !== "" && open!== null && close !== null && location !== "") {
-      console.log("updateBranch");
       if (isEdit) {
         
         updateBranch({id,city,open,close,location,image})
@@ -143,12 +142,6 @@ const changeOpen=(e)=>
   const deleteProduct = () => {
     deleteBranch(id)
     setDeleteProductDialog(false);
-    //   toast.current.show({
-    //   severity: 'success',
-    //   summary: 'Successful',
-    //   detail: 'Product Deleted',
-    //   life: 3000,
-    // });
   };
 
   const exportCSV = () => {
@@ -170,6 +163,7 @@ const changeOpen=(e)=>
   };
 
   const imageBodyTemplate = (rowData) => {
+
     console.log("rowData.image");
         console.log(rowData.image);
         //../public/images/3.jpg
@@ -219,7 +213,6 @@ const changeOpen=(e)=>
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
     </React.Fragment>
   );
-  console.log("branches",branches);
 return (
     
     <div>

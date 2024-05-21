@@ -24,8 +24,6 @@ export default function BasicDemo() {
     useEffect(() => {
         if (isSuccess)
         {
-        // let ordersToShow=[{status:'',address:'',createdAt:'',sweets:[]}]
-        // createOrdersToShow(ordersToShow)
         console.log("orders",orders);
         }
         else
@@ -33,27 +31,8 @@ export default function BasicDemo() {
     
       }, [isSuccess]);
     
-    // const fillArry=(element)=>{
-    //     element.sweets=['555','di']
-    // }
-
-    // const createOrdersToShow=(ordersToShow)=>{
-    //     console.log("sweets",sweets);
-    //     ordersToShow=orders.map((e)=>'','','',[])
-    //     console.log("ordersToShow",ordersToShow);
-    //     // for (let i = 0; i < ordersToShow.length; i++) {
-    //     //     let myDate=`${new Date(orders[i].createdAt).getDate()}/${new Date(orders[i].createdAt).getMonth()+1}/${new Date(orders[i].createdAt).getFullYear()}` 
-    //     //     ordersToShow[i].createdAt=myDate
-    //     // }
-    //     ordersToShow.forEach(element => {
-    //         fillArry(element)
-    //     });
-    //     return ordersToShow
-    // }
-
     return (
         <div className="card">
-            {console.log("orders to db " + orders)}
             <Card title="היסטוריית הזמנות" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
                 <DataTable value={orders} tableStyle={{ minWidth: '50rem' }}>
                     {columns.map((col, i) => (

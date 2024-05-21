@@ -9,7 +9,6 @@ const getAllBranches = async (req, res) => {
 }
 
 const createBranch = async (req, res) => {
-    console.log("createBranch");
     if(req.user.permission!='admin')
     {
         return res.status(401).json({message:'Unauthorized' })
@@ -28,7 +27,6 @@ const createBranch = async (req, res) => {
 }
 
 const updateBranch = async (req, res) => {
-    console.log("updateeBranch");
 
     if(req.user.permission!='admin')
     {

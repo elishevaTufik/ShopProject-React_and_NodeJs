@@ -59,11 +59,6 @@ const updateSweet = async (req, res) => {
         return res.status(401).json({message:'Unauthorized' })
     }
     const {id, price, name, description, extras, inInventory}= req.body
-
-    console.log("id"+id);
-    console.log(price);
-    console.log(name);
-
     if (!name || !price || !description || !id) {
         return res.status(400).json({ message: "fields are required" })
     }

@@ -4,12 +4,10 @@ const Sweets = require("../models/Sweets")
 const addNewProd = async (req, res) => {
 
     if (req.user.permission != 'client') {
-        console.log("req.user.permission != 'client'");
         return res.status(401).json({ message: 'Unauthorized' })
     }
     const { sweetId } = req.params
     if (!sweetId) {
-        console.log("!sweetId")
         return res.status(400).json({ message: 'missing field!' })
     }
 

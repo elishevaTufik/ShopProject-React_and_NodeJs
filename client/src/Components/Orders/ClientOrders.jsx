@@ -8,6 +8,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Steps } from 'primereact/steps';
 
+import CancelOrder from "./CancelOrder"
 import ClientAllOrders from "./ClientAllOrders";
 import { useGetOrderByIdClientQuery } from '../../app/orderApiSlice'
 import useAuth from "../../hooks/useAuth";
@@ -37,11 +38,8 @@ function ClientOrders() {
   useEffect(() => {
     if (isSuccess) {
       const arrStauses = ["accepted", "done", "closed"]
-      console.log("orders", orders);
       const a = findLatestOrder()
-      console.log("a", a);
       setLast(a)
-      // console.log("last",last);
       setTabs([
         {
           header: 'תאריך ביצוע',
@@ -73,14 +71,12 @@ function ClientOrders() {
   }, [isSuccess]);
 
   const findLatestOrder = () => {
-    console.log("in findLatestOrder");
     if (orders.length === 0) {
       return null;
     }
     const sortedOrders = [...orders];
     const latestOrder = sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
 
-    console.log("latestOrder", latestOrder);
     return latestOrder;
   }
 
@@ -165,8 +161,9 @@ function ClientOrders() {
         <Card title="ההזמנה האחרונה שלך" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
+          <CancelOrder lastId={last._id}/>
         </Card>
-        <ClientAllOrders/>
+        <ClientAllOrders />
       </div>
 
     </div>

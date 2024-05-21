@@ -8,10 +8,16 @@ import GetAllManagerOrders from './GetAllManagerOrders'
 import { useUpdateStatusMutation } from "../../app/orderApiSlice";
 import { useGetAllOrdersQuery } from "../../app/orderApiSlice";
 
-export default function BasicDemo({ order }) {
+export default function ManagerOrders() {
     const stepperRef = useRef(null);
     const [updateStatus] = useUpdateStatusMutation()
-
+    const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrdersQuery()
+    const [order,setOrder]=useState({})
+    const steps={
+        "accepted":0,
+        "done":1,
+        "closed":2
+    }
     // const { data: orders = [], isLoading, isError, error, isSuccess } = useGetAllOrdersQuery()
     // useEffect(() => {
     //     if (isSuccess) {
@@ -26,13 +32,21 @@ export default function BasicDemo({ order }) {
 
     return (
         <>
-            <Card title="הזמנות לקוח" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
+        {/* {console.log("Aaaaaaaaaa",order)} */}
+            <Card title="ניהול הזמנות" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
             <div className="card flex justify-content-center">
-                <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }}>
+               {order.status!="canceled"?
+                <Stepper activeStep={steps[order.status]} ref={stepperRef} style={{ flexBasis: '50rem' }}linear={true}>
+               
                     <StepperPanel header="התקבל">
                         <div className="flex flex-column h-12rem">
                             <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                                <Button onClick={() => updateStatus(order.id)} >ביצוע ההזמנה</Button>
+                                <Button onClick={() => {
+                                    updateStatus(order._id);
+                                    setOrder(orders.find(o=>o._id==order._id))
+                                    stepperRef.current.nextCallback()
+                                }
+                                 } >ביצוע ההזמנה</Button>
                             </div>
                         </div>
                         <div className="flex pt-4 justify-content-end">
@@ -42,7 +56,12 @@ export default function BasicDemo({ order }) {
                     <StepperPanel header="בדרך ללקוח">
                         <div className="flex flex-column h-12rem">
                             <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                                <Button onClick={() => updateStatus(order.id)}>שליח ההזמנה בדרך</Button>
+                                <Button onClick={() => {
+                                    updateStatus(order._id);
+                                    setOrder(orders.find(o=>o._id==order._id));
+                                    stepperRef.current.nextCallback()
+                                    
+                                }}>שליח ההזמנה בדרך</Button>
                             </div>
                         </div>
                         <div className="flex pt-4 justify-content-between">
@@ -57,14 +76,18 @@ export default function BasicDemo({ order }) {
                         </div>
 
                     </StepperPanel>
-                </Stepper>
+                </Stepper>:<></>
+}
 
             </div>
             </Card>
 
             <div>
                 <Card title="הזמנות לקוח" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
-                    <GetAllManagerOrders />
+                    {
+                        console.log("aaaa",order)
+                    }
+                    <GetAllManagerOrders setOrder={setOrder} />
                 </Card>
             </div>
         </>

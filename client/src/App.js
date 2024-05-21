@@ -3,6 +3,7 @@ import React, { Suspense, useState } from 'react';
 import { Provider } from 'react-redux';
 import  myStore  from './Store/Store';
 import TemplateDemo from './Components/NavBar/MenuBar'
+import NotFound from './Components/NotFound';
 
 // import ReactDOM from 'react-dom/client';
 //  import 'primeicons/primeicons.css';
@@ -11,6 +12,7 @@ import TemplateDemo from './Components/NavBar/MenuBar'
 // import 'primereact/resources/primereact.css';
 //import 'primereact/resources/themes/lara-light-indigo/theme.css';
 
+const LazyHome = React.lazy(() => import("./Components/HomePage"))
 const LazyBranch = React.lazy(() => import("./Components/Branches/Branch"))
 const LazyClient = React.lazy(() => import("./Components/Clients/Client"))
 const LazyMessege = React.lazy(() => import("./Components/Messeges/Messege"))
@@ -34,7 +36,7 @@ function App() {
       <Provider store={myStore}>
       <TemplateDemo/>
           <Routes>
-            {/* <Route path='/' element={<Suspense fallback="Loading..."><LazyHome/></Suspense> } /> */}
+            <Route path='/' element={<Suspense fallback="Loading..."><LazyHome/></Suspense> } />
             <Route path='/Branch' element={<Suspense fallback="Loading..."><LazyBranch/></Suspense>} />
             <Route path='/Client' element={<Suspense fallback="Loading..."><LazyClient/></Suspense>} />
             <Route path='/Messege' element={<Suspense fallback="Loading..."><LazyMessege/></Suspense>} />
@@ -47,7 +49,7 @@ function App() {
             <Route path='/Logout' element={<Suspense fallback="Loading..." ><LazyLogout/></Suspense>} />
             <Route path='/RegisterClient' element={<Suspense fallback="Loading..." ><LazyRegisterClient/></Suspense>} />
             <Route path='/RegisterWorker' element={<Suspense fallback="Loading..." ><LazyRegisterWorker/></Suspense>} />
-            
+            <Route path='/*' element={<NotFound/>} />
           </Routes> 
        </Provider>
     </div>

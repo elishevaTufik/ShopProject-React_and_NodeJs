@@ -13,7 +13,6 @@ import { useWriteMessageMutation } from '../../app/messegApiSlice';
 
 export default function MessageClient(props) {
     const id=props.id
-    console.log(id);
 
     const [productDialog, setProductDialog] = useState(false);
     const [submitted, setSubmitted] = useState(false);
@@ -41,7 +40,6 @@ export default function MessageClient(props) {
     useEffect(() => {
         if (isSuccess) {
             console.log("messages",messages);
-            console.log(messages[0].title);
         }
     }, [isSuccess])
 
@@ -52,16 +50,6 @@ export default function MessageClient(props) {
 
         if (title!="" && text!="") 
         {
-            // if(isEdit){
-            //     console.log("id: "+id);
-            //     // UpdateSweet({id,title, text})
-            //     // setText("")
-            //     // setTitle("")
-            //     // setId(0)
-            //     // setisEdit(false)
-            // }
-
-            // else{
                 writeMessage({clientId,title, text})
                 setText("")
                 setTitle("")
@@ -113,7 +101,6 @@ export default function MessageClient(props) {
     );
 
     const listItem = (product, index) => {
-       console.log(index); 
     return ( <>
 
             

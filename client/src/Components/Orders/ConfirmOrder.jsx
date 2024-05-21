@@ -66,8 +66,6 @@ export default function ConfirmOrder() {
         places.push({_id:e._id, description:e.location+" , "+e.city})
     });
 
-    console.log("places",places);
-
     const [address, setAddress] = useState("");
     const [selectedBranchId, setselectedBranchId] = useState(null);
 
@@ -93,7 +91,6 @@ export default function ConfirmOrder() {
 
     const deleteMyBasket = () =>{
         DeleteBasketById({clientId:_id})
-        console.log(resCDeleteBasketById);
     }
 
     const footer = (

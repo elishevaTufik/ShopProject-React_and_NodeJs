@@ -4,7 +4,6 @@ import Galery from "../Sweets/Galery";
 
 function Messege() {
   const {_id,username, permission, name, email, phone, isAdmin, isClient,isWorker,isShiftManager}=useAuth()
-  console.log(_id);
     return (
       <div className="Messege">
         Messege
