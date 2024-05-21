@@ -124,24 +124,31 @@ const updateOrder = async (req, res) => {
 //לכתוב פונקציית ביטול הזמנה ללקוח בלבד
 const updateStatus = async (req, res) => {
 
-    if(req.user.permission!='admin' && req.user.permission!='shift manager')
+    if(req.user.permission!='admin' 
+    // || req.user.permission!='shift manager'
+    )
     {
         return res.status(401).json({message:'Unauthorized' })
     }
-    const { id } = req.params
-    const {status} = req.body
-
+    
+    const {id} = req.params
     const order = await Orders.findById(id)
+    
+
     if (!order)
     {
         return res.status(400).json({ message: 'order not found' })
     }
+      
+    const arr = ["accepted", "done", "closed"]
 
-    if(status != 'accepted' && status != 'done' && status != 'closed' && status !='canceled' && status!=null ){
+    const i= arr.indexOf(order.status);
+        console.log(i);
+    if(i<0 || i==2){
         return res.status(400).json({ message: 'The status must be accepted, done or closed'})
     }
 
-    order.status = status
+     order.status = arr[i+1];
     const updatedChecked = await order.save()
     res.json(`${updatedChecked.id}'s status updated`)
     }
