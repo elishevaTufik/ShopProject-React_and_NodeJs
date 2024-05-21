@@ -1,4 +1,3 @@
-//https://primereact.org/menubar/
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink, useNavigate } from "react-router-dom"
@@ -40,42 +39,36 @@ if(permission=='admin')
                 {
                     label: 'מוזמנים לבוא להתלקק',
                     icon: 'pi pi-map-marker',
-                    // template: itemRenderer,
                     url: '/Branch'
                 },
         
                 {
                     label: 'המתוקים שלנו',
                     icon: 'pi pi-bars',
-                    // template: itemRenderer,
                     url: '/Sweet'
                 },
         
                 {
                     label: 'העובדים החרוצים שלנו',
                     icon: 'pi pi-users',
-                    // template: itemRenderer,
                     url: '/Worker'
                 },  
                 
                 {
                     label: 'לקוחותינו',
                     icon: 'pi pi-user',
-                    // template: itemRenderer,
                     url: '/Client'
                 },
         
                 {
                     label: 'הודעות',
                     icon: 'pi pi-comment',
-                    // template: itemRenderer,
                     url: '/Messege'
                 },
         
                 {
                     label: ' הזמנות ',
                     icon: 'pi pi-shopping-bag',
-                    // template: itemRenderer,
                     url: '/Order'
                 },
 
@@ -88,7 +81,6 @@ if(permission=='admin')
                             label: 'הרשמה',
                             icon: 'pi pi-palette',
                             badge: 3,
-                            // template: itemRenderer,
                             url: '/RegisterClient'
 
                         },
@@ -96,7 +88,6 @@ if(permission=='admin')
                             label: 'התחברות',
                             icon: 'pi pi-palette',
                             badge: 2,
-                            // template: itemRenderer,
                             url: '/Login'
                         },
 
@@ -104,7 +95,6 @@ if(permission=='admin')
                             label: 'התנתקות',
                             icon: 'pi pi-palette',
                             badge: 2,
-                            // template: itemRenderer,
                             url: '/Logout'
                         },
                     ]
@@ -160,7 +150,6 @@ if(permission=='admin')
                                 label: 'הרשמה',
                                 icon: 'pi pi-palette',
                                 badge: 3,
-                                // template: itemRenderer,
                                 url: '/RegisterClient'
     
                             },
@@ -168,7 +157,6 @@ if(permission=='admin')
                                 label: 'התחברות',
                                 icon: 'pi pi-palette',
                                 badge: 2,
-                                // template: itemRenderer,
                                 url: '/Login'
                             },
     
@@ -176,7 +164,6 @@ if(permission=='admin')
                                 label: 'התנתקות',
                                 icon: 'pi pi-palette',
                                 badge: 2,
-                                // template: itemRenderer,
                                 url: '/Logout'
                             },
                         ]
@@ -190,14 +177,12 @@ if(permission=='admin')
                     {
                         label: 'מוזמנים לבוא להתלקק',
                         icon: 'pi pi-map-marker',
-                        // template: itemRenderer,
                         url: '/Branch'
                     },
             
                     {
                         label: 'המתוקים שלנו',
                         icon: 'pi pi-bars',
-                        // template: itemRenderer,
                         url: '/Sweet'
                     },
             
@@ -210,7 +195,6 @@ if(permission=='admin')
                                 label: 'הרשמה',
                                 icon: 'pi pi-palette',
                                 badge: 3,
-                                // template: itemRenderer,
                                 url: '/RegisterClient'
     
                             },
@@ -218,7 +202,6 @@ if(permission=='admin')
                                 label: 'התחברות',
                                 icon: 'pi pi-palette',
                                 badge: 2,
-                                // template: itemRenderer,
                                 url: '/Login'
                             },
     
@@ -226,7 +209,6 @@ if(permission=='admin')
                                 label: 'התנתקות',
                                 icon: 'pi pi-palette',
                                 badge: 2,
-                                // template: itemRenderer,
                                 url: '/Logout'
                             },
                         ]
@@ -236,14 +218,11 @@ if(permission=='admin')
                 ];
             }
             
-            
         }
 
     const start = <img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img>;
     const end = (
         <div className="flex align-items-center gap-2">
-            {/* <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" /> */}
-            {/* <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" /> */}
         </div>
     );
 
@@ -254,10 +233,8 @@ if(permission=='admin')
     }
 
     return (
-        <div className="MenuBar">
+        <div className="navbar">
             <Menubar model={items} start={start} end={end} />
-            {/* {isUserLoggedIn &&  <a onClick={handleLogoutClick} > Logout </a> } */}
-
         </div>
     )
 }

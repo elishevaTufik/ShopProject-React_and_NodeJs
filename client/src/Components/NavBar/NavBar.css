@@ -1,8 +1,6 @@
-
 html {
     font-size: 14px;
 }
-
 
 body {
     font-family: var(--font-family);
@@ -49,3 +47,12 @@ span.flag {
     height: 30px;
     display: inline-block;
 }
+
+.navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color:'#ec4899';
+    width: 100%;
+    z-index: 1000;
+  }
