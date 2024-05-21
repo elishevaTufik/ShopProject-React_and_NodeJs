@@ -6,6 +6,7 @@ const verifyJWT = require("../middleware/verifyJWT")
 router.use(verifyJWT)
 
 router.get("/", BasketController.getAllCart)
+router.get("/calculateTotalPayment", BasketController.calculateTotalPayment)
 router.post("/:sweetId", BasketController.addNewProd)
 router.delete("/:id", BasketController.deleteProduct)
 router.delete("/", BasketController.deleteBasketById)

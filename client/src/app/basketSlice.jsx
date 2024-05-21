@@ -11,6 +11,13 @@ const basketsApiSlice = apiSlice.injectEndpoints({
             providesTags:["Basket"]
         }),
 
+        calculateTotalPayment: build.query({
+            query: () => ({
+                url: '/api/basket/calculateTotalPayment'
+            }), 
+            providesTags:["Basket"]
+        }),
+
         addNewProd: build.mutation({
             query: (sweetId) => ({
                 url: '/api/basket/'+sweetId,
@@ -49,6 +56,7 @@ const basketsApiSlice = apiSlice.injectEndpoints({
 
 export  const { 
     useGetAllCartQuery,
+    useCalculateTotalPaymentQuery,
     useAddNewProdMutation,
     useDeleteProductMutation,
     useDeleteBasketByIdMutation,

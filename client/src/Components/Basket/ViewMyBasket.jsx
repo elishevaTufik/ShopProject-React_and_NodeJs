@@ -21,6 +21,8 @@ import { Checkbox } from 'primereact/checkbox';
 import { ListBox } from 'primereact/listbox';
 import "primeflex/primeflex.css"
 
+import TotalPayment from "./TotalPayment"
+
 import { useCreateNewSweetMutation } from '../../app/sweetsApiSlice'
 import { useUpdateSweetMutation } from '../../app/sweetsApiSlice'
 import { useGetAllCartQuery, useUpdateQuantityOfProductMutation } from '../../app/basketSlice'
@@ -255,6 +257,8 @@ export default function ProductsDemo() {
                 </div>
             </Dialog>
 
+            <TotalPayment/>
+<br/><br/><br/><br/>
         </div>
     );
 }
