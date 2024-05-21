@@ -14,5 +14,6 @@ router.get("/getOrderByIdClient/:idClient",orderController.getOrderByIdClient)
 router.post("/", orderController.createOrder)
 router.put("/",orderController.updateOrder)
 router.put("/updateStatus/:id",orderController.updateStatus)
+router.put("/cancelOrder/:orderId",orderController.cancelOrder)
 
 module.exports = router

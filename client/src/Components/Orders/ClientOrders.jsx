@@ -8,6 +8,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import { Steps } from 'primereact/steps';
 
+import CancelOrder from "./CancelOrder"
 import ClientAllOrders from "./ClientAllOrders";
 import { useGetOrderByIdClientQuery } from '../../app/orderApiSlice'
 import useAuth from "../../hooks/useAuth";
@@ -165,8 +166,9 @@ function ClientOrders() {
         <Card title="ההזמנה האחרונה שלך" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
+          <CancelOrder lastId={last._id}/>
         </Card>
-        <ClientAllOrders/>
+        <ClientAllOrders />
       </div>
 
     </div>
