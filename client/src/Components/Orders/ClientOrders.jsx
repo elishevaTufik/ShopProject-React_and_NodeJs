@@ -37,6 +37,7 @@ function ClientOrders() {
   useEffect(() => {
     if (isSuccess)
     {
+      const arrStauses=["accepted", "done", "closed"]
       console.log("orders", orders);
       const a=findLatestOrder()
       console.log("a",a);
@@ -64,6 +65,7 @@ function ClientOrders() {
           children: <p className="m-0">{a.status}</p>
         }
       ])
+      setActiveIndex(arrStauses.indexOf(a.status))
 
     }
     else
@@ -161,7 +163,7 @@ function ClientOrders() {
         <p style={{ textAlign: 'center', color: '#ffffff', backgroundColor: '#ec4899', width: '20%', textAlign: 'center', marginLeft: '40%', borderRadius: '10px', opacity: '0.7', fontSize: '150%' }}>
           <br />ההזמנות שלי<br /><br />
         </p>
-        <Card title="הזמנה פתוחה" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
+        <Card title="ההזמנה האחרונה שלך" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
         </Card>
