@@ -140,7 +140,6 @@ const updateStatus = async (req, res) => {
     const arr = ["accepted", "done", "closed"]
 
     const i= arr.indexOf(order.status);
-        console.log(i);
     if(i<0 || i==2){
         return res.status(400).json({ message: 'The status must be accepted, done or closed'})
     }
@@ -156,7 +155,6 @@ const cancelOrder = async (req, res) => {
         return res.status(401).json({message:'Unauthorized' })
     }
     const {orderId} = req.params
-    console.log("orderId",orderId);
     const order = await Orders.findById(orderId);
     
     if (!order) {

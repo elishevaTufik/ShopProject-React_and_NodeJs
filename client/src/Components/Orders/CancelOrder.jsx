@@ -8,13 +8,11 @@ import {useCancelOrderMutation} from '../../app/orderApiSlice'
 export default function CancelOrder(props) {
 
     const {lastId} = props
-     console.log(lastId);
     const [CancelOrder, resCreate] = useCancelOrderMutation(lastId)
 
     const toast = useRef(null);
 
     const accept = () => {
-        console.log("lastId",lastId);
         CancelOrder(lastId)
         toast.current.show({ severity: 'success', summary: '', detail: 'הזמנתך בוטלה בהצלחה. נשמח לראות אותך שוב ולספק לך את מיטב המוצרים', life: 5000 });
     };

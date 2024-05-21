@@ -48,17 +48,17 @@ if(permission=='admin')
                     url: '/Sweet'
                 },
         
-                {
-                    label: 'העובדים החרוצים שלנו',
-                    icon: 'pi pi-users',
-                    url: '/Worker'
-                },  
+                // {
+                //     label: 'העובדים החרוצים שלנו',
+                //     icon: 'pi pi-users',
+                //     url: '/Worker'
+                // },  
                 
-                {
-                    label: 'לקוחותינו',
-                    icon: 'pi pi-user',
-                    url: '/Client'
-                },
+                // {
+                //     label: 'לקוחותינו',
+                //     icon: 'pi pi-user',
+                //     url: '/Client'
+                // },
         
                 {
                     label: 'הודעות',
@@ -122,12 +122,12 @@ if(permission=='admin')
                     },
             
             
-                    {
-                        label: 'הודעות',
-                        icon: 'pi pi-comment',
-                        // template: itemRenderer,
-                        url: '/Messege'
-                    },
+                    // {
+                    //     label: 'הודעות',
+                    //     icon: 'pi pi-comment',
+                    //     // template: itemRenderer,
+                    //     url: '/Messege'
+                    // },
             
                     {
                         label: ' הזמנות ',

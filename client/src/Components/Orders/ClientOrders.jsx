@@ -38,11 +38,8 @@ function ClientOrders() {
   useEffect(() => {
     if (isSuccess) {
       const arrStauses = ["accepted", "done", "closed"]
-      console.log("orders", orders);
       const a = findLatestOrder()
-      console.log("a", a);
       setLast(a)
-      // console.log("last",last);
       setTabs([
         {
           header: 'תאריך ביצוע',
@@ -74,14 +71,12 @@ function ClientOrders() {
   }, [isSuccess]);
 
   const findLatestOrder = () => {
-    console.log("in findLatestOrder");
     if (orders.length === 0) {
       return null;
     }
     const sortedOrders = [...orders];
     const latestOrder = sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
 
-    console.log("latestOrder", latestOrder);
     return latestOrder;
   }
 

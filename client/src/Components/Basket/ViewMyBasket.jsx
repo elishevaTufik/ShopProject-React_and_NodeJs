@@ -40,20 +40,16 @@ export default function ProductsDemo() {
 
     useEffect(() => {
         if (isSuccess) {
-            // console.log("cart",cart);
             setC(cart)
-
         }
     }, [isSuccess])
     useEffect(() => {
-            // console.log("cart",cart);
             setC(cart)
 
         
     }, [cart])
     useEffect(() => {
         if (isError) {
-            console.log(error);
             if(error.status==400)
             setC([])
         }
@@ -85,12 +81,10 @@ export default function ProductsDemo() {
     const [image, setImage] = useState("");
 
     const fillArrSweets = () => {
-        console.log("in fillArrSweets func");
         cart.forEach(element => {
            // sweets.push(element.sweetId._id)
             sweets.push(element)
         });
-         console.log("sweets",sweets);
     }
 
     const onChangeCheckBox = (checked) => {
