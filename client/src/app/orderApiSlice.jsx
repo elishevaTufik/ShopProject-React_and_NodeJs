@@ -58,8 +58,9 @@ const ordersApiSlice = apiSlice.injectEndpoints({
         
         updateStatus: build.mutation({
             query: (id) => ({
-                url: '/api/orders/updateStatus/'+id,
+                url: `/api/orders/updateStatus/${id}`,
                 method:"PUT",
+               
             }),
             invalidatesTags:["Order"]
         })

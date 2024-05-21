@@ -13,6 +13,6 @@ router.get("/getOrdersaccepted",orderController.getOrdersaccepted)
 router.get("/getOrderByIdClient/:idClient",orderController.getOrderByIdClient)
 router.post("/", orderController.createOrder)
 router.put("/",orderController.updateOrder)
-router.put("/updateStatus/",orderController.updateStatus)
+router.put("/updateStatus/:id",orderController.updateStatus)
 
 module.exports = router
