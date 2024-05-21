@@ -14,8 +14,9 @@ const addNewProd = async (req, res) => {
     const ifExist = await Basket.findOne({ sweetId: sweetId, clientId: req.user._id })
 
     if (ifExist) {
-        ifExist.quantity = ifExist.quantity + 1
-        ifExist.price = ifExist.price * ifExist.quantity;
+        let currentPrice = ifExist.price/ifExist.quantity
+        ifExist.quantity = ifExist.quantity + 1;
+        ifExist.price = ifExist.quantity * currentPrice
         await ifExist.save();
         res.status(201).json({ message: 'new item added-quantity+1' })
     }
