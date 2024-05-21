@@ -21,13 +21,13 @@ function ClientOrders() {
   const emptyObject = {
     address: "a",
     branchId: "b",
-    clientId:"a",
+    clientId: "a",
     createdAt: "c",
     status: "d",
     sweets: [],
-    updatedAt:"a",
-    _v:"s",
-    _id:"s"
+    updatedAt: "a",
+    _v: "s",
+    _id: "s"
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -35,18 +35,17 @@ function ClientOrders() {
   const [last, setLast] = useState(emptyObject);
 
   useEffect(() => {
-    if (isSuccess)
-    {
-      const arrStauses=["accepted", "done", "closed"]
+    if (isSuccess) {
+      const arrStauses = ["accepted", "done", "closed"]
       console.log("orders", orders);
-      const a=findLatestOrder()
-      console.log("a",a);
+      const a = findLatestOrder()
+      console.log("a", a);
       setLast(a)
       // console.log("last",last);
       setTabs([
         {
           header: 'תאריך ביצוע',
-          children: <p className="m-0">{`${new Date(a.createdAt).getDate()}-${new Date(a.createdAt).getMonth()+1}-${new Date(a.createdAt).getFullYear()}`}</p>
+          children: <p className="m-0">{`${new Date(a.createdAt).getDate()}-${new Date(a.createdAt).getMonth() + 1}-${new Date(a.createdAt).getFullYear()}`}</p>
         },
         {
           header: 'מוצרים שהוזמנו',
@@ -58,7 +57,7 @@ function ClientOrders() {
         },
         {
           header: 'סניף ממנו בוצעה ההזמנה',
-          children: <p className="m-0">{}</p>
+          children: <p className="m-0">{ }</p>
         },
         {
           header: 'סטטוס הזמנה',
@@ -122,7 +121,7 @@ function ClientOrders() {
     }
   ];
 
-  const [tabs,setTabs] = useState([
+  const [tabs, setTabs] = useState([
     {
       header: 'תאריך ביצוע',
       children: <p className="m-0">{last.createdAt}</p>
@@ -137,7 +136,7 @@ function ClientOrders() {
     },
     {
       header: 'סניף ממנו בוצעה ההזמנה',
-      children: <p className="m-0">{}</p>
+      children: <p className="m-0">{ }</p>
     },
     {
       header: 'סטטוס הזמנה',
@@ -167,9 +166,9 @@ function ClientOrders() {
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
         </Card>
-          <ClientAllOrders/>
+        <ClientAllOrders/>
       </div>
-    
+
     </div>
   );
 }
