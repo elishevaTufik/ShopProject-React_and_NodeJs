@@ -7,12 +7,20 @@ import {useCancelOrderMutation} from '../../app/orderApiSlice'
 
 export default function CancelOrder(props) {
 
-    const {lastId} = props
+    const lastId = props.lastId
+    console.log("lastId",lastId);
+    const lastStatus = props.lastStatus
+    console.log("lastStatus",lastStatus);
+
     const [CancelOrder, resCreate] = useCancelOrderMutation(lastId)
 
     const toast = useRef(null);
 
     const accept = () => {
+        if(lastStatus!='accepted'){
+            alert("אי אפשר לבטל את ההזמנה שלך. כבר הכנו אותה והיא בדרך אליך....")
+        return
+        }
         CancelOrder(lastId)
         toast.current.show({ severity: 'success', summary: '', detail: 'הזמנתך בוטלה בהצלחה. נשמח לראות אותך שוב ולספק לך את מיטב המוצרים', life: 5000 });
     };

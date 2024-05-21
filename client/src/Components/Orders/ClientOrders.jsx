@@ -161,7 +161,7 @@ function ClientOrders() {
         <Card title="ההזמנה האחרונה שלך" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
           <Steps model={items} activeIndex={activeIndex} readOnly={true} className="m-2 pt-4" /><br />
           <Accordion>{createDynamicTabs()}</Accordion>
-          <CancelOrder lastId={last._id}/>
+          <CancelOrder lastId={last._id} lastStatus={last.status}/>
         </Card>
         <ClientAllOrders />
       </div>
