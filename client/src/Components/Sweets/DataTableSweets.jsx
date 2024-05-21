@@ -16,32 +16,38 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { Checkbox } from 'primereact/checkbox';
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+
+
+
+
 import "primeflex/primeflex.css"
 
-import {useGetAllSweetsQuery} from '../../app/sweetsApiSlice'
-import {useCreateNewSweetMutation} from '../../app/sweetsApiSlice'
-import {useDeleteSweetMutation} from '../../app/sweetsApiSlice'
-import {useUpdateSweetMutation} from '../../app/sweetsApiSlice'
+import { useGetAllSweetsQuery } from '../../app/sweetsApiSlice'
+import { useCreateNewSweetMutation } from '../../app/sweetsApiSlice'
+import { useDeleteSweetMutation } from '../../app/sweetsApiSlice'
+import { useUpdateSweetMutation } from '../../app/sweetsApiSlice'
 
 import './DataTableSweets.css'
 // import { set } from 'mongoose';
 
 export default function ProductsDemo() {
 
-    const { data: sweets=[], something } = useGetAllSweetsQuery()
+    const { data: sweets = [], something } = useGetAllSweetsQuery()
     const [CreateNewSweet, resCreate] = useCreateNewSweetMutation()
     const [DeleteSweet, resDelete] = useDeleteSweetMutation()
     const [UpdateSweet, resUpdate] = useUpdateSweetMutation()
 
-    useEffect(()=>{
-        if(resCreate.isError){
+    useEffect(() => {
+        if (resCreate.isError) {
             alert(resCreate.error)
         }
-        if(resCreate.isSuccess){
+        if (resCreate.isSuccess) {
         }
         console.log(resCreate)
     }
-        ,[resCreate])
+        , [resCreate])
 
     //const [products, setProducts] = useState(sweets);
 
@@ -70,7 +76,7 @@ export default function ProductsDemo() {
     const [isEdit, setisEdit] = useState(false);
 
 
-    const onChangeCheckBox=(checked)=>{
+    const onChangeCheckBox = (checked) => {
         setChecked(checked)
         setInInventory(checked)
     };
@@ -89,7 +95,7 @@ export default function ProductsDemo() {
         setPrice(0)
         setName("")
         setDescription("")
-        setInInventory(false)  
+        setInInventory(false)
         setId(0)
         setImage("")
 
@@ -110,25 +116,24 @@ export default function ProductsDemo() {
     const saveProduct = () => {
         setSubmitted(true);
 
-        if (name!="" && price!=0 && description!="") 
-        {
-            if(isEdit){
-                UpdateSweet({id,price, name, description, extras, image, inInventory})
+        if (name != "" && price != 0 && description != "") {
+            if (isEdit) {
+                UpdateSweet({ id, price, name, description, extras, image, inInventory })
                 setPrice(0)
                 setName("")
                 setDescription("")
                 setImage("")
-                setInInventory(false)  
+                setInInventory(false)
                 setId(0)
                 setisEdit(false)
             }
 
-            else{
-                CreateNewSweet({price, name, description, extras,image, inInventory})
+            else {
+                CreateNewSweet({ price, name, description, extras, image, inInventory })
                 setPrice(0)
                 setName("")
                 setDescription("")
-                setInInventory(false)  
+                setInInventory(false)
                 setImage("")
                 setId(0)
             }
@@ -144,7 +149,7 @@ export default function ProductsDemo() {
         setName(rowData.name)
         setDescription(rowData.description)
         setImage(rowData.image)
-        setInInventory(rowData.inInventory)  
+        setInInventory(rowData.inInventory)
         setId(rowData._id)
     };
 
@@ -175,13 +180,13 @@ export default function ProductsDemo() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="הוסף מוצר חדש" icon="pi pi-plus" severity="success" onClick={openNew} style={{backgroundColor:'#ce9149', border:'1px solid #ce9149'}} />
+                <Button label="הוסף מוצר חדש" icon="pi pi-plus" severity="success" onClick={openNew} style={{ backgroundColor: '#ce9149', border: '1px solid #ce9149' }} />
             </div>
         );
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} style={{backgroundColor:'#ec4899',  border:'1px solid #ec4899'}} />;
+        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} style={{ backgroundColor: '#ec4899', border: '1px solid #ec4899' }} />;
     };
 
     const imageBodyTemplate = (rowData) => {
@@ -201,14 +206,14 @@ export default function ProductsDemo() {
     };
 
     const actionBodyTemplate = (rowData) => {
-        {                
- }  
+        {
+        }
         return (
             <React.Fragment>
                 <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
-                <s style={{color:'#ffffff'}}> . . . </s>
+                <s style={{ color: '#ffffff' }}> . . . </s>
                 {/* //אייקון אפדייט ומחיקה */}
-              <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => {confirmDeleteProduct(rowData._id)}} />
+                <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => { confirmDeleteProduct(rowData._id) }} />
             </React.Fragment>
         );
     };
@@ -224,11 +229,17 @@ export default function ProductsDemo() {
     };
 
     const header = (
-        <div className="flex flex-wrap gap-2 align-items-center justify-content-between" style={{"textAlign":'center'}}>
+        <div className="flex flex-wrap gap-2 align-items-center justify-content-between" style={{ "textAlign": 'center' }}>
             <h1 className="m-0">ניהול מוצרים </h1>
             <span className="p-input-icon-left">
                 <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
+                <div className="flex gap-3">
+                    <IconField iconPosition="left">
+                        <InputIcon className="pi pi-search"> </InputIcon>
+                        <InputText v-model="value1"  onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
+                    </IconField>
+                </div>
+               
             </span>
         </div>
     );
@@ -240,10 +251,10 @@ export default function ProductsDemo() {
         </React.Fragment>
     );
     const deleteProductDialogFooter = (
-         <React.Fragment>
-             <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
-             <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
-         </React.Fragment>
+        <React.Fragment>
+            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
+            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
+        </React.Fragment>
     );
     // const deleteProductsDialogFooter = (
     //     <React.Fragment>
@@ -254,17 +265,17 @@ export default function ProductsDemo() {
 
     return (
         <div >
-            <br/><br/><br/>
+            <br /><br /><br />
             {/* <img alt="logo" src="../images/logo.png" height="40" className="mr-2" style={{length:'20%',width:'20%'}}></img> */}
             {/* <img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img> */}
             <Toast ref={toast} />
             <div className="card">
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
                 <DataTable ref={dt} value={sweets}
-                style={{opacity:1}}
-                        dataKey="id"  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="מראה {first} - {last} מתוך {totalRecords} מוצרים" globalFilter={globalFilter} header={header}>
+                    style={{ opacity: 1 }}
+                    dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                    currentPageReportTemplate="מראה {first} - {last} מתוך {totalRecords} מוצרים" globalFilter={globalFilter} header={header}>
                     <Column field="name" header="שם" sortable style={{ minWidth: '16rem' }}></Column>
                     <Column field="description" header="תיאור" style={{ minWidth: '16rem' }}></Column>
                     <Column field="image" header="תמונה" body={imageBodyTemplate}></Column>
@@ -275,31 +286,31 @@ export default function ProductsDemo() {
                 </DataTable>
             </div>
 
-            <Dialog visible={productDialog} style={{ width: '32rem'  }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי מוצר" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+            <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי מוצר" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
 
                 {/* {product.image && <img src={`../public/images/${rowData.image}`} alt={rowData.image} className="product-image block m-auto pb-3" />} */}
-                
+
                 <div className="field">
                     <label htmlFor="name" className="font-bold">
                         שם מוצר
                     </label>
-                    <InputText id="name" value={name} onChange={(e) =>setName(e.target.value)} required  autoFocus className={classNames({ 'p-invalid':  name=="" })} />
-                    {submitted && name=="" && <small className="p-error">Name is required</small>}
-                </div><br/><br/>
+                    <InputText id="name" value={name} onChange={(e) => setName(e.target.value)} required autoFocus className={classNames({ 'p-invalid': name == "" })} />
+                    {submitted && name == "" && <small className="p-error">Name is required</small>}
+                </div><br /><br />
 
                 <div className="field">
-                    <label htmlFor="description"  className="font-bold">
+                    <label htmlFor="description" className="font-bold">
                         תיאור
                     </label>
                     <InputTextarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} required rows={3} cols={20} />
-                </div><br/><br/>
+                </div><br /><br />
 
                 <div className="field">
                     <label htmlFor="image" className="font-bold">
                         תמונה
                     </label>
-                    <InputText id="image" value={image} onChange={(e) =>setImage(e.target.value)} className={classNames({ 'p-invalid':  image=="" })} />
-                </div><br/><br/>
+                    <InputText id="image" value={image} onChange={(e) => setImage(e.target.value)} className={classNames({ 'p-invalid': image == "" })} />
+                </div><br /><br />
 
                 {/* <div className="field">
                     <label className="mb-3 font-bold">Category</label>
@@ -329,14 +340,14 @@ export default function ProductsDemo() {
                             מחיר
                         </label>
                         <InputNumber id="price" value={price} onValueChange={(e) => setPrice(e.target.value)} mode="currency" currency="USD" locale="en-US" />
-                    </div><br/><br/>
+                    </div><br /><br />
 
                     <div className="field col">
                         <label htmlFor="inInventory" className="font-bold">
                             במלאי?
                         </label>
                         <Checkbox value={inInventory} onChange={e => onChangeCheckBox(e.checked)} checked={checked}></Checkbox>
-                    </div><br/><br/>
+                    </div><br /><br />
                 </div>
             </Dialog>
 
@@ -344,7 +355,7 @@ export default function ProductsDemo() {
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {/* {product && ( */}
-                        
+
                     {(
                         <span>
                             Are you sure you want to delete <b>{name}</b>?
@@ -362,4 +373,3 @@ export default function ProductsDemo() {
         </div>
     );
 }
-        

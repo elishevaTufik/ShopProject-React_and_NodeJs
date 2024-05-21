@@ -14,6 +14,9 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { Image } from 'primereact/image';
+import { IconField } from "primereact/iconfield";
+import { InputIcon } from "primereact/inputicon";
+
 import "primeflex/primeflex.css"
 
 
@@ -44,11 +47,10 @@ export default function BranchAdmin() {
 
   const [productDialog, setProductDialog] = useState(false);
   const [deleteProductDialog, setDeleteProductDialog] = useState(false);
-  
-const changeOpen=(e)=>
-{
-  debugger
-}
+
+  const changeOpen = (e) => {
+    debugger
+  }
   const [selectedProducts, setSelectedProducts] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
@@ -56,11 +58,11 @@ const changeOpen=(e)=>
   const dt = useRef(null);
   const [checked, setChecked] = useState(false);
 
-  
+
   const [city, setCity] = useState("");
   const [location, setLocation] = useState("");
   const [close, setClose] = useState("00:00");
-  const [open,setOpen]=useState("00:00")
+  const [open, setOpen] = useState("00:00")
   const [image, setImage] = useState("")
   const [id, setId] = useState(0)
 
@@ -91,15 +93,15 @@ const changeOpen=(e)=>
   const hideDeleteProductDialog = () => {
     setDeleteProductDialog(false);
   };
-  
+
   const saveProduct = () => {
     setSubmitted(true);
     if (city !== "" && location !== "") {
-    // if (city !== "" && open!== null && close !== null && location !== "") {
+      // if (city !== "" && open!== null && close !== null && location !== "") {
       if (isEdit) {
-        
-        updateBranch({id,city,open,close,location,image})
-      
+
+        updateBranch({ id, city, open, close, location, image })
+
         setCity("")
         setOpen("00:00")
         setClose("00:00")
@@ -110,14 +112,14 @@ const changeOpen=(e)=>
       }
 
       else {
-        createBranch({ city, location,image,open,close})
+        createBranch({ city, location, image, open, close })
         setCity("")
         setLocation("")
         setOpen("00:00")
         setClose("00:00")
         setImage("")
         setId(0)
-        
+
       }
       setProductDialog(false);
     }
@@ -151,7 +153,7 @@ const changeOpen=(e)=>
   const leftToolbarTemplate = () => {
     return (
       <div className="flex flex-wrap gap-2">
-        <Button label="הוסף סניף" icon="pi pi-plus" severity="success" onClick={openNew} style={{backgroundColor:'#ce9149', border:'1px solid #ce9149'}} />
+        <Button label="הוסף סניף" icon="pi pi-plus" severity="success" onClick={openNew} style={{ backgroundColor: '#ce9149', border: '1px solid #ce9149' }} />
       </div>
     );
   };
@@ -165,19 +167,20 @@ const changeOpen=(e)=>
   const imageBodyTemplate = (rowData) => {
 
     console.log("rowData.image");
-        console.log(rowData.image);
-        //../public/images/3.jpg
-        return(
-        <div className="card flex justify-content-center">
-        <Image src={`images/${rowData.image}`} alt="Image"  width= '250'  preview />
-    </div>
-        
-  )};
+    console.log(rowData.image);
+    //../public/images/3.jpg
+    return (
+      <div className="card flex justify-content-center">
+        <Image src={`images/${rowData.image}`} alt="Image" width='250' preview />
+      </div>
+
+    )
+  };
 
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <Button icon="pi pi-pencil" rounded outlined className="mr-2"  onClick={() => editProduct(rowData)} />
+        <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
         <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => confirmDeleteProduct(rowData._id)} />
       </React.Fragment>
     );
@@ -194,11 +197,14 @@ const changeOpen=(e)=>
 
   const header = (
     <div className="flex flex-wrap gap-2 align-items-center justify-content-between" style={{ textAlign: 'center' }}>
-      <h2 style={{textAlign:'center'}} className="m-0">ניהול סניפים</h2>
-      <span className="p-input-icon-left">
-        <i className="pi pi-search" />
-        <InputText  type="search"  onInput={(e) => setGlobalFilter(e.target.value)}  placeholder="Search..."  />
-      </span>
+      <h2 style={{ textAlign: 'center' }} className="m-0">ניהול סניפים</h2>
+      <div className="flex gap-3">
+        <IconField iconPosition="left">
+          <InputIcon className="pi pi-search"> </InputIcon>
+          <InputText v-model="value1" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
+        </IconField>
+      </div>
+     
     </div>
   );
   const productDialogFooter = (
@@ -213,29 +219,29 @@ const changeOpen=(e)=>
       <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
     </React.Fragment>
   );
-return (
-    
+  return (
+
     <div>
       <Toast ref={toast} />
       <div className="card">
         <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}  ></Toolbar>
-        <DataTable  ref={dt}  value={branches}   style={{ opacity: 1 }}  dataKey="id" paginator  rows={10}  rowsPerPageOptions={[5, 10, 25]}  paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"  globalFilter={globalFilter}  header={header}  >
+        <DataTable ref={dt} value={branches} style={{ opacity: 1 }} dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]} paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" globalFilter={globalFilter} header={header}  >
           <Column field="city" header="עיר" sortable style={{ minWidth: '16rem' }} ></Column>
           <Column field="location" header="כתובת" sortable style={{ minWidth: '16rem' }} ></Column>
           <Column field="open" header="שעת פתיחה" style={{ minWidth: '8rem' }} ></Column>
           <Column field="close" header="שעת סגירה" style={{ minWidth: '8rem' }} ></Column>
-          <Column field="image"  body={imageBodyTemplate} ></Column>
+          <Column field="image" body={imageBodyTemplate} ></Column>
           <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}  ></Column>
         </DataTable>
       </div>
 
-      <Dialog visible={productDialog} style={{ width: '32rem', textAlign:'center'}} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי הסניף" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog} >
+      <Dialog visible={productDialog} style={{ width: '32rem', textAlign: 'center' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי הסניף" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog} >
         {/* {image && (
           <img src={`https://primefaces.org/cdn/primereact/images/product/${image}`} alt={image} className="product-image block m-auto pb-3"/>
         )} */}
         <div className="field">
           <label htmlFor="city" className="font-bold">עיר</label>
-          <InputText  id="city"  value={city}  onChange={(e) => setCity(e.target.value)}  required  autoFocus  className={classNames({ 'p-invalid': submitted && city !== " " })} />
+          <InputText id="city" value={city} onChange={(e) => setCity(e.target.value)} required autoFocus className={classNames({ 'p-invalid': submitted && city !== " " })} />
           {submitted && !city !== " " && (<small className="p-error">City is required.</small>)}
 
         </div>
@@ -245,18 +251,18 @@ return (
         </div>
         <div className="formgrid grid">
           <div className="field col">
-           <div className="flex-auto">
-               <label htmlFor="openHours" className="font-bold">שעת פתיחה  </label>
-                <Calendar id="open" value={new Date('October 13, 2014 '+open+':00')} onChange={(e)=>setOpen(""+e.target.value.getHours()+":"+e.target.value.getMinutes())} showIcon timeOnly  icon={() => <i className="pi pi-clock" />} />
-                <label htmlFor="buttondisplay" className="font-bold block mb-2">שעת סגירה</label>
-                <Calendar id="close" value={new Date('October 13, 2014 '+close+':00')} onChange={(e) => setClose(""+e.target.value.getHours()+":"+e.target.value.getMinutes())} showIcon timeOnly  icon={() => <i className="pi pi-clock" />}/>
-            </div> 
-                <div className="field">
-                    <label htmlFor="image" className="font-bold">
-                        תמונה
-                    </label>
-                    <InputText id="image" value={image} onChange={(e) =>setImage(e.target.value)} className={classNames({ 'p-invalid':  image=="" })} />
-                </div>
+            <div className="flex-auto">
+              <label htmlFor="openHours" className="font-bold">שעת פתיחה  </label>
+              <Calendar id="open" value={new Date('October 13, 2014 ' + open + ':00')} onChange={(e) => setOpen("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
+              <label htmlFor="buttondisplay" className="font-bold block mb-2">שעת סגירה</label>
+              <Calendar id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
+            </div>
+            <div className="field">
+              <label htmlFor="image" className="font-bold">
+                תמונה
+              </label>
+              <InputText id="image" value={image} onChange={(e) => setImage(e.target.value)} className={classNames({ 'p-invalid': image == "" })} />
+            </div>
           </div>
         </div>
       </Dialog>
@@ -271,7 +277,7 @@ return (
       </Dialog>
 
 
-      
+
     </div>
   );
 }
