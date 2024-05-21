@@ -1,0 +1,9 @@
+.image-gallery img {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .image-gallery img.active {
+    opacity: 1;
+  }
