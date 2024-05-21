@@ -14,7 +14,7 @@ const addNewProd = async (req, res) => {
     const ifExist = await Basket.findOne({ sweetId: sweetId, clientId: req.user._id })
 
     if (ifExist) {
-        let currentPrice = ifExist.price/ifExist.quantity
+        let currentPrice = ifExist.price / ifExist.quantity
         ifExist.quantity = ifExist.quantity + 1;
         ifExist.price = ifExist.quantity * currentPrice
         await ifExist.save();
@@ -97,10 +97,29 @@ const updateQuantityOfProduct = async (req, res) => {
     res.json(reply)
 }
 
+const calculateTotalPayment = async (req, res) => {
+        if (req.user.permission !== 'client') {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        
+        const basketItems = await Basket.find({ clientId: req.user._id });
+
+        if (!basketItems) {
+            return res.status(400).json({ message: 'basketItems not found!' })
+        }
+    
+        let totalPayment = 0;
+        for (const item of basketItems) {
+            totalPayment += item.price;
+        }
+
+        res.json( totalPayment );
+}
 
 module.exports = {
     addNewProd,
     getAllCart,
+    calculateTotalPayment,
     deleteProduct,
     deleteBasketById,
     updateQuantityOfProduct
