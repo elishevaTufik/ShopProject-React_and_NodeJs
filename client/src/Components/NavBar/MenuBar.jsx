@@ -219,7 +219,7 @@ if(permission=='admin')
             
         }
 
-    const start = <img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img>;
+    const start = <a href='/'><img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img></a>;
 
     const end = (
         <div className="flex align-items-center gap-2">

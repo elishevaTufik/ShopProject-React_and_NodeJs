@@ -3,8 +3,8 @@ import './HomePage.css';
 
 const ImageGallery = ({ }) => {
 
-  const str='images/'
-  const images=[`${str}1.jpg`,`${str}2.jpg`]
+  const str='images/homePage/'
+  const images=[`${str}1.jpg`,`${str}2.jpg`,`${str}3.jpg`,`${str}4.jpg`,`${str}5.jpg`,`${str}6.jpg`,`${str}7.jpg`,`${str}8.jpg`,]
 
   const [currentIndex, setCurrentIndex] = useState(0);
 

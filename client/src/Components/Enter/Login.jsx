@@ -55,10 +55,7 @@ export default function Login() {
                 <br /><br /><br /><br />
 
 
-                {/* <IconField iconPosition="left">
-                        <InputIcon className="pi pi-search"></InputIcon>
-                        <InputText v-model="value1"  onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
-                    </IconField> */}
+                
                 <span className="p-input-icon-left">
 
                     <div className="flex gap-3">

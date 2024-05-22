@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useRegisterClientMutation } from '../../app/clientApiSlice';
@@ -11,6 +11,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Password } from 'primereact/password';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputMask } from "primereact/inputmask";
+
 
 import './Register.css'
 
@@ -27,47 +28,47 @@ export default function HeadlessDemo() {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
 
-    
-    const [registerClient, { isError, isSuccess, error  }] = useRegisterClientMutation()
 
-    useEffect(()=>{
-        if(isError){
+    const [registerClient, { isError, isSuccess, error }] = useRegisterClientMutation()
+
+    useEffect(() => {
+        if (isError) {
             console.log(error);
-           { error.status==409? alert("אופס.... המשתמש הזה כבר קים"):  alert("יש להשלים את כל השדות")}
-          
+            { error.status == 409 ? alert("אופס.... המשתמש הזה כבר קים") : alert("יש להשלים את כל השדות") }
+
             navigate("/RegisterClient")
         }
-        },[isError])  
+    }, [isError])
 
-    useEffect(()=>{ 
-            if(isSuccess){
-                navigate("/login")
-            } 
-            },[isSuccess]) 
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/login")
+        }
+    }, [isSuccess])
 
     const onclickadd = () => {
         setVisible(false)
-        registerClient({ username: username, name: name, password: password, email: email, phone: phone})
+        registerClient({ username: username, name: name, password: password, email: email, phone: phone })
         setUsername("")
         setPassword("")
         setName("")
         setEmail("")
         setPhone("")
     }
- 
+
     return (
-        <div className="card flex justify-content-center" style={{ textAlign:'center' }}>
-            <br/><br/><br/><br/>
+        <div className="card flex justify-content-center" style={{ textAlign: 'center' }}>
+            <br /><br /><br /><br />
             <h1>ברוכים הבאים לאתר שלנו</h1>
-            <br/>
+            <br />
             <h2>😊נשמח לראות אתכם אצלינו😊</h2>
-            <br/><br/>
-            <Button onClick={()=>setVisible(true)} >הרשמה</Button>
+            <br /><br />
+            <Button onClick={() => setVisible(true)} >הרשמה</Button>
 
             {/* <h3>{isError&&JSON.stringify(error.data)}</h3> */}
 
 
-            <Dialog 
+            <Dialog
                 visible={visible}
                 modal
 
@@ -75,55 +76,55 @@ export default function HeadlessDemo() {
                     setVisible(false)
                 }}
 
-                style={{textAlign:'center'}}
+                style={{ textAlign: 'center' }}
                 content={({ hide }) => (
 
-                    <div className="register card" style={{borderRadius:'15px', direction: 'rtl', textAlign:'center' ,width: '500px',height: '600px', backgroundColor: "white", backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}><br/>
+                    <div className="register card" style={{ borderRadius: '15px', direction: 'rtl', textAlign: 'center', width: '500px', height: '600px', backgroundColor: "white", backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}><br />
 
-                        <h1 style={{ marginRight: '30px',textAlign:'center' , fontSize: '30px' }}>ברוך הבא אלינו</h1><br/>
-                    
+                        <h1 style={{ marginRight: '30px', textAlign: 'center', fontSize: '30px' }}>ברוך הבא אלינו</h1><br />
+
                         <div className="p-inputgroup flex-1">
-                           <span  className="p-inputgroup-addon" style={{marginRight:"40px", borderRadius:'5px'}}>
+                            <span className="p-inputgroup-addon" style={{ marginRight: "40px", borderRadius: '5px' }}>
                                 <i className="pi pi-user"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="שם משתמש" id="username" onChange={(e)=>{setUsername(e.target.value)}}/>
-                        </div><br/>
+                            <InputText style={{ maxWidth: "75%", borderRadius: '5px' }} placeholder="שם משתמש" id="username" onChange={(e) => { setUsername(e.target.value) }} />
+                        </div><br />
 
                         <div className="p-inputgroup flex-1">
-                            <span style={{marginRight:"40px", borderRadius:'5px'}} className="p-inputgroup-addon">
+                            <span style={{ marginRight: "40px", borderRadius: '5px' }} className="p-inputgroup-addon">
                                 <i className="pi pi-key"></i>
                             </span>
                             {/* //<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask /> */}
-                            <div className="p-inputgroup flex-1">
-                            {/* <div className="card flex justify-content-center"> */}
-                           {/* padding-left: 24rem;
-                                margin-right: -11.5rem;
-                                    padding-right: 0.5rem; */}
-                                <Password style={{ maxWidth:"100%", borderRadius:'5px' ,paddingright: '0.5rem',paddingleft: "24rem",marginright: "-11.5rem"}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask />
+                            {/* //////////////////////////////////////// */}
+                            {/* <Password style={{ maxWidth:"100%", borderRadius:'5px' ,paddingright: '0.5rem',paddingleft: "24rem",marginright: "-11.5rem"}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask /> */}
+                            <div style={{maxWidth: "700%"}}>
+                                <div className="p-inputgroup flex-1 " 
+                                // style={{ maxWidth: "700%" }}
+                                >
+                                    <Password style={{ borderRadius: '5px', paddingLeft: "27rem" }} placeholder="סיסמה" id="password" onChange={(e) => { setPassword(e.target.value) }} toggleMask />
+                                </div>
                             </div>
-
-                            {/* <Password style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask/> */}
-                        </div><br/>
+                        </div><br />
 
                         <div className="p-inputgroup flex-1">
-                            <span style={{marginRight:"40px", borderRadius:'5px'}} className="p-inputgroup-addon">
+                            <span style={{ marginRight: "40px", borderRadius: '5px' }} className="p-inputgroup-addon">
                                 <i className="pi pi-pause"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="שם מלא" id="name" onChange={(e)=>{setName(e.target.value)}} />
-                        </div><br/>
+                            <InputText style={{ maxWidth: "75%", borderRadius: '5px' }} placeholder="שם מלא" id="name" onChange={(e) => { setName(e.target.value) }} />
+                        </div><br />
 
                         <div className="p-inputgroup flex-1">
-                            <span style={{marginRight:"40px", borderRadius:'5px'}} className="p-inputgroup-addon">
+                            <span style={{ marginRight: "40px", borderRadius: '5px' }} className="p-inputgroup-addon">
                                 <i className="pi pi-envelope"></i>
                             </span>
-                            <InputText style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder="מייל" id="email"  onChange={(e)=>{setEmail(e.target.value)}} />
-                        </div><br/>
+                            <InputText style={{ maxWidth: "75%", borderRadius: '5px' }} placeholder="מייל" id="email" onChange={(e) => { setEmail(e.target.value) }} />
+                        </div><br />
 
                         <div className="p-inputgroup flex-1">
-                            <span style={{marginRight:"40px", borderRadius:'5px'}} className="p-inputgroup-addon">
+                            <span style={{ marginRight: "40px", borderRadius: '5px' }} className="p-inputgroup-addon">
                                 <i className="pi pi-phone"></i>
                             </span>
-                            <InputMask id="phone" mask="999-9999999"  style={{ maxWidth:"75%", borderRadius:'5px'}} placeholder= "טלפון" id="phone" onChange={(e)=>{setPhone(e.value)}} />
+                            <InputMask mask="999-9999999" style={{ maxWidth: "75%", borderRadius: '5px' }} placeholder="טלפון" id="phone" onChange={(e) => { setPhone(e.value) }} />
                         </div>
                         <div className="flex align-items-center gap-2" >
                             <Button label="בטל" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" style={{ marginTop: "70px", width: '100px', height: '50px', borderRadius: '10px', marginRight: '5%', backgroundColor: '#ffffff' }}></Button>

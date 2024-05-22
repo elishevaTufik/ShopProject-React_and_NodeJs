@@ -58,8 +58,8 @@ const updateSweet = async (req, res) => {
     {
         return res.status(401).json({message:'Unauthorized' })
     }
-    const {id, price, name, description, extras, inInventory}= req.body
-    if (!name || !price || !description || !id) {
+    const {id, price, name, description, extras, inInventory,image}= req.body
+    if (!name || !price || !description || !id || !image) {
         return res.status(400).json({ message: "fields are required" })
     }
 
@@ -73,8 +73,10 @@ const updateSweet = async (req, res) => {
     sweet.description = description
     sweet.extras = extras
     sweet.inInventory = inInventory
-
+    sweet.image=image
+    
     const updatedsweet = await sweet.save()
+
     res.json(`${updatedsweet.name} updated`)
 }
 
