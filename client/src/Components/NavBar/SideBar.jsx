@@ -18,7 +18,7 @@ export default function PositionDemo() {
             </div>
 
             <Sidebar visible={visibleRight} position="right" onHide={() => setVisibleRight(false)}>
-                <h2>נשמח שנהיה בקשר</h2>
+                <h2>נשמח להיות בקשר</h2>
                 <p>
                     <div><Button icon="pi pi-phone" /><Button style={{marginLeft:'15px', opacity:'0.7'}}>*670</Button> </div>
                     <div style={{marginTop:'10px'}}><Button icon="pi pi-envelope" /><Button style={{opacity:'0.7',marginLeft:'15px'}}>katzefet@gmail.com</Button> </div>

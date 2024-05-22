@@ -61,7 +61,7 @@ export default function HeadlessDemo() {
             <br /><br /><br /><br />
             <h1>ברוכים הבאים לאתר שלנו</h1>
             <br />
-            <h2>😊נשמח לראות אתכם אצלינו😊</h2>
+            <h2>נשמח לראות אתכם אצלינו</h2>
             <br /><br />
             <Button onClick={() => setVisible(true)} >הרשמה</Button>
 
