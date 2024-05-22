@@ -69,11 +69,12 @@ export default function Galery() {
                             <div className="flex flex-column align-items-center sm:align-items-start gap-3">
                                 <div className="text-2xl font-bold text-900">{product.name}</div>
                                 <div>{product.description}</div>
-                                <div className="flex align-items-center gap-3">
+                                {/* <div className="flex align-items-center gap-3">
                                     <span className="flex align-items-center gap-2">
                                         <span className="font-semibold">{product.category}</span>
                                     </span>
-                                </div>
+                                </div> */}
+                                {checkDisabled(!product.inInventory)?<Button label="אזלתי מהמלאי" severity="danger" outlined disabled={true}/>:<></>}
                             </div>
                             <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                                 <span className="text-2xl font-semibold">₪{product.price}</span>
@@ -100,10 +101,13 @@ export default function Galery() {
                         <div className="text-2xl font-bold">{product.name}</div>
                         <div>{product.description}</div>
                     </div>
-                    <div className="flex align-items-center justify-content-between">
-                        <span className="text-2xl font-semibold">₪{product.price}</span>
+                    <div className="flex align-items-center justify-content-between"> 
+                   
+                        <span className="text-2xl font-semibold">₪{product.price}</span> 
+                        {checkDisabled(!product.inInventory)?<Button label="אזלתי מהמלאי" severity="danger" outlined disabled={true}/>:<></>}
                         <Button onClick={() => { hundleSubmit(product) }} icon="pi pi-cart-plus" className="p-button-rounded" disabled={checkDisabled(!product.inInventory)}></Button>
-                    </div>
+                       
+                    </div> 
                 </div>
             </div>
         );
