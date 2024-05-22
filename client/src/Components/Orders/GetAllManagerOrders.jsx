@@ -45,10 +45,10 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
             </div>
             
             <DataTable value={orders}  selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) =>{ selectedOrder(e.value) }} dataKey="id" tableStyle={{ minWidth: '50rem' }}>
-                <Column selectionMode="single" headerStyle={{ width: '3rem' }}></Column>
+                <Column selectionMode="single" headerStyle={{ width: '3rem' }} sortField={"createdAt"} sortOrder={-1}></Column>
                 <Column field="status" header="סטטוס"></Column>
                 <Column field="address" header="כתובת"></Column>
-                <Column field="createdAt" header="תאריך" sortable ></Column>
+                <Column field="createdAt" header="תאריך" ></Column>
                 <Column field="sweets" header="מוצרים שהוזמנו"></Column>
             </DataTable>
             {/* {manager?<ManagerOrders  order={order} />:<></>} */}

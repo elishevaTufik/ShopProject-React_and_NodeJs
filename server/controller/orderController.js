@@ -165,6 +165,7 @@ const cancelOrder = async (req, res) => {
     res.json(`order's status updated`)
 };
 
+
 module.exports = {
     getAllOrders,
     getOrdersHistory,

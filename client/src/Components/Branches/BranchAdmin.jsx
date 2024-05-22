@@ -255,7 +255,8 @@ export default function BranchAdmin() {
               <label htmlFor="openHours" className="font-bold">שעת פתיחה  </label>
               <Calendar id="open" value={new Date('October 13, 2014 ' + open + ':00')} onChange={(e) => setOpen("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
               <label htmlFor="buttondisplay" className="font-bold block mb-2">שעת סגירה</label>
-              <Calendar id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
+              <Calendar  id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
+              {/* <InputText type='time' id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value +  e.target.value)} showIcon timeOnly icon={() => <i className="pi pi-clock" />} /> */}
             </div>
             <div className="field">
               <label htmlFor="image" className="font-bold">
