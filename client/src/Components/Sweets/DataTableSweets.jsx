@@ -71,10 +71,7 @@ export default function ProductsDemo() {
     const [id, setId] = useState(0);
     const [image, setImage] = useState("");
 
-
-    // const [isCreate, setisCreate] = useState(false);
     const [isEdit, setisEdit] = useState(false);
-
 
     const onChangeCheckBox = (checked) => {
         setChecked(checked)
@@ -86,7 +83,6 @@ export default function ProductsDemo() {
     };
 
     const openNew = () => {
-        // setProduct(sweets);
         setSubmitted(false);
         setProductDialog(true);
     };
@@ -161,7 +157,6 @@ export default function ProductsDemo() {
     const deleteProduct = () => {
         DeleteSweet(id)
         setDeleteProductDialog(false);
-        // toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
     };
 
     const exportCSV = () => {
@@ -174,7 +169,6 @@ export default function ProductsDemo() {
 
     const deleteSelectedProducts = () => {
         setDeleteProductsDialog(false);
-        // toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
     };
 
     const leftToolbarTemplate = () => {
@@ -190,12 +184,8 @@ export default function ProductsDemo() {
     };
 
     const imageBodyTemplate = (rowData) => {
-        //../public/images/3.jpg
-        return <img src={`images/${rowData.image}`} alt={rowData.image} className="shadow-2 border-round" style={{ width: '64px' }} />;
-        //return <img alt="rowData.image" src={`../public/images/${image}`} height="40" className="mr-2" style={{textAlign:'center', width: '64px'}}></img> 
-        //    url('../public/images/3.jpg');
+        return <img src={`images/${rowData.image}`} alt={rowData.image} className="border-round" style={{ width: '64px' }} />;
     };
-    //,nubvvvv
 
     const priceBodyTemplate = (rowData) => {
         return formatCurrency(rowData.price);
@@ -212,7 +202,6 @@ export default function ProductsDemo() {
             <React.Fragment>
                 <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editProduct(rowData)} />
                 <s style={{ color: '#ffffff' }}> . . . </s>
-                {/* //אייקון אפדייט ומחיקה */}
                 <Button icon="pi pi-trash" rounded outlined severity="danger" onClick={() => { confirmDeleteProduct(rowData._id) }} />
             </React.Fragment>
         );
@@ -256,18 +245,10 @@ export default function ProductsDemo() {
             <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
         </React.Fragment>
     );
-    // const deleteProductsDialogFooter = (
-    //     <React.Fragment>
-    //         <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
-    //         <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedProducts} />
-    //     </React.Fragment>
-    // );
 
     return (
         <div >
             <br /><br /><br />
-            {/* <img alt="logo" src="../images/logo.png" height="40" className="mr-2" style={{length:'20%',width:'20%'}}></img> */}
-            {/* <img alt="logo" src="../images/logo.png" height="40" className="mr-2"></img> */}
             <Toast ref={toast} />
             <div className="card">
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
@@ -287,8 +268,6 @@ export default function ProductsDemo() {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="פרטי מוצר" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-
-                {/* {product.image && <img src={`../public/images/${rowData.image}`} alt={rowData.image} className="product-image block m-auto pb-3" />} */}
 
                 <div className="field">
                     <label htmlFor="name" className="font-bold">
@@ -312,28 +291,6 @@ export default function ProductsDemo() {
                     <InputText id="image" value={image} onChange={(e) => setImage(e.target.value)} className={classNames({ 'p-invalid': image == "" })} />
                 </div><br /><br />
 
-                {/* <div className="field">
-                    <label className="mb-3 font-bold">Category</label>
-                    <div className="formgrid grid">
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
-                            <label htmlFor="category1">Accessories</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
-                            <label htmlFor="category2">Clothing</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
-                            <label htmlFor="category3">Electronics</label>
-                        </div>
-                        <div className="field-radiobutton col-6">
-                            <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
-                            <label htmlFor="category4">Fitness</label>
-                        </div>
-                    </div>
-                </div> */}
-
                 <div className="formgrid grid">
                     <div className="field col">
                         <label htmlFor="price" className="font-bold">
@@ -354,7 +311,6 @@ export default function ProductsDemo() {
             <Dialog visible={deleteProductDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {/* {product && ( */}
 
                     {(
                         <span>
@@ -363,13 +319,6 @@ export default function ProductsDemo() {
                     )}
                 </div>
             </Dialog>
-
-            {/* <Dialog visible={deleteProductsDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
-                <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {<span>Are you sure you want to delete the selected products?</span>}
-                </div>
-            </Dialog> */}
         </div>
     );
 }

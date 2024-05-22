@@ -168,7 +168,6 @@ export default function BranchAdmin() {
 
     console.log("rowData.image");
     console.log(rowData.image);
-    //../public/images/3.jpg
     return (
       <div className="card flex justify-content-center">
         <Image src={`images/${rowData.image}`} alt="Image" width='250' preview />
