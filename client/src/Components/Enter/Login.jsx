@@ -31,7 +31,8 @@ export default function Login() {
 
     useEffect(() => {
         if (isError) {
-            navigate("/RegisterClient")
+            console.log(error);
+            {error.status==400?alert("!כל השדות הינם שדות חובה"):navigate("/RegisterClient")}
         }
     }, [isError])
 
