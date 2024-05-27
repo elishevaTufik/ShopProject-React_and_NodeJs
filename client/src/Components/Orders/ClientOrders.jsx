@@ -87,7 +87,7 @@ function ClientOrders() {
     return (
       <>
         <span
-          className="inline-flex align-items-center justify-content-center align-items-center border-circle border-primary border-1 h-6rem w-6rem z-1 cursor-pointer"
+          className="inline-flex align-items-center justify-content-center align-items-center border-circle border-primary border-1 h-4rem w-4rem z-1 cursor-pointer"
           style={{ backgroundColor: backgroundColor, color: textColor, marginTop: '-25px' }}
           onClick={() => setActiveIndex(itemIndex)}>
           <i className={`${item.icon} text-xl`} />
@@ -155,7 +155,7 @@ function ClientOrders() {
     <div className="Order">
       <br />
       <div className="card">
-        <p style={{ textAlign: 'center', color: '#ffffff', backgroundColor: '#ec4899', width: '20%', textAlign: 'center', marginLeft: '40%', borderRadius: '10px', opacity: '0.7', fontSize: '150%' }}>
+        <p style={{ textAlign: 'center', color: '#ffffff', backgroundColor: '#ec4899', width: '20%', textAlign: 'center', marginLeft: '40%', borderRadius: '10px', opacity: '0.7', fontSize: '120%' }}>
           <br />ההזמנות שלי<br /><br />
         </p>
         <Card title="ההזמנה האחרונה שלך" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
