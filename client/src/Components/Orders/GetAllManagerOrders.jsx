@@ -21,7 +21,6 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
 
     useEffect(() => {
         if (isSuccess){
-            //setProducts(orders)
             console.log(orders);
         }
         else
@@ -29,10 +28,6 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
 
     }, [isSuccess]);
 
-
-    // useEffect(() => {
-    //     order.getProductsMini().then((data) => setProducts(data));
-    // }, []);
 
     const selectedOrder=(e)=>{
         props.setOrder(e)
@@ -60,7 +55,6 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
                 <Column field="createdAt" header="תאריך" ></Column>
                 <Column field="sweets" header="מוצרים שהוזמנו"></Column>
             </DataTable>
-            {/* {manager?<ManagerOrders  order={order} />:<></>} */}
             
         </div>
     );

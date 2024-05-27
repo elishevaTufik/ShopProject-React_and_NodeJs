@@ -4,8 +4,6 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
-//import { FileUpload } from 'primereact/fileupload';
-//import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { Calendar } from 'primereact/calendar';
 import { RadioButton } from 'primereact/radiobutton';
@@ -97,7 +95,6 @@ export default function BranchAdmin() {
   const saveProduct = () => {
     setSubmitted(true);
     if (city !== "" && location !== "") {
-      // if (city !== "" && open!== null && close !== null && location !== "") {
       if (isEdit) {
 
         updateBranch({ id, city, open, close, location, image })
@@ -166,8 +163,6 @@ export default function BranchAdmin() {
 
   const imageBodyTemplate = (rowData) => {
 
-    console.log("rowData.image");
-    console.log(rowData.image);
     return (
       <div className="card flex justify-content-center">
         <Image src={`images/${rowData.image}`} alt="Image" width='250' preview />

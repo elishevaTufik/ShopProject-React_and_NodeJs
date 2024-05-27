@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-// import { ProductService } from './ProductService';
 import { Card } from 'primereact/card';
 
 import { useGetAllSweetsQuery } from '../../app/sweetsApiSlice'

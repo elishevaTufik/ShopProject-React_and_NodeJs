@@ -124,7 +124,6 @@ const updateOrder = async (req, res) => {
 const updateStatus = async (req, res) => {
 
     if(req.user.permission!='admin' 
-    // || req.user.permission!='shift manager'
     )
     {
         return res.status(401).json({message:'Unauthorized' })

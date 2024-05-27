@@ -19,27 +19,13 @@ export default function ManagerOrders() {
         "done": 1,
         "closed": 2
     }
-    // const { data: orders = [], isLoading, isError, error, isSuccess } = useGetAllOrdersQuery()
-    // useEffect(() => {
-    //     if (isSuccess) {
-    //         //setProducts(orders)
-    //         console.log(orders);
-    //     }
-    //     else
-    //         console.log("loading");
-
-    // }, [isSuccess]);
-
 
     return (
         <>
-            {/* {console.log("Aaaaaaaaaa",order)} */}
             <Card title="ניהול הזמנות" style={{ textAlign: 'center', width: '80%', paddingRight: '10%', paddingLeft: '10%', marginLeft: '10%' }}>
                 <div className="card flex justify-content-center">
-                    {console.log("lllll", steps[order.status])}
                     {order.status === "accepted" ?
                         <>
-                            {console.log(order.status)}
                             <Stepper activeStep={0} ref={stepperRef} style={{ flexBasis: '50rem' }} linear={true}>
                                 <StepperPanel header="התקבל">
                                     <div className="flex flex-column h-12rem">
@@ -83,7 +69,6 @@ export default function ManagerOrders() {
                     }
                     {order.status === "done" ?
                         <>
-                            {console.log(order.status)}
                             <Stepper activeStep={1} ref={stepperRef} style={{ flexBasis: '50rem' }} linear={true}>
 
                                 <StepperPanel header="התקבל">
@@ -128,7 +113,6 @@ export default function ManagerOrders() {
                     }
                     {order.status === "closed" ?
                         <>
-                            {console.log(order.status)}
                             <Stepper activeStep={2} ref={stepperRef} style={{ flexBasis: '50rem' }} linear={true}>
 
                                 <StepperPanel header="התקבל">

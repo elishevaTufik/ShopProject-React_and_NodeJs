@@ -110,14 +110,12 @@ if(permission=='admin')
                     {
                         label: 'מוזמנים לבוא להתלקק',
                         icon: 'pi pi-map-marker',
-                        // template: itemRenderer,
                         url: '/Branch'
                     },
             
                     {
                         label: 'המתוקים שלנו',
                         icon: 'pi pi-bars',
-                        // template: itemRenderer,
                         url: '/Sweet'
                     },
             
@@ -132,7 +130,6 @@ if(permission=='admin')
                     {
                         label: ' הזמנות ',
                         icon: 'pi pi-shopping-bag',
-                        // template: itemRenderer,
                         url: '/Order'
                     },
                     {

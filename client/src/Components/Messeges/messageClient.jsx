@@ -6,7 +6,6 @@ import { InputText } from "primereact/inputtext";
 import { DataView } from 'primereact/dataview';
 import { Toolbar } from 'primereact/toolbar';
 import { Dialog } from 'primereact/dialog';
-//import { FloatLabel } from "primereact/floatlabel";
 import './messageCss.css'
 import { useGetMessageByIdClientQuery } from '../../app/messegApiSlice'
 import { useWriteMessageMutation } from '../../app/messegApiSlice';
@@ -54,7 +53,6 @@ export default function MessageClient(props) {
                 setText("")
                 setTitle("")
                 setClientId(id)
-            // }
             setProductDialog(false);
         }
     };
@@ -62,9 +60,6 @@ export default function MessageClient(props) {
         setText("")
         setTitle("")
         setClientId(0)
-
-        //setisEdit(false)
-        ////////////////
         setSubmitted(false);
         setProductDialog(false);
     };
@@ -81,15 +76,12 @@ export default function MessageClient(props) {
         if (layout === 'list') return listItem(messages, index);
     };
     const openNew = () => {
-        // setProduct(sweets);
         setSubmitted(false);
         setProductDialog(true);
     };
     const leftToolbarTemplate = () => {
         return (
-            // <div className="flex flex-wrap gap-2" > 
                 <Button  icon="pi pi-plus" severity="success" onClick={openNew} style={{backgroundColor:'#ce9149', border:'1px solid #ce9149'}} />
-        //   </div>
         );
     };
 
@@ -110,14 +102,10 @@ export default function MessageClient(props) {
             </div>
             <Dialog visible={productDialog} style={{ width: '32rem'  }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="?מה תרצה" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
 
-                {/* {product.image && <img src={`../public/images/${rowData.image}`} alt={rowData.image} className="product-image block m-auto pb-3" />} */}
                 
                 <div className="field">
-                    {/* <label htmlFor="title" className="font-bold">
-                        שם מוצר
-                    </label> */}
+                 
                     <InputText id="title" value={title} onChange={(e) =>setTitle(e.target.value)} required  autoFocus 
-                    // className={classNames({ 'p-invalid':  title=="" })}
                      />
                     {submitted && title=="" && <small className="p-error">Title is required</small>}
                 </div><br/><br/>
@@ -132,11 +120,7 @@ export default function MessageClient(props) {
                 <AccordionTab header={messages[index].title}>
 
                     <div className="card flex justify-content-center">
-                        {/* <FloatLabel> */}
-                            {/* <label htmlFor="description">Description</label><br/><br/>
-                            <InputTextarea id="description" value={value} onChange={(e) => setValue(e.target.value)} rows={5} cols={30} /> */}
                            <div>{messages[index].text}</div>
-                        {/* </FloatLabel> */}
                     </div>
                 </AccordionTab>
             </Accordion>
@@ -149,7 +133,6 @@ export default function MessageClient(props) {
         <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
         <div className="card" >
             <DataView value={messages} listTemplate={listTemplate} layout={layout}  />
-            {/* <Toast ref={toast} /> */}
         </div>
         </>
     )

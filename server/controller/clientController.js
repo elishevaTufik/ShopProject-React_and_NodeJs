@@ -14,31 +14,6 @@ const getAllClients = async (req, res) => {
     res.json(clients)
 }
 
-// const createClient = async (req, res) => {
-
-//     const {name, password, username, email, phone, points } = req.body
-//     if(!username || !password || !name || !phone)
-//     {
-//         return res.status(400).json({ message: 'username, password, name and phone are required' })
-//     }
-//     if(await Client.findOne({username:username})){
-//         return res.status(400).json({ message: 'This username is already exist' })
-//     }
-        
-//     const client = await Client.create({name, password, username, email, phone, points})
-//     if (client) 
-//     {
-//         return res.status(201).json({ message: 'New client created' })
-//     }
-//     else 
-//     {
-//         return res.status(400).json({ message: 'Invalid client ' })
-//     }
-// }
-// const buyCoupon = async (req, res) => {
-
-// }
-
 const deleteClient = async (req, res) => {
 
     if(req.user.permission!='admin')
@@ -85,7 +60,6 @@ const updateClient = async (req, res) => {
 
 module.exports = {
     getAllClients,
-    // createClient,
     deleteClient,
     updateClient
 }

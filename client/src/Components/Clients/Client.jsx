@@ -1,4 +1,3 @@
-//import GetAllTodos from "./GetAllTodos";
 
 function Client() {
   

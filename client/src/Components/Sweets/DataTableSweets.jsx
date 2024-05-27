@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { ProductService } from './service/ProductService';
 
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
@@ -30,7 +29,6 @@ import { useDeleteSweetMutation } from '../../app/sweetsApiSlice'
 import { useUpdateSweetMutation } from '../../app/sweetsApiSlice'
 
 import './DataTableSweets.css'
-// import { set } from 'mongoose';
 
 export default function ProductsDemo() {
 
@@ -49,12 +47,10 @@ export default function ProductsDemo() {
     }
         , [resCreate])
 
-    //const [products, setProducts] = useState(sweets);
 
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
-    // const [product, setProduct] = useState(null);
 
     const [checked, setChecked] = useState(false);
     const [selectedProducts, setSelectedProducts] = useState(null);
@@ -96,7 +92,6 @@ export default function ProductsDemo() {
         setImage("")
 
         setisEdit(false)
-        ////////////////
         setSubmitted(false);
         setProductDialog(false);
     };

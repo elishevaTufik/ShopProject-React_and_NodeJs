@@ -33,7 +33,6 @@ export default function HeadlessDemo() {
 
     useEffect(() => {
         if (isError) {
-            console.log(error);
             { error.status == 409 ? alert("אופס.... המשתמש הזה כבר קים") : alert("יש להשלים את כל השדות") }
 
             navigate("/RegisterClient")
@@ -94,13 +93,8 @@ export default function HeadlessDemo() {
                             <span style={{ marginRight: "40px", borderRadius: '5px' }} className="p-inputgroup-addon">
                                 <i className="pi pi-key"></i>
                             </span>
-                            {/* //<Password value={value} onChange={(e) => setValue(e.target.value)} toggleMask /> */}
-                            {/* //////////////////////////////////////// */}
-                            {/* <Password style={{ maxWidth:"100%", borderRadius:'5px' ,paddingright: '0.5rem',paddingleft: "24rem",marginright: "-11.5rem"}} placeholder="סיסמה" id="password" onChange={(e)=>{setPassword(e.target.value)}} toggleMask /> */}
                             <div style={{maxWidth: "700%"}}>
-                                <div className="p-inputgroup flex-1 " 
-                                // style={{ maxWidth: "700%" }}
-                                >
+                                <div className="p-inputgroup flex-1 ">
                                     <Password style={{ borderRadius: '5px', paddingLeft: "27rem" }} placeholder="סיסמה" id="password" onChange={(e) => { setPassword(e.target.value) }} toggleMask />
                                 </div>
                             </div>

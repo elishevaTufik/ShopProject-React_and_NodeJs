@@ -102,17 +102,14 @@ function ClientOrders() {
   const items = [
     {
       icon: 'pi pi-credit-card',
-      // text: '  התקבל  ',//accepted
       template: (item) => itemRenderer(item, 0)
     },
     {
       icon: 'pi pi-truck',
-      // text: '  בדרך אליך  ',//done
       template: (item) => itemRenderer(item, 1)
     },
     {
       icon: 'pi pi-thumbs-up',
-      // text: '  הזמנה הושלמה  ',//closed
       template: (item) => itemRenderer(item, 2)
     }
   ];

@@ -8,9 +8,7 @@ import {useCancelOrderMutation} from '../../app/orderApiSlice'
 export default function CancelOrder(props) {
 
     const lastId = props.lastId
-    console.log("lastId",lastId);
     const lastStatus = props.lastStatus
-    console.log("lastStatus",lastStatus);
 
     const [CancelOrder, resCreate] = useCancelOrderMutation(lastId)
 

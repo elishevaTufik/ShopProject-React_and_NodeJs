@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// import { ProductService } from './service/ProductService';
-
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -84,7 +82,6 @@ export default function ProductsDemo() {
 
     const fillArrSweets = () => {
         cart.forEach(element => {
-           // sweets.push(element.sweetId._id)
             sweets.push(element)
         });
     }
@@ -156,7 +153,6 @@ export default function ProductsDemo() {
     const imageBodyTemplate = (rowData) => {
         return <img src={`images/${rowData.sweetId.image}`} alt={rowData.sweetId.image} className="shadow-2 border-round" style={{ width: '150px', direction: 'rtl' }} />;
     };
-    //,nubvvvv
     const inputN = (rowData) => {
         return (<>
             <InputNumber min={1} className="card flex justify-content-center" value={rowData.quantity} onValueChange={(e) => onClikUpdeteQuentity(rowData._id, e.value)} showButtons buttonLayout="vertical" style={{ width: '8rem' }}

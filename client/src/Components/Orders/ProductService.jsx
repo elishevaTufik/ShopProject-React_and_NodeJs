@@ -1,9 +1,6 @@
 import { useGetOrderByIdClientQuery } from '../../app/orderApiSlice'
 import useAuth from "../../hooks/useAuth";
 
-//   const { _id, username, permission, name, email, phone, isAdmin, isClient, isWorker, isShiftManager } = useAuth()
-//   const { data: orders = [], isLoading, isError, error, isSuccess } = useGetOrderByIdClientQuery(_id)
-
 export const ProductService = {
     
     getProductsData() {

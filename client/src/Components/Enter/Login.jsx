@@ -26,12 +26,8 @@ export default function Login() {
 
     const [login, { isError, error, isSuccess, data }] = useLoginMutation()
 
-    //מחיקת כל ה STATEשל המערכת נריץ את הפקודה
-    // dispatch(apiSlice.util.resetApiState())
-
     useEffect(() => {
         if (isError) {
-            console.log(error);
             {error.status==400?alert("!כל השדות הינם שדות חובה"):navigate("/RegisterClient")}
         }
     }, [isError])

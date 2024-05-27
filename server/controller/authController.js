@@ -97,23 +97,16 @@ const registerClient = async (req,res)=>{
 
 
 const registerWorker = async (req,res)=>{
-    
-    // if(req.user.permission!='admin')
-    // {
-    //     return res.status(401).json({message:'Unauthorized' })
-    // }
 
     const {username, password, name, email, phone, branchId, permission} = req.body
 
     if (!name || !username || !password ||!phone) {
         return res.status(400).json({message:'username, password, name and  email are required'})
     }
-     ///////   
     const duplicateClient = await Client.findOne({username:username}).lean()
     if(duplicateClient){
         return res.status(409).json({message:"This username is alredy exist .Try another one... "})
     }
-////////
     const duplicateWorker = await Worker.findOne({username:username}).lean()
     if(duplicateWorker){
         return res.status(409).json({message:"This username is alredy exist .Try another one... "})

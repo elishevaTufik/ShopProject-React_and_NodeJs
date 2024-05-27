@@ -5,12 +5,6 @@ import  myStore  from './Store/Store';
 import TemplateDemo from './Components/NavBar/MenuBar'
 import NotFound from './Components/NotFound';
 
-// import ReactDOM from 'react-dom/client';
-//  import 'primeicons/primeicons.css';
-// import { PrimeReactProvider } from 'primereact/api';
-// import 'primeflex/primeflex.css';  
-// import 'primereact/resources/primereact.css';
-//import 'primereact/resources/themes/lara-light-indigo/theme.css';
 
 const LazyHome = React.lazy(() => import("./Components/HomePage"))
 const LazyBranch = React.lazy(() => import("./Components/Branches/Branch"))
@@ -28,9 +22,6 @@ const LazyRegisterWorker = React.lazy(() => import("./Components/Enter/RegisterW
 
 function App() {
   
-  // const[searchVal, setsearchVal]=useState("");
-  // const[idUser, setidUser]=useState("");
- 
   return (
     <div className="App">
       <Provider store={myStore}>

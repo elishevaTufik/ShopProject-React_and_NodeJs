@@ -40,7 +40,6 @@ const getAllCart = async (req, res) => {
     if (!products?.length) {
         return res.status(400).json({ message: "No products found :(" })
     }
-    //const sweets = await Sweets.find().lean()
     res.json(products)
 
 }
