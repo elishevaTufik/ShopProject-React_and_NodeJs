@@ -1,3 +1,5 @@
+import RegisterAdmin from './RegisterAdmin'
+import EditWorkers from './EditWorkers'
 
 function Worker() {
     
@@ -5,6 +7,8 @@ function Worker() {
       <div className="Worker">
         <br/>
         Worker
+        <EditWorkers/>
+        {/* <RegisterAdmin/> */}
       </div>
     );
   }

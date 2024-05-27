@@ -35,7 +35,7 @@ const workerApiSlice = apiSlice.injectEndpoints({
             invalidatesTags:["Worker"]
         }),
 
-        createWorker: build.mutation({
+        registerWorker: build.mutation({
             query: (worker) => ({
                 url: '/registerWorker',
                 method:"POST",
@@ -57,5 +57,6 @@ export  const {
     useGetAllWorkersQuery,
     useGetAllShiftManagersQuery,
     useDeleteWorkerMutation,
-    useUpdateWorkerDetailsMutation
+    useUpdateWorkerDetailsMutation,
+    useRegisterWorkerMutation
     } = workerApiSlice

@@ -97,7 +97,11 @@ const registerClient = async (req,res)=>{
 
 
 const registerWorker = async (req,res)=>{
-
+    
+    if(req.user.permission!='admin')
+    {
+        return res.status(401).json({message:'Unauthorized' })
+    }
     const {username, password, name, email, phone, branchId, permission} = req.body
 
     if (!name || !username || !password ||!phone) {

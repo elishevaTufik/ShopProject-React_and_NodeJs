@@ -48,11 +48,11 @@ if(permission=='admin')
                     url: '/Sweet'
                 },
         
-                // {
-                //     label: 'העובדים החרוצים שלנו',
-                //     icon: 'pi pi-users',
-                //     url: '/Worker'
-                // },  
+                {
+                    label: 'העובדים החרוצים שלנו',
+                    icon: 'pi pi-users',
+                    url: '/Worker'
+                },  
                 
                 // {
                 //     label: 'לקוחותינו',

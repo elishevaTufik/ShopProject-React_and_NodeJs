@@ -18,7 +18,8 @@ const LazyBasket = React.lazy(() => import("./Components/Basket/Basket"))
 const LazyLogin = React.lazy(() => import("./Components/Enter/Login"))
 const LazyLogout = React.lazy(() => import("./Components/Enter/Logout"))
 const LazyRegisterClient = React.lazy(() => import("./Components/Enter/RegisterClient"))
-const LazyRegisterWorker = React.lazy(() => import("./Components/Enter/RegisterWorker"))
+const LazyRegisterWorker = React.lazy(() => import("./Components/Workers/RegisterAdmin"))
+const LazyEditWorkers = React.lazy(() => import("./Components/Workers/EditWorkers"))
 
 function App() {
   
@@ -40,6 +41,7 @@ function App() {
             <Route path='/Logout' element={<Suspense fallback="Loading..." ><LazyLogout/></Suspense>} />
             <Route path='/RegisterClient' element={<Suspense fallback="Loading..." ><LazyRegisterClient/></Suspense>} />
             <Route path='/RegisterWorker' element={<Suspense fallback="Loading..." ><LazyRegisterWorker/></Suspense>} />
+            <Route path='/EditWorkers' element={<Suspense fallback="Loading..." ><LazyEditWorkers/></Suspense>} />
             <Route path='/*' element={<NotFound/>} />
           </Routes> 
        </Provider>
