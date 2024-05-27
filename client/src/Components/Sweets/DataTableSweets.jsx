@@ -113,40 +113,32 @@ export default function ProductsDemo() {
         setSubmitted(true);
 
         if (name != "" && price != 0 && description != "") {
-            if (isEdit) {
+            if (isEdit) 
                 UpdateSweet({ id, price, name, description, extras, image, inInventory })
-                setPrice(0)
-                setName("")
-                setDescription("")
-                setImage("")
-                setInInventory(false)
-                setId(0)
-                setisEdit(false)
-            }
-
-            else {
+         
+            else 
                 CreateNewSweet({ price, name, description, extras, image, inInventory })
-                setPrice(0)
-                setName("")
-                setDescription("")
-                setInInventory(false)
-                setImage("")
-                setId(0)
-            }
-            setProductDialog(false);
+
+            setPrice(0)
         }
+        setName("")
+        setDescription("")
+        setImage("")
+        setInInventory(false)
+        setId(0)
+        setisEdit(false)
+        setProductDialog(false);
     };
 
     const editProduct = (rowData) => {
-        setisEdit(true)
-        setProductDialog(true);
-
         setPrice(rowData.price)
         setName(rowData.name)
         setDescription(rowData.description)
         setImage(rowData.image)
         setInInventory(rowData.inInventory)
-        setId(rowData._id)
+        setId(rowData._id) 
+        setisEdit(true)
+        setProductDialog(true);
     };
 
     const confirmDeleteProduct = (id1) => {
@@ -303,7 +295,7 @@ export default function ProductsDemo() {
                         <label htmlFor="inInventory" className="font-bold">
                             במלאי?
                         </label>
-                        <Checkbox value={inInventory} onChange={e => onChangeCheckBox(e.checked)} checked={checked}></Checkbox>
+                        <Checkbox value={inInventory} onChange={e => onChangeCheckBox(e.checked)} checked={inInventory}></Checkbox>
                     </div><br /><br />
                 </div>
             </Dialog>
@@ -311,7 +303,6 @@ export default function ProductsDemo() {
             <Dialog visible={deleteProductDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-
                     {(
                         <span>
                             Are you sure you want to delete <b>{name}</b>?
