@@ -42,18 +42,30 @@ const { data:orders=[], isLoading, isError, error, isSuccess } = useGetAllOrders
                 <label htmlFor="input-rowclick">Row Click</label>
             </div>
             
-            <DataTable value={orders}  selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) =>{ selectedOrder(e.value) }} dataKey="id" tableStyle={{ minWidth: '50rem' }}
+            <DataTable  value={orders}  selectionMode={rowClick ? null : 'radiobutton'} selection={selectedProduct} onSelectionChange={(e) =>{ selectedOrder(e.value) }} dataKey="id" tableStyle={{ minWidth: '50rem' }}
                 ref={dt}
                 style={{ opacity: 1 }}
                  paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                 currentPageReportTemplate="מראה {first} - {last} מתוך {totalRecords} מוצרים" globalFilter={globalFilter} 
             >
+                
+                
+               
+                
+                <Column field="sweets" header="מוצרים שהוזמנו"></Column>
+                 <Column field="address" header="כתובת"></Column>
+                 <Column field="createdAt" header="תאריך" ></Column>
+                <Column field="status" header="סטטוס"></Column>
                 <Column selectionMode="single" headerStyle={{ width: '3rem' }} sortField={"createdAt"} sortOrder={-1}></Column>
+
+
+
+                {/* <Column selectionMode="single" headerStyle={{ width: '3rem' }} sortField={"createdAt"} sortOrder={-1}></Column>
                 <Column field="status" header="סטטוס"></Column>
                 <Column field="address" header="כתובת"></Column>
                 <Column field="createdAt" header="תאריך" ></Column>
-                <Column field="sweets" header="מוצרים שהוזמנו"></Column>
+                <Column field="sweets" header="מוצרים שהוזמנו"></Column> */}
             </DataTable>
             
         </div>

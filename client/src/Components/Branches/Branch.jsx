@@ -9,7 +9,7 @@ function Branch() {
   return (
     <div className="Branch">
       <br/>
-      Branch        
+          
       {/* {permission=='admin'?<BranchAdmin/>:<BranchView/>} */}
       {permission=='admin'?<BranchAdmin/>:<BranchView/>}
 

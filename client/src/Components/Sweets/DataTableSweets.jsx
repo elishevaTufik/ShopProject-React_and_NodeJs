@@ -75,7 +75,7 @@ export default function ProductsDemo() {
     };
 
     const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'ILS' });
     };
 
     const openNew = () => {
@@ -228,8 +228,8 @@ export default function ProductsDemo() {
     );
     const deleteProductDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
+            <Button label="לא" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
+            <Button label="כן" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
         </React.Fragment>
     );
 
@@ -283,13 +283,13 @@ export default function ProductsDemo() {
                         <label htmlFor="price" className="font-bold">
                             מחיר
                         </label>
-                        <InputNumber id="price" value={price} onValueChange={(e) => setPrice(e.target.value)} mode="currency" currency="USD" locale="en-US" />
+                        <InputNumber id="price" value={price} onValueChange={(e) => setPrice(e.target.value)} mode="currency" currency="ILS" locale="en-US" />
                     </div><br /><br />
 
                     <div className="field col">
-                        <label htmlFor="inInventory" className="font-bold">
-                            במלאי?
-                        </label>
+                        <label htmlFor="inInventory" className="font-bold"> ?במלאי </label>
+                          <br/>
+                          <br/>
                         <Checkbox value={inInventory} onChange={e => onChangeCheckBox(e.checked)} checked={inInventory}></Checkbox>
                     </div><br /><br />
                 </div>
@@ -300,7 +300,7 @@ export default function ProductsDemo() {
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {(
                         <span>
-                            Are you sure you want to delete <b>{name}</b>?
+                           ?האם אתה בטוח שאתה רוצה למחוק אותי 
                         </span>
                     )}
                 </div>

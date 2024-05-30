@@ -101,7 +101,9 @@ export default function BranchAdmin() {
 
         setCity("")
         setOpen("00:00")
-        setClose("00:00")
+        setClose("")
+        // setClose("00:00")
+
         setLocation("")
         setImage("")
         setId(0)
@@ -113,7 +115,8 @@ export default function BranchAdmin() {
         setCity("")
         setLocation("")
         setOpen("00:00")
-        setClose("00:00")
+        setClose("")
+        // setClose("00:00")
         setImage("")
         setId(0)
 
@@ -198,13 +201,13 @@ export default function BranchAdmin() {
           <InputText v-model="value1" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="...חיפוש" />
         </IconField>
       </div>
-     
+
     </div>
   );
   const productDialogFooter = (
     <React.Fragment>
-      <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
-      <Button label="Save" icon="pi pi-check" onClick={saveProduct} />
+      <Button label="ביטול" icon="pi pi-times" outlined onClick={hideDialog} />
+      <Button label="שמירה" icon="pi pi-check" onClick={saveProduct} />
     </React.Fragment>
   );
   const deleteProductDialogFooter = (
@@ -249,8 +252,8 @@ export default function BranchAdmin() {
               <label htmlFor="openHours" className="font-bold">שעת פתיחה  </label>
               <Calendar id="open" value={new Date('October 13, 2014 ' + open + ':00')} onChange={(e) => setOpen("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
               <label htmlFor="buttondisplay" className="font-bold block mb-2">שעת סגירה</label>
-              <Calendar  id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
-              {/* <InputText type='time' id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value +  e.target.value)} showIcon timeOnly icon={() => <i className="pi pi-clock" />} /> */}
+              <Calendar id="close" value={new Date('October 13, 2014 ' + close + ':00')} onChange={(e) => setClose("" + e.target.value.getHours() + ":" + e.target.value.getMinutes())} showIcon timeOnly icon={() => <i className="pi pi-clock" />} />
+              {/* <InputText type='time' id="close" value={close} onChange={(e) => setClose(e.target.value +  e.target.value)} showIcon timeOnly icon={() => <i className="pi pi-clock" />} /> */}
             </div>
             <div className="field">
               <label htmlFor="image" className="font-bold">

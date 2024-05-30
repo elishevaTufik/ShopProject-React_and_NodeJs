@@ -11,7 +11,7 @@ const ImageGallery = ({ }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [images]);
