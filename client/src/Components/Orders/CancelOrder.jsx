@@ -15,7 +15,12 @@ export default function CancelOrder(props) {
     const toast = useRef(null);
 
     const accept = () => {
-        if(lastStatus!='accepted'){
+        if(lastStatus=='canceled')
+        {
+            alert("אי אפשר לבטל את ההזמנה שלך.כבר ביטלת אותה....")
+        return
+        }
+        if(lastStatus!='accepted' && lastStatus!='canceled'){
             alert("אי אפשר לבטל את ההזמנה שלך. כבר הכנו אותה והיא בדרך אליך....")
         return
         }

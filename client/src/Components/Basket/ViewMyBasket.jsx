@@ -28,37 +28,40 @@ import { useDeleteProductMutation } from '../../app/basketSlice'
 import './ViewMyBasket.css'
 
 export default function ProductsDemo() {
-    
+
     const navigate = useNavigate()
-    
-    const [DeleteProduct, resDeleteProduct] = useDeleteProductMutation()
+
+    const [DeleteProduct, { isSuccess: isSuccessDelete }] = useDeleteProductMutation()
     const [UpdateQuantityOfProduct] = useUpdateQuantityOfProductMutation()
-    const [c,setC]=useState([])
-    const { data: cart = [], isSuccess,isError,error } = useGetAllCartQuery()
+    const [c, setC] = useState([])
+    const { data: cart = [], isSuccess, isError, error } = useGetAllCartQuery()
 
     let sweets = [];
 
     useEffect(() => {
         if (isSuccess) {
-            setC(cart)
+            setC(cart);
         }
     }, [isSuccess])
-    useEffect(() => {
-            setC(cart)
 
-        
+    useEffect(() => {
+        if (cart.length > 0)
+            setC(cart);
+
     }, [cart])
+
     useEffect(() => {
         if (isError) {
-            if(error.status==400)
-            setC([])
+            if (error.status == 400) {
+                setC([])
+            }
         }
     }, [isError])
 
     const onclickadd = () => {
         setVisible(false)
     }
- 
+
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
@@ -133,9 +136,10 @@ export default function ProductsDemo() {
         setDeleteProductDialog(true);
     };
 
-    const mydeleteProduct = () => {
-        DeleteProduct(id)
+    const mydeleteProduct = async () => {
+        await DeleteProduct(id)
         setDeleteProductDialog(false);
+
     };
 
     const confirmDeleteSelected = () => {
@@ -147,7 +151,8 @@ export default function ProductsDemo() {
     };
 
     const rightToolbarTemplate = (rowData) => {
-        return <Button label="רכישת הסל" icon="pi pi-eject" className="p-button-help" onClick={buyBasket} disabled={checkDisabled()} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }}  />;
+
+        return <Button label="רכישת הסל" icon="pi pi-eject" className="p-button-help" onClick={buyBasket} disabled={c.length > 0 ? false : true} style={{ "backgroundColor": '#ec4899', border: '1px solid #ec4899' }} />;
     };
 
     const imageBodyTemplate = (rowData) => {
@@ -180,17 +185,10 @@ export default function ProductsDemo() {
         );
     };
 
-    const checkDisabled =()=>{
-        if (cart.length>0)
-            return false
-        return true
-    }
-
     const getSeverity = (inInventorys) => {
         switch (inInventorys) {
             case true:
                 return 'success';
-
             case false:
                 return 'danger';
         }
@@ -228,7 +226,7 @@ export default function ProductsDemo() {
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem', direction: 'rtl' }}></Column>
                     <Column field="inventoryStatus" body={statusBodyTemplate} ></Column>
                     <Column field="price" body={priceBodyTemplate} style={{ minWidth: '4rem', direction: 'rtl', textAlign: 'center' }}></Column>
-                    <Column field="quantity" body={inputN} style={{ minWidth: '4rem', direction: 'rtl'}} ></Column>
+                    <Column field="quantity" body={inputN} style={{ minWidth: '4rem', direction: 'rtl' }} ></Column>
                     <Column field="name" body={nameBodyTemplate} style={{ minWidth: '2rem', direction: 'rtl', textAlign: 'center' }}></Column>
                     <Column field="image" body={imageBodyTemplate} style={{ direction: 'rtl' }}> </Column>
                 </DataTable>
@@ -253,8 +251,8 @@ export default function ProductsDemo() {
                 </div>
             </Dialog>
 
-            <TotalPayment/>
-<br/><br/><br/><br/>
+            <TotalPayment />
+            <br /><br /><br /><br />
         </div>
     );
 }
