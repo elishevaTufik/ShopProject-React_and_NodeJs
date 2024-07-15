@@ -37,7 +37,7 @@ const workerApiSlice = apiSlice.injectEndpoints({
 
         registerWorker: build.mutation({
             query: (worker) => ({
-                url: '/registerWorker',
+                url: '/api/auth/registerWorker',
                 method:"POST",
                 body:worker
             })

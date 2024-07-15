@@ -12,7 +12,6 @@ import { Password } from 'primereact/password';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputMask } from "primereact/inputmask";
 
-
 import './Register.css'
 
 export default function HeadlessDemo() {

@@ -97,7 +97,7 @@ const registerClient = async (req,res)=>{
 
 
 const registerWorker = async (req,res)=>{
-    
+    console.log("hereee");
     if(req.user.permission!='admin')
     {
         return res.status(401).json({message:'Unauthorized' })
@@ -105,26 +105,31 @@ const registerWorker = async (req,res)=>{
     const {username, password, name, email, phone, branchId, permission} = req.body
 
     if (!name || !username || !password ||!phone) {
+        console.log("!name || !username || !password ||!phone");
         return res.status(400).json({message:'username, password, name and  email are required'})
     }
     const duplicateClient = await Client.findOne({username:username}).lean()
     if(duplicateClient){
+        console.log("duplicateClient");
         return res.status(409).json({message:"This username is alredy exist .Try another one... "})
     }
     const duplicateWorker = await Worker.findOne({username:username}).lean()
     if(duplicateWorker){
+        console.log("duplicateWorker");
         return res.status(409).json({message:"This username is alredy exist .Try another one... "})
     }
     const hashedPwd = await bcrypt.hash(password, 10)
     
     if(permission!='admin' && permission!='shift manager' && permission!='worker')
     {
+        console.log("permission!='admin' && permission!='shift manager' && permission!='worker'");
         return res.status(400).json({message:'your premission needs to be admin, shift manager or worker'})
     }
  
     const worker= await Worker.create({username, password:hashedPwd, name, email, phone, branchId, permission})
     
     if(!worker){
+        console.log("!worker");
         return res.status(400).json({message:'All fields are required'})
     }
   
